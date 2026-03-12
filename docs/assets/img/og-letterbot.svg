@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#07111f"/>
+<stop offset="1" stop-color="#0b1629"/>
+</linearGradient>
+<linearGradient id="acc" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#7ab6ff"/>
+<stop offset="1" stop-color="#52d7a3"/>
+</linearGradient>
+</defs>
+<rect width="1200" height="630" fill="url(#bg)"/>
+<circle cx="1040" cy="80" r="260" fill="rgba(122,182,255,.18)"/>
+<circle cx="120" cy="580" r="300" fill="rgba(82,215,163,.12)"/>
+<rect x="80" y="100" width="1040" height="430" rx="28" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.10)"/>
+<rect x="120" y="145" width="76" height="76" rx="20" fill="url(#acc)"/>
+<path d="M132 168h52v30h-52z" fill="#06101d"/>
+<path d="M132 168l26 18 26-18" fill="none" stroke="#eaf1ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="224" y="202" font-family="Segoe UI, Arial, sans-serif" font-weight="800" font-size="52" fill="#eaf1ff">LetterBot</text>
+<text x="120" y="282" font-family="Segoe UI, Arial, sans-serif" font-weight="700" font-size="34" fill="#eaf1ff">Self-hosted email triage to Telegram</text>
+<text x="120" y="340" font-family="Segoe UI, Arial, sans-serif" font-weight="500" font-size="24" fill="#9db0d1">Explainable decisions • adaptive prioritization • snooze intelligence • observability</text>
+<text x="120" y="420" font-family="Consolas, monospace" font-weight="700" font-size="22" fill="#7ab6ff">Open source • privacy-first • runs on ordinary hardware</text>
+</svg>

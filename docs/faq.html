@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LetterBot FAQ — direct answers about self-hosted email triage</title>
+  <meta name="description" content="Direct answers to the most common questions about LetterBot, privacy, workflow, Telegram integration, and self-hosted operation." />
+  <link rel="canonical" href="https://letterbot.ru/faq.html" />
+  <meta name="theme-color" content="#07111f" />
+  <meta property="og:title" content="LetterBot FAQ — direct answers about self-hosted email triage" />
+  <meta property="og:description" content="Direct answers to the most common questions about LetterBot, privacy, workflow, Telegram integration, and self-hosted operation." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://letterbot.ru/faq.html" />
+  <meta property="og:image" content="https://letterbot.ru/assets/img/og-letterbot.svg" />
+  <meta property="og:image:alt" content="LetterBot premium static website preview" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LetterBot FAQ — direct answers about self-hosted email triage" />
+  <meta name="twitter:description" content="Direct answers to the most common questions about LetterBot, privacy, workflow, Telegram integration, and self-hosted operation." />
+  <meta name="twitter:image" content="https://letterbot.ru/assets/img/og-letterbot.svg" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="/" aria-label="LetterBot home">
+        <span class="brand-mark">L</span>
+        <span>LetterBot</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+        <a href="/features.html">Features</a>
+        <a href="/how-it-works.html">How it works</a>
+        <a href="/install.html">Install</a>
+        <a href="/docs.html">Docs</a>
+        <a href="/faq.html">FAQ</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/security.html">Security</a>
+        <a href="/support.html" class="pill">Donate</a>
+        <a href="https://github.com/SergioTheFirst/letterbot" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content">
+    <section class="section"><div class="container"><h1>Frequently asked questions</h1><div class="answer"><strong>Direct answer:</strong> This page is written in short question-and-answer form on purpose: it helps both humans and AI search systems understand what LetterBot is, who it helps, and why it is different.</div><div class="faq" style="margin-top:18px"><details><summary>What is LetterBot?</summary><p class="muted">LetterBot is a self-hosted email triage assistant that watches IMAP inboxes, prioritizes messages, and sends concise Telegram notifications for what needs attention.</p></details><details><summary>Who is LetterBot for?</summary><p class="muted">It is built for overloaded inbox owners: freelancers, technical users who care about privacy, and small teams that want a local workflow instead of another cloud subscription.</p></details><details><summary>Does it replace my mailbox?</summary><p class="muted">No. Your mailbox remains the source system. LetterBot adds a decision layer and a faster notification workflow on top.</p></details><details><summary>Does LetterBot delete or move email?</summary><p class="muted">Its main job is triage and notification. Your original email stays in your mailbox; operational behavior is designed to be visible and reviewable.</p></details><details><summary>Can it work without AI providers?</summary><p class="muted">Yes. The system can continue in a degraded mode and still provide useful notifications when advanced AI assistance is unavailable.</p></details><details><summary>Why Telegram?</summary><p class="muted">Telegram is used as the fast action surface. It reduces context switching and lets you reprioritize or snooze a message where you already are.</p></details><details><summary>Can it monitor multiple inboxes?</summary><p class="muted">Yes. Multi-account routing is one of the strongest practical benefits of LetterBot.</p></details><details><summary>Does it learn from my actions?</summary><p class="muted">Yes. Manual priority changes and snooze behavior can become useful signals for future prioritization and reporting.</p></details><details><summary>What makes it more trustworthy than a black-box AI?</summary><p class="muted">LetterBot exposes decision traces and a local observability dashboard, so you can inspect behavior instead of guessing.</p></details><details><summary>What kind of messages can it understand?</summary><p class="muted">It is especially useful for operational mail: invoices, contracts, deadlines, customer requests, and document-heavy business threads.</p></details><details><summary>Can it read attachments?</summary><p class="muted">Yes, the product is designed to extract useful facts from common attachment types and use them in prioritization and summaries.</p></details><details><summary>Is it suitable for old hardware?</summary><p class="muted">It is designed to be practical on modest machines and to degrade safely rather than crash when resources are limited.</p></details><details><summary>Does it support Windows?</summary><p class="muted">Yes. Windows is a primary practical scenario, with a launcher intended to reduce first-run friction.</p></details><details><summary>Is there a web dashboard?</summary><p class="muted">Yes. A local, read-only observability cockpit shows system health, decision traces, and processed message history.</p></details><details><summary>How does snooze work?</summary><p class="muted">A snoozed email is postponed and then reintroduced with context later, so you do not have to keep it mentally active in the meantime.</p></details><details><summary>What is a decision trace?</summary><p class="muted">It is a structured explanation of how a message was interpreted, prioritized, and formatted for delivery.</p></details><details><summary>What if the bot makes a mistake?</summary><p class="muted">The original email is still in your mailbox, and your manual correction becomes useful feedback for the system.</p></details><details><summary>Why is it open source?</summary><p class="muted">Because trust, transparency, and inspectability matter more in email operations than a closed marketing promise.</p></details><details><summary>Why should I donate?</summary><p class="muted">Because the product stays free and useful through focused maintenance, documentation, and quality work, not through aggressive monetization.</p></details><details><summary>What is the fastest way to try it?</summary><p class="muted">Use the Windows launcher, fill the config, connect Telegram, and watch the first few important emails arrive as compact action cards.</p></details></div></div></section>
+  </main>
+  <footer class="footer">
+    <div class="container footer-row">
+      <p class="muted small">© <span id="year"></span> LetterBot • Self-hosted email triage to Telegram • AGPL-3.0</p>
+      <p class="muted small"><a href="/privacy.html">Privacy</a> · <a href="/security.html">Security</a> · <a href="/faq.html">FAQ</a> · <a href="/support.html">Support</a></p>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js" defer></script>
+</body>
+</html>

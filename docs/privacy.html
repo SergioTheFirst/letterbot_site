@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LetterBot Privacy — local control and data handling</title>
+  <meta name="description" content="How LetterBot handles privacy, local state, and external provider usage in a self-hosted workflow." />
+  <link rel="canonical" href="https://letterbot.ru/privacy.html" />
+  <meta name="theme-color" content="#07111f" />
+  <meta property="og:title" content="LetterBot Privacy — local control and data handling" />
+  <meta property="og:description" content="How LetterBot handles privacy, local state, and external provider usage in a self-hosted workflow." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://letterbot.ru/privacy.html" />
+  <meta property="og:image" content="https://letterbot.ru/assets/img/og-letterbot.svg" />
+  <meta property="og:image:alt" content="LetterBot premium static website preview" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LetterBot Privacy — local control and data handling" />
+  <meta name="twitter:description" content="How LetterBot handles privacy, local state, and external provider usage in a self-hosted workflow." />
+  <meta name="twitter:image" content="https://letterbot.ru/assets/img/og-letterbot.svg" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="/" aria-label="LetterBot home">
+        <span class="brand-mark">L</span>
+        <span>LetterBot</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+        <a href="/features.html">Features</a>
+        <a href="/how-it-works.html">How it works</a>
+        <a href="/install.html">Install</a>
+        <a href="/docs.html">Docs</a>
+        <a href="/faq.html">FAQ</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/security.html">Security</a>
+        <a href="/support.html" class="pill">Donate</a>
+        <a href="https://github.com/SergioTheFirst/letterbot" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content">
+    
+<section class="section">
+  <div class="container">
+    <h1>Privacy</h1>
+    <div class="answer"><strong>Direct answer:</strong> LetterBot is built around local control. The practical privacy promise is simple: keep mailbox processing on infrastructure you control, expose what the system is doing, and avoid silent cloud dependence.</div>
+    <div class="two-col" style="margin-top:18px">
+      <div class="panel" style="padding:20px">
+        <h2>What stays local</h2>
+        <ul class="clean">
+          <li>Mailbox polling and local runtime state</li>
+          <li>SQLite history and local web cockpit data</li>
+          <li>Decision traces and internal health evidence</li>
+        </ul>
+      </div>
+      <div class="panel" style="padding:20px">
+        <h2>What to verify in your own setup</h2>
+        <ul class="clean">
+          <li>Where your configuration files and logs are stored</li>
+          <li>Whether an external LLM provider is enabled</li>
+          <li>What minimal context is sent when a provider is used</li>
+          <li>Who can access the local machine and dashboard</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </main>
+  <footer class="footer">
+    <div class="container footer-row">
+      <p class="muted small">© <span id="year"></span> LetterBot • Self-hosted email triage to Telegram • AGPL-3.0</p>
+      <p class="muted small"><a href="/privacy.html">Privacy</a> · <a href="/security.html">Security</a> · <a href="/faq.html">FAQ</a> · <a href="/support.html">Support</a></p>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js" defer></script>
+</body>
+</html>

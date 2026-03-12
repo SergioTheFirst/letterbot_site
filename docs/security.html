@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LetterBot Security — operational hardening and disclosure</title>
+  <meta name="description" content="Security basics for LetterBot deployments, including secret hygiene, local exposure, and responsible disclosure." />
+  <link rel="canonical" href="https://letterbot.ru/security.html" />
+  <meta name="theme-color" content="#07111f" />
+  <meta property="og:title" content="LetterBot Security — operational hardening and disclosure" />
+  <meta property="og:description" content="Security basics for LetterBot deployments, including secret hygiene, local exposure, and responsible disclosure." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://letterbot.ru/security.html" />
+  <meta property="og:image" content="https://letterbot.ru/assets/img/og-letterbot.svg" />
+  <meta property="og:image:alt" content="LetterBot premium static website preview" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LetterBot Security — operational hardening and disclosure" />
+  <meta name="twitter:description" content="Security basics for LetterBot deployments, including secret hygiene, local exposure, and responsible disclosure." />
+  <meta name="twitter:image" content="https://letterbot.ru/assets/img/og-letterbot.svg" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="/" aria-label="LetterBot home">
+        <span class="brand-mark">L</span>
+        <span>LetterBot</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+        <a href="/features.html">Features</a>
+        <a href="/how-it-works.html">How it works</a>
+        <a href="/install.html">Install</a>
+        <a href="/docs.html">Docs</a>
+        <a href="/faq.html">FAQ</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/security.html">Security</a>
+        <a href="/support.html" class="pill">Donate</a>
+        <a href="https://github.com/SergioTheFirst/letterbot" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content">
+    
+<section class="section">
+  <div class="container">
+    <h1>Security</h1>
+    <div class="answer"><strong>Direct answer:</strong> LetterBot is most secure when treated like a local operational service: protect the host, keep secrets in configuration files under your control, restrict dashboard exposure, and report vulnerabilities privately.</div>
+    <div class="two-col" style="margin-top:18px">
+      <div class="panel" style="padding:20px">
+        <h2>Security principles</h2>
+        <ul class="clean">
+          <li>Least exposure: bind the dashboard locally unless you intentionally publish it.</li>
+          <li>Secret hygiene: keep Telegram tokens and mailbox credentials private and rotate them if exposed.</li>
+          <li>Operational visibility: use logs and the dashboard to verify behavior after changes.</li>
+        </ul>
+      </div>
+      <div class="panel" style="padding:20px">
+        <h2>Responsible disclosure</h2>
+        <p class="muted">If you discover a security issue, contact the maintainer privately before public disclosure. Include steps to reproduce, impact, and environment details when possible.</p>
+        <pre><code>Security contact: master@letterbot.ru</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </main>
+  <footer class="footer">
+    <div class="container footer-row">
+      <p class="muted small">© <span id="year"></span> LetterBot • Self-hosted email triage to Telegram • AGPL-3.0</p>
+      <p class="muted small"><a href="/privacy.html">Privacy</a> · <a href="/security.html">Security</a> · <a href="/faq.html">FAQ</a> · <a href="/support.html">Support</a></p>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js" defer></script>
+</body>
+</html>

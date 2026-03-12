@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LetterBot — Self-hosted email triage to Telegram</title>
+  <meta name="description" content="LetterBot is a self-hosted email triage assistant that turns overloaded inboxes into concise Telegram actions with explainable decisions, behavioral learning, and a local observability dashboard." />
+  <link rel="canonical" href="https://letterbot.ru/" />
+  <meta name="theme-color" content="#07111f" />
+  <meta property="og:title" content="LetterBot — Self-hosted email triage to Telegram" />
+  <meta property="og:description" content="LetterBot is a self-hosted email triage assistant that turns overloaded inboxes into concise Telegram actions with explainable decisions, behavioral learning, and a local observability dashboard." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://letterbot.ru/" />
+  <meta property="og:image" content="https://letterbot.ru/assets/img/og-letterbot.svg" />
+  <meta property="og:image:alt" content="LetterBot premium static website preview" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LetterBot — Self-hosted email triage to Telegram" />
+  <meta name="twitter:description" content="LetterBot is a self-hosted email triage assistant that turns overloaded inboxes into concise Telegram actions with explainable decisions, behavioral learning, and a local observability dashboard." />
+  <meta name="twitter:image" content="https://letterbot.ru/assets/img/og-letterbot.svg" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script type='application/ld+json'>{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"Organization",
+      "name":"LetterBot",
+      "url":"https://letterbot.ru/",
+      "logo":"https://letterbot.ru/assets/img/logo.svg",
+      "sameAs":["https://github.com/SergioTheFirst/letterbot"]
+    },
+    {
+      "@type":"SoftwareApplication",
+      "name":"LetterBot",
+      "applicationCategory":"BusinessApplication",
+      "operatingSystem":"Windows, Linux, macOS",
+      "isAccessibleForFree":true,
+      "license":"https://www.gnu.org/licenses/agpl-3.0.en.html",
+      "url":"https://letterbot.ru/",
+      "downloadUrl":"https://github.com/SergioTheFirst/letterbot",
+      "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+      "description":"LetterBot is a self-hosted email triage assistant that reads IMAP inboxes, summarizes important messages to Telegram, adapts from user corrections, and exposes a local observability dashboard."
+    },
+    {
+      "@type":"FAQPage",
+      "mainEntity":[
+        {
+          "@type":"Question",
+          "name":"What is LetterBot?",
+          "acceptedAnswer":{"@type":"Answer","text":"LetterBot is a self-hosted email triage assistant that watches IMAP inboxes, prioritizes incoming mail, and sends concise Telegram notifications for what requires attention."}
+        },
+        {
+          "@type":"Question",
+          "name":"Why is LetterBot different from ordinary email AI tools?",
+          "acceptedAnswer":{"@type":"Answer","text":"LetterBot combines explainable decision traces, behavioral learning from user corrections, snooze intelligence, multi-account routing, and a local observability dashboard in a privacy-first self-hosted workflow."}
+        }
+      ]
+    }
+  ]
+}</script>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="/" aria-label="LetterBot home">
+        <span class="brand-mark">L</span>
+        <span>LetterBot</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+        <a href="/features.html">Features</a>
+        <a href="/how-it-works.html">How it works</a>
+        <a href="/install.html">Install</a>
+        <a href="/docs.html">Docs</a>
+        <a href="/faq.html">FAQ</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/security.html">Security</a>
+        <a href="/support.html" class="pill">Donate</a>
+        <a href="https://github.com/SergioTheFirst/letterbot" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content">
+    
+<section class="hero">
+  <div class="container grid-hero">
+    <div>
+      <p class="eyebrow">Open source • Self-hosted • Privacy-first • Explainable</p>
+      <h1>See only the email that matters — with Telegram summaries, explainable decisions, and local control.</h1>
+      <p class="lead">LetterBot is a self-hosted email triage assistant for overloaded inboxes. It reads incoming mail through IMAP, decides what matters, sends compact Telegram notifications, and keeps a local audit trail so you can see why a decision was made.</p>
+      <div class="answer"><strong>Direct answer:</strong> If you want an email assistant that works on your own machine, keeps control in your hands, and helps you react to important messages faster, LetterBot is built for that job.</div>
+      <div class="cta">
+        <a class="btn primary" href="/install.html">Get started</a>
+        <a class="btn" href="/features.html">Explore features</a>
+        <a class="btn ghost" href="/support.html">Support the project</a>
+      </div>
+      <div class="hero-metrics">
+        <div class="metric"><span class="muted small">Core promise</span><strong>Important email, not inbox noise</strong></div>
+        <div class="metric"><span class="muted small">Deployment model</span><strong>Self-hosted, local-first</strong></div>
+        <div class="metric"><span class="muted small">What makes it trustable</span><strong>Decision trace + observability</strong></div>
+      </div>
+    </div>
+    <div class="panel mock">
+      <div class="mock-window">
+        <div class="telegram-card">
+          <div class="topline">🟡 from supplier@example.com</div>
+          <div class="subject">Invoice due on Wednesday</div>
+          <div>Suggested action: confirm payment date and review attachment.</div>
+          <div class="meta">Account: finance@company.com · Confidence: high</div>
+          <div class="telegram-buttons">
+            <span>▌Low</span>
+            <span>▌Medium</span>
+            <span>▌High</span>
+            <span>Snooze 2h</span>
+            <span>Tomorrow</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Why LetterBot feels different</h2>
+    <p class="muted">Most email AI products optimize for writing email. LetterBot optimizes for operating the inbox: triage, prioritization, reminders, accountability, and visibility into how decisions were made.</p>
+    <div class="card-grid">
+      <article class="card">
+        <div class="kicker">Explainable AI</div>
+        <h3>Decision trace, not a black box</h3>
+        <p class="muted">Inspect why a message was marked urgent, what evidence was extracted, and which path the system used.</p>
+      </article>
+      <article class="card">
+        <div class="kicker">Behavioral adaptation</div>
+        <h3>It learns from your corrections</h3>
+        <p class="muted">Manual priority changes and snooze history become useful signals instead of disappearing into the void.</p>
+      </article>
+      <article class="card">
+        <div class="kicker">Operational workflow</div>
+        <h3>Telegram as an action console</h3>
+        <p class="muted">Act on important email where you already are: review, reprioritize, snooze, and continue working.</p>
+      </article>
+      <article class="card">
+        <div class="kicker">Privacy</div>
+        <h3>Your machine stays in control</h3>
+        <p class="muted">The product is designed for local operation and can keep working in a degraded mode even when AI providers are unavailable.</p>
+      </article>
+      <article class="card">
+        <div class="kicker">Scale</div>
+        <h3>Multiple inboxes, one workflow</h3>
+        <p class="muted">Monitor many accounts and route notifications to the right Telegram chats without turning everything into one giant noisy feed.</p>
+      </article>
+      <article class="card">
+        <div class="kicker">Trust</div>
+        <h3>Observability built in</h3>
+        <p class="muted">A local dashboard shows health, latency, recent decisions, and processed email history instead of fake green status badges.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Who uses LetterBot</h2>
+    <div class="card-grid">
+      <article class="card">
+        <h3>Freelancers and solo operators</h3>
+        <p class="muted">They do not want to miss a paying client because a critical email drowned in newsletters and receipts.</p>
+      </article>
+      <article class="card">
+        <h3>Technical users with privacy requirements</h3>
+        <p class="muted">They want a self-hosted workflow, GitHub-visible code, and predictable behavior they can inspect.</p>
+      </article>
+      <article class="card">
+        <h3>Small businesses with multiple inboxes</h3>
+        <p class="muted">They need one lightweight assistant to route important mail across finance, support, founder, and personal accounts.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Three-step setup</h2>
+    <div class="steps">
+      <div class="panel step"><div class="step-num">1</div><h3>Install locally</h3><p class="muted">Use the Windows launcher or run with Python. The first start prepares the config files and points you to the right place.</p></div>
+      <div class="panel step"><div class="step-num">2</div><h3>Connect email and Telegram</h3><p class="muted">Add IMAP credentials and your Telegram bot settings. Multi-account routing is supported.</p></div>
+      <div class="panel step"><div class="step-num">3</div><h3>Review only what matters</h3><p class="muted">LetterBot parses, prioritizes, and sends concise Telegram summaries with optional snooze and manual correction.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>What makes it unusually strong</h2>
+    <div class="callout-grid">
+      <div class="callout"><strong>Adaptive prioritization</strong><br><span class="muted small">Learns from corrections instead of pretending every inbox is the same.</span></div>
+      <div class="callout"><strong>Snooze intelligence</strong><br><span class="muted small">Treats postponement as a workflow signal, not just a timer.</span></div>
+      <div class="callout"><strong>Golden corpus checks</strong><br><span class="muted small">Measures regressions on real email scenarios before changes ship.</span></div>
+      <div class="callout"><strong>Old hardware friendly</strong><br><span class="muted small">Designed to survive on modest machines and continue in degraded mode.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container panel" style="padding:24px">
+    <div class="donate-box">
+      <div>
+        <h2>Support the project</h2>
+        <p class="muted">LetterBot is a practical open-source tool. If it saves you time, helps you catch critical email, or gives you a workflow you trust, support ongoing development.</p>
+        <div class="cta">
+          <a class="btn primary" href="https://boosty.to/personalbot/donate?qr=true" rel="noopener noreferrer">Donate via Boosty</a>
+          <a class="btn" href="/support.html">Why support matters</a>
+        </div>
+      </div>
+      <div class="qr-box">
+        <img src="/assets/img/boostydon.svg" alt="LetterBot donation QR code" />
+      </div>
+    </div>
+  </div>
+</section>
+
+  </main>
+  <footer class="footer">
+    <div class="container footer-row">
+      <p class="muted small">© <span id="year"></span> LetterBot • Self-hosted email triage to Telegram • AGPL-3.0</p>
+      <p class="muted small"><a href="/privacy.html">Privacy</a> · <a href="/security.html">Security</a> · <a href="/faq.html">FAQ</a> · <a href="/support.html">Support</a></p>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js" defer></script>
+</body>
+</html>

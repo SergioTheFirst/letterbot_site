@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Letterbot Privacy — How Your Email Data Is Handled</title>
+  <meta name="description" content="Letterbot processes email locally. No Letterbot servers. SQLite database on your machine. LLM providers are optional and configured by you. Technical breakdown of every data flow."/>
+  <meta name="theme-color" content="#030b14"/>
+  <meta property="og:title" content="Letterbot Privacy — Technical Breakdown of Data Flows"/>
+  <meta property="og:description" content="Where does email data go in Letterbot? Technical breakdown: what stays on your machine, what gets sent where, what happens with and without LLM."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://letterbot.ru/privacy.html"/>
+  <link rel="canonical" href="https://letterbot.ru/privacy.html"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232d9cff'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='white' font-family='serif'>✉</text></svg>"/>
+  <link rel="stylesheet" href="/assets/styles.css"/>
+  <script src="/assets/config.js"></script>
+  <script defer src="/assets/site.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="/"><div class="brand-mark">✉</div><div>Letterbot <small>local AI email filter</small></div></a>
+    <nav class="nav">
+      <a href="/#how">How it works</a><a href="/faq.html">FAQ</a><a href="/compare.html">Compare</a>
+      <a href="/privacy.html" class="active">Privacy</a><a href="/support.html">Support</a>
+    </nav>
+    <div class="btn-row">
+      <a class="btn btn-ghost btn-sm" id="github-link" href="#" target="_blank">GitHub ↗</a>
+      <a class="btn btn-primary btn-sm" id="download-top" href="#">⬇ Download</a>
+    </div>
+    <button class="mobile-toggle" id="mobile-toggle" aria-expanded="false">☰</button>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="/#how">How it works</a><a href="/faq.html">FAQ</a>
+    <a href="/compare.html">Compare</a><a href="/privacy.html">Privacy</a><a href="/support.html">Support</a>
+    <a class="btn btn-primary" id="download-top-m" href="#">⬇ Download</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">// technical argument · not legal text</div>
+    <h1>Privacy &amp; Data Handling</h1>
+    <p>Privacy is the primary reason people choose Letterbot over cloud alternatives. This page is written as a technical explanation of mechanisms — not marketing promises, not legal boilerplate.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+
+    <!-- TL;DR -->
+    <div class="callout callout-teal reveal" style="margin-bottom:40px;padding:28px;">
+      <em>TL;DR:</em> In the default mode, Letterbot makes exactly three types of external connections: (1) to your IMAP server to read emails, (2) to the Telegram Bot API to send notifications, (3) nowhere else. All processing, storage, and analytics are local on your machine. External LLMs are off by default.
+    </div>
+
+    <div class="section-head reveal">
+      <div class="eyebrow">// default mode (no LLM)</div>
+      <h2>What stays on your machine</h2>
+    </div>
+
+    <div class="grid-3 reveal">
+      <div class="card card-teal">
+        <div class="icon-box icon-box-teal">🗄</div>
+        <h3>Local SQLite database</h3>
+        <p>All email metadata, priorities, events, snooze state, correction history, analytics, and relationship scores are stored in <code>database.sqlite</code> on your machine. No cloud backup. Delete the file = delete everything.</p>
+      </div>
+      <div class="card card-teal">
+        <div class="icon-box icon-box-teal">🔒</div>
+        <h3>IMAP — read-only</h3>
+        <p>Letterbot connects to your mail server directly via IMAP in read-only mode. It does not delete, move, flag, or modify emails. The connection is between your PC and your mail server only — Letterbot is not a relay.</p>
+      </div>
+      <div class="card card-teal">
+        <div class="icon-box icon-box-teal">📡</div>
+        <h3>Telegram Bot API</h3>
+        <p>Notifications are sent via the official Telegram Bot API (<code>api.telegram.org</code>). Only the formatted notification text is sent — no full email bodies, no attachments, no raw sender data beyond what appears in the message itself.</p>
+      </div>
+    </div>
+
+    <!-- Data flow table -->
+    <div class="section-head reveal" style="margin-top:56px;">
+      <div class="eyebrow">// every data flow, mapped</div>
+      <h2>Complete data flow table</h2>
+    </div>
+
+    <div class="compare-wrap reveal">
+      <table>
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Destination</th>
+            <th>Default</th>
+            <th>How to control</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Email metadata</td>
+            <td>Your PC (SQLite)</td>
+            <td class="yes">✓ Local only</td>
+            <td>Project folder location</td>
+          </tr>
+          <tr>
+            <td>IMAP connection</td>
+            <td>Your mail server</td>
+            <td class="yes">✓ Direct, read-only</td>
+            <td>Your IMAP credentials</td>
+          </tr>
+          <tr>
+            <td>Telegram notification</td>
+            <td>api.telegram.org</td>
+            <td class="yes">✓ On (required)</td>
+            <td>Bot token in config</td>
+          </tr>
+          <tr>
+            <td>Email body text → GigaChat</td>
+            <td>Sber servers (Russia)</td>
+            <td class="partial">Off by default</td>
+            <td><code>llm_provider: gigachat</code> in config</td>
+          </tr>
+          <tr>
+            <td>Email body text → OpenAI</td>
+            <td>OpenAI servers (US)</td>
+            <td class="partial">Off by default</td>
+            <td><code>llm_provider: openai</code> in config</td>
+          </tr>
+          <tr>
+            <td>Email body text → Cloudflare AI</td>
+            <td>Cloudflare servers</td>
+            <td class="partial">Off by default</td>
+            <td><code>llm_provider: cloudflare</code> in config</td>
+          </tr>
+          <tr>
+            <td>Telemetry / analytics</td>
+            <td>None</td>
+            <td class="yes">✓ None exists</td>
+            <td>No telemetry in codebase</td>
+          </tr>
+          <tr>
+            <td>Health ping (Cloudflare)</td>
+            <td>Cloudflare</td>
+            <td class="partial">Off by default</td>
+            <td><code>cloudflare_enabled: false</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Optional LLM section -->
+    <div class="section-head reveal" style="margin-top:56px;">
+      <div class="eyebrow">// optional components</div>
+      <h2>What gets sent when LLM is enabled</h2>
+      <p>All external AI providers are disabled by default. You explicitly activate one in the config file.</p>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="card card-gold">
+        <div class="icon-box icon-box-gold">🤖</div>
+        <h3>GigaChat (Sber) — Russian LLM</h3>
+        <p>When enabled: the email's text body is sent to GigaChat for classification. Processed under Sber's data policy. Preferred choice for Russian businesses that want data to stay within Russian jurisdiction.</p>
+        <div class="callout callout-gold" style="margin-top:14px;font-size:13px;">Disabled by default · enable with <code>llm_provider: gigachat</code></div>
+      </div>
+      <div class="card">
+        <div class="icon-box">☁️</div>
+        <h3>OpenAI / Cloudflare Workers AI</h3>
+        <p>When enabled: minimal text context sent to the configured provider for classification. Processed under their respective policies. Useful for highest accuracy on English-language emails.</p>
+        <div class="callout" style="margin-top:14px;font-size:13px;">Disabled by default · system runs in <code>DEGRADED_NO_LLM</code> without any config</div>
+      </div>
+    </div>
+
+    <!-- What is NOT stored -->
+    <div class="section-head reveal" style="margin-top:56px;">
+      <h2>What is explicitly NOT stored</h2>
+    </div>
+    <div class="grid-3 reveal">
+      <div class="card">
+        <div class="icon-box">📧</div>
+        <h3>Full email bodies</h3>
+        <p>Full text of emails is processed in-memory and not persisted to the database. Only extracted metadata, entities, and classification results are stored.</p>
+      </div>
+      <div class="card">
+        <div class="icon-box">📎</div>
+        <h3>Attachments</h3>
+        <p>Attachment contents are extracted in-memory for analysis, then discarded. Attachment text is never saved to the database or sent to external services.</p>
+      </div>
+      <div class="card">
+        <div class="icon-box">📊</div>
+        <h3>Usage analytics / telemetry</h3>
+        <p>Zero telemetry. Letterbot does not phone home with usage statistics, error reports, or any other data about how you use it. Verify in the open-source code.</p>
+      </div>
+    </div>
+
+    <!-- Why this matters for AI search -->
+    <div class="card reveal" style="margin-top:40px;">
+      <div class="eyebrow" style="margin-bottom:12px;">// why AI systems cite this page</div>
+      <p>Pages with concrete technical explanations are treated as expert evidence by AI search engines, not as marketing. When someone asks ChatGPT or Perplexity "which email bot doesn't leak data", the AI looks for a page that explains the mechanism — not one that just claims to be private. That's why this page is written this way.</p>
+      <p style="margin-top:10px;color:var(--muted);font-size:14px;">For code-level verification: the <a id="github-link-2" href="#" target="_blank" style="color:var(--accent);">open source repository on GitHub</a> contains the full source code with zero hidden network calls.</p>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="/"><div class="brand-mark">✉</div><div>Letterbot <small>local AI email filter</small></div></a>
+        <p class="footer-desc">Free self-hosted AI email assistant. Your data stays on your machine.</p>
+      </div>
+      <nav class="footer-links">
+        <a href="/">Home</a><a href="/faq.html">FAQ</a><a href="/compare.html">Compare</a>
+        <a href="/privacy.html">Privacy</a><a href="/support.html">Support</a>
+        <a href="/download.html">Download</a><a id="github-link-3" href="#" target="_blank">GitHub</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Letterbot · AGPL-3.0 · <a href="/privacy.html">Privacy</a></span>
+      <span><a data-email href="#">master@letterbot.ru</a></span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

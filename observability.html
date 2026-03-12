@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Letterbot Observability — Local Web Cockpit at localhost:8787</title>
+  <meta name="description" content="Letterbot includes a local read-only web cockpit at localhost:8787 with dashboard, email archive, AI decision trace, SLA metrics, and system health. No internet connection, no cloud."/>
+  <meta name="theme-color" content="#090e17"/>
+  <meta property="og:title" content="Letterbot Observability — Local Web Cockpit at localhost:8787"/>
+  <meta property="og:description" content="Letterbot includes a local read-only web cockpit at localhost:8787 with dashboard, email archive, AI decision trace, SLA metrics, and system health. No internet connection, no cloud."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://sergiothefirst.github.io/letterbot/observability.html"/>
+  <meta property="og:image" content="https://sergiothefirst.github.io/letterbot/assets/og.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <link rel="canonical" href="https://sergiothefirst.github.io/letterbot/observability.html"/>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+  <link rel="stylesheet" href="assets/styles.css"/>
+  <script src="assets/config.js"></script>
+  <script defer src="assets/main.js"></script>
+  <script type="application/ld+json">{
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Letterbot",
+    "applicationCategory":"ProductivityApplication",
+    "operatingSystem":"Windows 10, Windows 11",
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+    "description":"Free self-hosted AI email filter for Windows. Reads IMAP inbox, prioritizes with AI, sends only important emails to Telegram. Data stays local.",
+    "url":"https://sergiothefirst.github.io/letterbot/",
+    "downloadUrl":"https://github.com/SergioTheFirst/letterbot/releases/latest",
+    "softwareVersion":"28.0.0",
+    "dateModified":"2026-03-11"
+  }</script>
+  
+</head>
+<body>
+
+<nav class="nav" role="navigation">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-icon">✉</span>
+      <span>Letterbot<span class="brand-tag">local AI email filter</span></span>
+    </a>
+    <div class="nav-links"><a href="index.html">Home</a><a href="features.html">Features</a><a href="how-it-works.html">How it works</a><a href="install.html">Install</a><a href="faq.html">FAQ</a><a href="compare.html">Compare</a><a href="privacy.html">Privacy</a><a href="support.html">Donate</a></div>
+    <div class="nav-end">
+      <a class="btn btn-outline btn-sm" href="#" data-gh>GitHub</a>
+      <a class="btn btn-amber btn-sm" href="install.html">Download</a>
+    </div>
+    <button class="mob-btn" id="mob-toggle" aria-expanded="false" aria-label="Toggle menu">☰</button>
+  </div>
+  <div class="mob-nav" id="mob-nav"><a href="index.html">Home</a><a href="features.html">Features</a><a href="how-it-works.html">How it works</a><a href="install.html">Install</a><a href="faq.html">FAQ</a><a href="compare.html">Compare</a><a href="privacy.html">Privacy</a><a href="support.html">Donate</a>
+    <a class="btn btn-amber" href="install.html" style="margin-top:4px;">⬇ Download</a>
+  </div>
+</nav>
+<main id="content">
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">// localhost:8787 · read-only · no internet</p>
+    <h1>Local Observability Cockpit</h1>
+    <p>Letterbot includes a built-in web dashboard that runs entirely on your machine. No cloud login, no subscription, no telemetry. Just open a browser.</p>
+  </div>
+</section>
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="callout callout-teal rv" style="padding:24px;margin-bottom:44px;font-size:15px"><strong>Access the cockpit:</strong> while Letterbot is running, open <code>http://127.0.0.1:8787</code> in any browser on the same machine. Read-only — nothing in the cockpit modifies email or config.</div>
+
+    <div class="g4 rv" style="margin-bottom:48px">
+      <div class="card card-amber"><div class="ib ib-amber">📊</div><h3>Dashboard</h3><p>System status overview: IMAP connection health per account, Telegram bot status, processing queue, last sync time, active mode (FULL / DEGRADED).</p></div>
+      <div class="card"><div class="ib">📧</div><h3>Email archive</h3><p>History of all processed emails: type, priority, reason code, detected entities, delivery status. Filter by account, date, priority, or email type.</p></div>
+      <div class="card card-teal"><div class="ib ib-teal">🔍</div><h3>AI decision trace</h3><p>For each email: why was this priority assigned? Which signals contributed? What did the LLM return (if enabled)? Full evidence chain, no black box.</p></div>
+      <div class="card card-green"><div class="ib ib-green">💚</div><h3>System health</h3><p>Per-component health: IMAP accounts, Telegram, LLM provider, database. With specific error messages when something is wrong.</p></div>
+    </div>
+
+    <div class="qa-grid rv">
+      <div>
+        <div class="qa-q">What SLA metrics does the cockpit show?</div>
+        <div class="qa-a">Delivery rate (% of processed emails successfully sent to Telegram), error rate, p90 latency (90th percentile end-to-end processing time from email arrival to Telegram delivery), and salvage rate (% of initially-failed deliveries that succeeded on retry).</div>
+      </div>
+      <div>
+        <div class="qa-q">What is the AI decision trace?</div>
+        <div class="qa-a">For every prioritized email, the decision trace records: the final priority and reason codes, the individual signals that contributed (sender score, email type, LLM output if used), the correction history from Telegram buttons, and the email's current snooze state. This makes the system auditable at any time.</div>
+      </div>
+      <div>
+        <div class="qa-q">Does the cockpit connect to the internet?</div>
+        <div class="qa-a">No. The cockpit is a local Flask/Uvicorn server bound to <code>127.0.0.1:8787</code> only. It reads from the local SQLite database. No outbound network calls. It is not accessible from other machines on the network without explicit configuration.</div>
+      </div>
+      <div>
+        <div class="qa-q">Does the cockpit show email content?</div>
+        <div class="qa-a">The archive shows metadata — sender, subject, type, priority, reason codes, entities. Full email bodies and attachments are not stored in the database and therefore not shown. This is by design: the cockpit is safe to leave open without exposing raw correspondence.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html">
+          <span class="brand-icon">✉</span>
+          <span>Letterbot<span class="brand-tag">local AI email filter</span></span>
+        </a>
+        <p class="footer-desc">Free self-hosted AI email assistant. Your emails stay on your machine. Open source forever.</p>
+        <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
+          <a class="badge badge-amber" href="#" data-gh target="_blank">GitHub ↗</a>
+          <a class="badge badge-teal" href="#" data-tg target="_blank">Telegram ↗</a>
+          <a class="badge badge-green" href="#" data-boosty target="_blank">Boosty ↗</a>
+        </div>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="features.html">Features</a>
+          <a href="how-it-works.html">How it works</a>
+          <a href="install.html">Install</a>
+          <a href="use-cases.html">Use cases</a>
+          <a href="observability.html">Observability</a>
+          <a href="changelog.html">Changelog</a>
+        </div>
+        <div class="footer-col">
+          <h4>Compare &amp; Learn</h4>
+          <a href="compare.html">Compare alternatives</a>
+          <a href="privacy.html">Privacy &amp; data</a>
+          <a href="faq.html">FAQ</a>
+          <a href="blog/why-letterbot-exists.html">Why Letterbot</a>
+          <a href="blog/email-ai-guide.html">Email AI guide</a>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <a href="#" data-gh>GitHub</a>
+          <a href="#" data-issues>Issues &amp; feedback</a>
+          <a href="#" data-tg>Telegram channel</a>
+          <a href="support.html">Support the project</a>
+          <a href="#" data-email>master@letterbot.ru</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Letterbot · AGPL-3.0 · <a href="privacy.html">Privacy</a></span>
+      <span>v<span data-ver></span> · updated <span data-updated></span> · <a data-email href="#" data-email-show></a></span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

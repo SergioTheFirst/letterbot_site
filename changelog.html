@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Letterbot Changelog — Version History and Release Notes</title>
+  <meta name="description" content="Letterbot version history: v28 (current), v27, v26 and earlier. What changed, what was fixed, what was added in each release."/>
+  <meta name="theme-color" content="#090e17"/>
+  <meta property="og:title" content="Letterbot Changelog — Version History and Release Notes"/>
+  <meta property="og:description" content="Letterbot version history: v28 (current), v27, v26 and earlier. What changed, what was fixed, what was added in each release."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://sergiothefirst.github.io/letterbot/changelog.html"/>
+  <meta property="og:image" content="https://sergiothefirst.github.io/letterbot/assets/og.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <link rel="canonical" href="https://sergiothefirst.github.io/letterbot/changelog.html"/>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+  <link rel="stylesheet" href="assets/styles.css"/>
+  <script src="assets/config.js"></script>
+  <script defer src="assets/main.js"></script>
+  <script type="application/ld+json">{
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Letterbot",
+    "applicationCategory":"ProductivityApplication",
+    "operatingSystem":"Windows 10, Windows 11",
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+    "description":"Free self-hosted AI email filter for Windows. Reads IMAP inbox, prioritizes with AI, sends only important emails to Telegram. Data stays local.",
+    "url":"https://sergiothefirst.github.io/letterbot/",
+    "downloadUrl":"https://github.com/SergioTheFirst/letterbot/releases/latest",
+    "softwareVersion":"28.0.0",
+    "dateModified":"2026-03-11"
+  }</script>
+  
+</head>
+<body>
+
+<nav class="nav" role="navigation">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-icon">✉</span>
+      <span>Letterbot<span class="brand-tag">local AI email filter</span></span>
+    </a>
+    <div class="nav-links"><a href="index.html">Home</a><a href="features.html">Features</a><a href="how-it-works.html">How it works</a><a href="install.html">Install</a><a href="faq.html">FAQ</a><a href="compare.html">Compare</a><a href="privacy.html">Privacy</a><a href="support.html">Donate</a></div>
+    <div class="nav-end">
+      <a class="btn btn-outline btn-sm" href="#" data-gh>GitHub</a>
+      <a class="btn btn-amber btn-sm" href="install.html">Download</a>
+    </div>
+    <button class="mob-btn" id="mob-toggle" aria-expanded="false" aria-label="Toggle menu">☰</button>
+  </div>
+  <div class="mob-nav" id="mob-nav"><a href="index.html">Home</a><a href="features.html">Features</a><a href="how-it-works.html">How it works</a><a href="install.html">Install</a><a href="faq.html">FAQ</a><a href="compare.html">Compare</a><a href="privacy.html">Privacy</a><a href="support.html">Donate</a>
+    <a class="btn btn-amber" href="install.html" style="margin-top:4px;">⬇ Download</a>
+  </div>
+</nav>
+<main id="content">
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">// version history · what changed · when</p>
+    <h1>Changelog</h1>
+    <p>What was added, fixed, or changed in each Letterbot release. Current version: <strong>v<span data-ver></span></strong>.</p>
+  </div>
+</section>
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+
+    <div class="card card-amber rv" style="margin-bottom:32px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+        <div><span class="badge badge-green">Current</span> <span style="font-family:var(--font-m);font-size:12px;color:var(--muted);margin-left:8px">v28.0.0 · March 2026</span></div>
+        <a class="btn btn-outline btn-sm" href="#" data-releases>Download →</a>
+      </div>
+      <h3>v28 — Architecture hardening &amp; source-of-truth audit</h3>
+      <ul class="tick-list" style="margin-top:12px">
+        <li>Startup assertion: <code>knowledge_db.path == storage.db_path</code> — prevents silent snooze divergence</li>
+        <li>IMAP UID loop guard for Yandex RFC3501 edge case</li>
+        <li>Database lock fix: <code>sqlite3.connect(timeout=10)</code> in emitter</li>
+        <li>Analytics <code>OperationalError</code> catch in <code>top_sender_relationship_profiles()</code></li>
+        <li>Visibility change handler added to cockpit.html and health.html</li>
+        <li>Config hot-reload improvements</li>
+        <li><code>_provider_has_real_credentials</code> moved to <code>StartupHealthChecker</code></li>
+      </ul>
+    </div>
+
+    <div class="card rv" style="margin-bottom:32px">
+      <div style="margin-bottom:14px"><span class="badge badge-amber">Previous</span> <span style="font-family:var(--font-m);font-size:12px;color:var(--muted);margin-left:8px">v27.1.0 · February 2026</span></div>
+      <h3>v27.1 — Priority buttons &amp; snooze fixes</h3>
+      <ul class="tick-list" style="margin-top:12px">
+        <li>Priority button callbacks now correctly update <code>emails.priority</code> and <code>emails.priority_source</code></li>
+        <li>Snooze write path consolidated — all writes go through single <code>_save_snooze</code> function</li>
+        <li>Snooze read path (<code>storage.list_due_snoozes()</code>) confirmed to use same DB path as writer</li>
+        <li>Web UI priority reads confirmed to go through <code>emails.priority</code> column only</li>
+        <li>Web cockpit page layout improvements</li>
+      </ul>
+    </div>
+
+    <div class="card rv" style="margin-bottom:32px">
+      <div style="margin-bottom:14px"><span class="badge">v27.0</span> <span style="font-family:var(--font-m);font-size:12px;color:var(--muted);margin-left:8px">January 2026</span></div>
+      <h3>v27 — Web cockpit beta</h3>
+      <ul class="tick-list" style="margin-top:12px">
+        <li>Local observability web cockpit launched at <code>localhost:8787</code></li>
+        <li>Dashboard, email archive, health page, AI decision trace</li>
+        <li>Delivery SLA metrics: p90 latency, delivery rate, error rate, salvage rate</li>
+        <li>Relationship analytics: sender trust scores, anomaly detection</li>
+        <li>Insight/narrative layer for weekly digest</li>
+      </ul>
+    </div>
+
+    <div class="card rv">
+      <div style="margin-bottom:14px"><span class="badge">v26</span> <span style="font-family:var(--font-m);font-size:12px;color:var(--muted);margin-left:8px">2025</span></div>
+      <h3>v26 — Multi-account, adaptive learning, obligation tracking</h3>
+      <ul class="tick-list" style="margin-top:12px">
+        <li>Multi-Inbox Routing: unlimited IMAP accounts, per-account Telegram chat routing</li>
+        <li>Adaptive priority learning from Telegram button corrections</li>
+        <li>Obligation tracking: detects commitment phrases, surfaces in weekly digest</li>
+        <li>Snooze with context memory</li>
+        <li>GigaChat (Sber) LLM provider added</li>
+        <li>DEGRADED_NO_LLM mode with automatic recovery</li>
+        <li>Weekly digest with financial and obligation summary</li>
+      </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:32px" class="rv">
+      <p class="muted" style="margin-bottom:16px">Full commit history on GitHub</p>
+      <a class="btn btn-outline" href="#" data-gh>Open GitHub →</a>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html">
+          <span class="brand-icon">✉</span>
+          <span>Letterbot<span class="brand-tag">local AI email filter</span></span>
+        </a>
+        <p class="footer-desc">Free self-hosted AI email assistant. Your emails stay on your machine. Open source forever.</p>
+        <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
+          <a class="badge badge-amber" href="#" data-gh target="_blank">GitHub ↗</a>
+          <a class="badge badge-teal" href="#" data-tg target="_blank">Telegram ↗</a>
+          <a class="badge badge-green" href="#" data-boosty target="_blank">Boosty ↗</a>
+        </div>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="features.html">Features</a>
+          <a href="how-it-works.html">How it works</a>
+          <a href="install.html">Install</a>
+          <a href="use-cases.html">Use cases</a>
+          <a href="observability.html">Observability</a>
+          <a href="changelog.html">Changelog</a>
+        </div>
+        <div class="footer-col">
+          <h4>Compare &amp; Learn</h4>
+          <a href="compare.html">Compare alternatives</a>
+          <a href="privacy.html">Privacy &amp; data</a>
+          <a href="faq.html">FAQ</a>
+          <a href="blog/why-letterbot-exists.html">Why Letterbot</a>
+          <a href="blog/email-ai-guide.html">Email AI guide</a>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <a href="#" data-gh>GitHub</a>
+          <a href="#" data-issues>Issues &amp; feedback</a>
+          <a href="#" data-tg>Telegram channel</a>
+          <a href="support.html">Support the project</a>
+          <a href="#" data-email>master@letterbot.ru</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Letterbot · AGPL-3.0 · <a href="privacy.html">Privacy</a></span>
+      <span>v<span data-ver></span> · updated <span data-updated></span> · <a data-email href="#" data-email-show></a></span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

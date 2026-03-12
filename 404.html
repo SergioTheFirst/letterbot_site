@@ -1,46 +1,53 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>404 — Letterbot</title>
-  <meta name="theme-color" content="#030b14"/>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232d9cff'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='white' font-family='serif'>✉</text></svg>"/>
-  <link rel="stylesheet" href="/assets/styles.css"/>
-  <script src="/assets/config.js"></script>
-  <script defer src="/assets/site.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Page not found — LetterBot</title>
+  <meta name="description" content="The page you requested does not exist." />
+  <link rel="canonical" href="https://sergiothefirst.github.io/letterbot_site/404.html" />
+  <meta property="og:title" content="Page not found — LetterBot" />
+  <meta property="og:description" content="The page you requested does not exist." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sergiothefirst.github.io/letterbot_site/404.html" />
+  <meta property="og:image" content="https://sergiothefirst.github.io/letterbot_site/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Page not found — LetterBot" />
+  <meta name="twitter:description" content="The page you requested does not exist." />
+  <meta name="twitter:image" content="https://sergiothefirst.github.io/letterbot_site/assets/og.png" />
+  <meta name="theme-color" content="#08111f" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "name": "LetterBot", "url": "https://sergiothefirst.github.io/letterbot_site/", "logo": "https://sergiothefirst.github.io/letterbot_site/assets/logo.svg", "sameAs": ["https://github.com/SergioTheFirst/letterbot"]}, {"@type": "SoftwareApplication", "name": "LetterBot", "applicationCategory": "BusinessApplication", "operatingSystem": "Windows, Linux, macOS", "isAccessibleForFree": true, "license": "https://www.gnu.org/licenses/agpl-3.0.en.html", "url": "https://sergiothefirst.github.io/letterbot_site/404.html", "downloadUrl": "https://github.com/SergioTheFirst/letterbot", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "description": "LetterBot is a self-hosted email triage assistant that watches IMAP inboxes, extracts useful facts, prioritizes incoming mail, sends Telegram notifications, and exposes a local observability dashboard."}]}</script>
 </head>
 <body>
-<header class="topbar">
-  <div class="wrap topbar-inner">
-    <a class="brand" href="/"><div class="brand-mark">✉</div><div>Letterbot <small>local AI email filter</small></div></a>
-    <div class="btn-row">
-      <a class="btn btn-ghost btn-sm" id="github-link" href="#" target="_blank">GitHub ↗</a>
-      <a class="btn btn-primary btn-sm" id="download-top" href="#">⬇ Download</a>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="index.html" aria-label="LetterBot home">
+        <span class="brand-mark">L</span><span>LetterBot</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+        <a href="features.html">Features</a><a href="use-cases.html">Use cases</a><a href="how-it-works.html">How it works</a><a href="observability.html">Observability</a><a href="install.html">Install</a><a href="faq.html">FAQ</a><a href="compare.html">Compare</a><a href="privacy.html">Privacy</a><a href="support.html">Support</a>
+        <a class="pill" href="https://github.com/SergioTheFirst/letterbot" rel="noopener noreferrer">GitHub</a>
+      </nav>
     </div>
-  </div>
-</header>
-<main>
-  <section style="padding:120px 0;text-align:center;">
-    <div class="wrap">
-      <div style="font-size:80px;margin-bottom:8px;opacity:.15;font-family:var(--font-display);font-weight:800;letter-spacing:-4px;">404</div>
-      <div style="font-size:48px;margin-bottom:16px;">✉</div>
-      <h1 style="font-size:28px;margin-bottom:12px;">This email got lost</h1>
-      <p class="muted" style="max-width:38ch;margin:0 auto 32px;">The page you're looking for doesn't exist. But Letterbot would have found the important one.</p>
-      <div class="btn-row" style="justify-content:center;">
-        <a class="btn btn-primary" href="/">Go home</a>
-        <a class="btn btn-ghost" href="/faq.html">FAQ</a>
-        <a class="btn btn-ghost" href="/download.html">Download</a>
-      </div>
-    </div>
-  </section>
+  </header>
+  <main id="content">
+<section class="section"><div class="container">
+  <h1>Page not found</h1>
+  <div class="answer"><strong>Direct answer:</strong> The page you requested does not exist. Use the navigation or go back to the homepage.</div>
+  <div class="cta"><a class="btn primary" href="index.html">Go home</a><a class="btn" href="faq.html">Open FAQ</a></div>
+</div></section>
 </main>
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer-bottom" style="justify-content:center;">
-      <span>© 2026 Letterbot · <a data-email href="#">master@letterbot.ru</a></span>
+  <footer class="footer">
+    <div class="container footer-row">
+      <p class="muted small">© <span id="year"></span> LetterBot • GitHub Pages edition • AGPL-3.0</p>
+      <p class="muted small"><a href="faq.html">FAQ</a> · <a href="privacy.html">Privacy</a> · <a href="support.html">Support</a></p>
     </div>
-  </div>
-</footer>
+  </footer>
+  <script src="assets/main.js" defer></script>
 </body>
 </html>

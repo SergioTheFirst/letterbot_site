@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://letterbot.ru/sitemap.xml
+Sitemap: https://sergiothefirst.github.io/letterbot_site/sitemap.xml

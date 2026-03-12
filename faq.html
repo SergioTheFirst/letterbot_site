@@ -1,304 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Letterbot FAQ — 30+ Questions Answered About the Local AI Email Filter</title>
-  <meta name="description" content="Complete FAQ for Letterbot: does it need ChatGPT, where does email data go, which mailboxes are supported, how snooze works, can it run on old hardware, is it really free."/>
-  <meta name="theme-color" content="#030b14"/>
-  <meta property="og:title" content="Letterbot FAQ — 30+ Answered Questions"/>
-  <meta property="og:description" content="All questions about Letterbot answered directly. No marketing fluff — just answers."/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://letterbot.ru/faq.html"/>
-  <link rel="canonical" href="https://letterbot.ru/faq.html"/>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232d9cff'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='white' font-family='serif'>✉</text></svg>"/>
-  <link rel="stylesheet" href="/assets/styles.css"/>
-  <script src="/assets/config.js"></script>
-  <script defer src="/assets/site.js"></script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-    {"@type":"Question","name":"What is Letterbot?","acceptedAnswer":{"@type":"Answer","text":"Letterbot is a free, self-hosted AI email filter for Windows. It connects to your IMAP mailbox, analyzes every incoming email, determines priority and suggested action, and sends concise notifications to Telegram. Your emails never leave your machine."}},
-    {"@type":"Question","name":"Does Letterbot require ChatGPT or paid AI services?","acceptedAnswer":{"@type":"Answer","text":"No. Letterbot works in a deterministic mode without any external AI by default. LLM providers (GigaChat, OpenAI, Cloudflare Workers AI) are entirely optional and only activate when you explicitly configure them."}},
-    {"@type":"Question","name":"Where does my email data go?","acceptedAnswer":{"@type":"Answer","text":"Nowhere external. Letterbot runs locally on your machine. Email metadata is stored in a SQLite database on your PC. There is no Letterbot cloud server. If you enable an external LLM, only a minimal text context is sent to that provider — never full bodies or attachments."}},
-    {"@type":"Question","name":"Is Letterbot free forever?","acceptedAnswer":{"@type":"Answer","text":"Yes. Letterbot is free and open source under AGPL-3.0. There is no freemium model, no feature paywall, no subscription. Development is funded by voluntary donations via Boosty."}},
-    {"@type":"Question","name":"Can I connect multiple email accounts?","acceptedAnswer":{"@type":"Answer","text":"Yes. Letterbot supports unlimited IMAP accounts via Multi-Inbox Routing. You can send each account's notifications to a different Telegram chat — work emails to one chat, personal to another, server alerts to a third."}},
-    {"@type":"Question","name":"Does Letterbot modify my emails?","acceptedAnswer":{"@type":"Answer","text":"No. Letterbot connects to your mailbox in read-only IMAP mode. It never deletes, moves, flags, or modifies any emails. Your mailbox remains exactly as it was."}},
-    {"@type":"Question","name":"What happens if the internet goes down?","acceptedAnswer":{"@type":"Answer","text":"Letterbot cannot connect to the IMAP server or Telegram without internet. The program does not crash — it waits for the next cycle and retries automatically. All local SQLite data remains intact."}},
-    {"@type":"Question","name":"Can Letterbot run on an old laptop?","acceptedAnswer":{"@type":"Answer","text":"Yes. Letterbot is tested on Intel Celeron N4020 (2 cores, 1.1 GHz) with 3 GB RAM. This is one of the best use cases: giving an old or spare laptop a useful second life as a local email assistant."}},
-    {"@type":"Question","name":"Which email providers are supported?","acceptedAnswer":{"@type":"Answer","text":"Any mailbox with IMAP access: Yandex.Mail (imap.yandex.ru), Mail.ru (imap.mail.ru), Gmail (imap.gmail.com with app password), corporate Exchange/Office 365, Outlook, and any other IMAP provider."}},
-    {"@type":"Question","name":"Is there a web interface?","acceptedAnswer":{"@type":"Answer","text":"Yes. Letterbot includes a local web cockpit at http://127.0.0.1:8787. It shows a dashboard, email archive, AI decision trace, system health, SLA metrics, and relationship analytics. It is read-only and does not connect to the internet."}},
-    {"@type":"Question","name":"What does a Telegram notification look like?","acceptedAnswer":{"@type":"Answer","text":"One email equals one message. The message contains: sender, subject, 2–3 line summary, priority emoji (🔴/🟡/🔵), suggested action, and attachment note if applicable. Priority buttons and snooze options appear below the message."}},
-    {"@type":"Question","name":"How does snooze work?","acceptedAnswer":{"@type":"Answer","text":"You can snooze any email for 2 hours, tomorrow, next week, or a custom time directly from Telegram. When it returns, Letterbot reminds you with full context — who sent it, what was requested, when it arrived."}},
-    {"@type":"Question","name":"Does Letterbot learn from my corrections?","acceptedAnswer":{"@type":"Answer","text":"Yes. When you override a priority in Telegram, the system records it as a correction signal. Over time, Letterbot adapts its priority model based on your real behavior — which senders you treat as urgent, which as low priority."}},
-    {"@type":"Question","name":"Is Letterbot open source?","acceptedAnswer":{"@type":"Answer","text":"Yes. The full source code is available on GitHub under the AGPL-3.0 license. You can read, modify, and redistribute the code, with the condition that modified versions run as a network service must publish their source code."}},
-    {"@type":"Question","name":"How do I install Letterbot?","acceptedAnswer":{"@type":"Answer","text":"Download the ZIP from the releases page, unzip to a folder, fill in accounts.yaml and settings.ini with your IMAP credentials and Telegram bot token, then run letterbot.bat. Installation takes about 10 minutes."}},
-    {"@type":"Question","name":"Do I need Python installed?","acceptedAnswer":{"@type":"Answer","text":"For the bundled Windows build, ideally no. The run.bat script handles the environment. For advanced users or Linux/macOS, Python 3.10+ is required and dependencies are installed via pip."}},
-    {"@type":"Question","name":"What is the weekly digest?","acceptedAnswer":{"@type":"Answer","text":"Letterbot sends a weekly summary every Monday that includes: total emails processed, invoices detected, contracts for review, overdue obligations, silent-partner risks (contacts you haven't heard from), and pending replies."}},
-    {"@type":"Question","name":"Can Letterbot read PDF and Excel attachments?","acceptedAnswer":{"@type":"Answer","text":"Yes. Letterbot extracts text from PDF files and Excel (.xlsx) spreadsheets without requiring Microsoft Office. The attachment content is used when calculating email priority — an invoice in a PDF is treated as urgent."}},
-    {"@type":"Question","name":"What if the LLM provider is unavailable?","acceptedAnswer":{"@type":"Answer","text":"Letterbot automatically switches to DEGRADED_NO_LLM mode and continues sending basic notifications using its deterministic extraction engine. You are notified about the degraded state via Telegram."}},
-    {"@type":"Question","name":"Does Letterbot work without internet?","acceptedAnswer":{"@type":"Answer","text":"In basic mode, yes — Letterbot processes emails locally without calling any external service. For IMAP sync and Telegram delivery, internet is required. For full AI analysis, LLM providers need to be reachable."}},
-    {"@type":"Question","name":"How do I delete all Letterbot data?","acceptedAnswer":{"@type":"Answer","text":"Delete the project folder or just the SQLite database file. There are no cloud backups, no remote storage, nothing to request deletion of — everything is on your machine."}},
-    {"@type":"Question","name":"Is Letterbot suitable for businesses?","acceptedAnswer":{"@type":"Answer","text":"Yes for small teams and sole traders who want self-hosted control. Not for enterprise use requiring SLA guarantees, centralized management, or compliance certification."}},
-    {"@type":"Question","name":"How do I create a Telegram bot for Letterbot?","acceptedAnswer":{"@type":"Answer","text":"Open Telegram, search for @BotFather, send /newbot, follow the prompts. You receive a bot token. Set this token in Letterbot config. The setup takes about 2 minutes."}},
-    {"@type":"Question","name":"Will Letterbot become paid in the future?","acceptedAnswer":{"@type":"Answer","text":"No. Letterbot is designed as a permanently free, open-source tool. The project is maintained as an independent initiative supported by voluntary donations, not as a commercial venture."}},
-    {"@type":"Question","name":"What email types does Letterbot recognize?","acceptedAnswer":{"@type":"Answer","text":"Letterbot classifies emails into types: INVOICE, CONTRACT, SECURITY_ALERT, PRICE_LIST, NEWSLETTER, NOTIFICATION, and others. Classification drives priority decisions and extracted action suggestions."}},
-    {"@type":"Question","name":"What does the local web cockpit show?","acceptedAnswer":{"@type":"Answer","text":"The cockpit at localhost:8787 shows: system health, IMAP connection status, Telegram delivery metrics (p90 latency, delivery rate, error rate), processed email history, AI decision trace with reason codes, and relationship analytics."}},
-    {"@type":"Question","name":"How does Letterbot handle corporate Exchange mailboxes?","acceptedAnswer":{"@type":"Answer","text":"Any Exchange mailbox with IMAP enabled works with Letterbot. Configure the IMAP host (typically outlook.office365.com or your internal server), port, and credentials in accounts.yaml. OAuth2 is not yet supported."}},
-    {"@type":"Question","name":"Does Letterbot support email threads?","acceptedAnswer":{"@type":"Answer","text":"Letterbot tracks email threads and detects stalled conversations — contacts who stopped replying. These are flagged in the weekly digest as potential silent-partner risks."}},
-    {"@type":"Question","name":"What is explainable AI prioritization?","acceptedAnswer":{"@type":"Answer","text":"Every priority decision in Letterbot is accompanied by a reason code: PRIO_INVOICE (invoice detected), PRIO_DEADLINE_1D (deadline tomorrow), PRIO_FREQ_SPIKE_3X (3x normal frequency from this sender), etc. This makes the system auditable, not a black box."}},
-    {"@type":"Question","name":"How do I get help with Letterbot?","acceptedAnswer":{"@type":"Answer","text":"Check the FAQ and documentation first. For setup issues, GitHub Issues is the best place. For complex configuration (corporate Exchange, custom IMAP) or bugs, email master@letterbot.ru."}}
-  ]}</script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LetterBot FAQ — direct answers for users and answer engines</title>
+  <meta name="description" content="Answer-first FAQ about LetterBot, privacy, Telegram workflow, explainability, and multi-account operation." />
+  <link rel="canonical" href="https://sergiothefirst.github.io/letterbot_site/faq.html" />
+  <meta property="og:title" content="LetterBot FAQ — direct answers for users and answer engines" />
+  <meta property="og:description" content="Answer-first FAQ about LetterBot, privacy, Telegram workflow, explainability, and multi-account operation." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sergiothefirst.github.io/letterbot_site/faq.html" />
+  <meta property="og:image" content="https://sergiothefirst.github.io/letterbot_site/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LetterBot FAQ — direct answers for users and answer engines" />
+  <meta name="twitter:description" content="Answer-first FAQ about LetterBot, privacy, Telegram workflow, explainability, and multi-account operation." />
+  <meta name="twitter:image" content="https://sergiothefirst.github.io/letterbot_site/assets/og.png" />
+  <meta name="theme-color" content="#08111f" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "name": "LetterBot", "url": "https://sergiothefirst.github.io/letterbot_site/", "logo": "https://sergiothefirst.github.io/letterbot_site/assets/logo.svg", "sameAs": ["https://github.com/SergioTheFirst/letterbot"]}, {"@type": "SoftwareApplication", "name": "LetterBot", "applicationCategory": "BusinessApplication", "operatingSystem": "Windows, Linux, macOS", "isAccessibleForFree": true, "license": "https://www.gnu.org/licenses/agpl-3.0.en.html", "url": "https://sergiothefirst.github.io/letterbot_site/faq.html", "downloadUrl": "https://github.com/SergioTheFirst/letterbot", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "description": "LetterBot is a self-hosted email triage assistant that watches IMAP inboxes, extracts useful facts, prioritizes incoming mail, sends Telegram notifications, and exposes a local observability dashboard."}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is LetterBot?", "acceptedAnswer": {"@type": "Answer", "text": "LetterBot is a self-hosted email triage assistant that watches IMAP inboxes, prioritizes messages, and sends concise Telegram notifications for what needs attention."}}, {"@type": "Question", "name": "Does LetterBot replace my mailbox?", "acceptedAnswer": {"@type": "Answer", "text": "No. Your mailbox stays the source system. LetterBot adds a decision layer on top."}}, {"@type": "Question", "name": "Who is LetterBot for?", "acceptedAnswer": {"@type": "Answer", "text": "It is strongest for freelancers, operators, founders, privacy-conscious technical users, and small teams with overloaded inboxes."}}, {"@type": "Question", "name": "What makes it different from typical email AI?", "acceptedAnswer": {"@type": "Answer", "text": "Explainable decision traces, user-correction learning, snooze with memory, multi-account routing, and a local observability dashboard."}}, {"@type": "Question", "name": "Can it work without external AI providers?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is designed to remain useful in degraded mode instead of collapsing into fake all-green behavior."}}, {"@type": "Question", "name": "Why Telegram?", "acceptedAnswer": {"@type": "Answer", "text": "Because Telegram is a fast operational surface: triage, reprioritize, snooze, and keep moving."}}, {"@type": "Question", "name": "Can it monitor multiple inboxes?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Multi-account routing is one of LetterBot’s strongest practical differentiators."}}, {"@type": "Question", "name": "Why is this FAQ important?", "acceptedAnswer": {"@type": "Answer", "text": "Because answer-first pages and explicit Q&A are easier for search and recommendation systems to match to user intent."}}]}]}</script>
 </head>
 <body>
-
-<header class="topbar">
-  <div class="wrap topbar-inner">
-    <a class="brand" href="/"><div class="brand-mark">✉</div><div>Letterbot <small>local AI email filter</small></div></a>
-    <nav class="nav">
-      <a href="/#how">How it works</a><a href="/faq.html" class="active">FAQ</a>
-      <a href="/compare.html">Compare</a><a href="/privacy.html">Privacy</a><a href="/support.html">Support</a>
-    </nav>
-    <div class="btn-row">
-      <a class="btn btn-ghost btn-sm" id="github-link" href="#" target="_blank">GitHub ↗</a>
-      <a class="btn btn-primary btn-sm" id="download-top" href="#">⬇ Download</a>
-    </div>
-    <button class="mobile-toggle" id="mobile-toggle" aria-expanded="false">☰</button>
-  </div>
-  <nav class="mobile-nav" id="mobile-nav">
-    <a href="/#how">How it works</a><a href="/faq.html">FAQ</a><a href="/compare.html">Compare</a>
-    <a href="/privacy.html">Privacy</a><a href="/support.html">Support</a>
-    <a class="btn btn-primary" id="download-top-m" href="#">⬇ Download</a>
-  </nav>
-</header>
-
-<main>
-
-<section class="page-hero">
-  <div class="wrap">
-    <div class="eyebrow">// direct answers · no marketing</div>
-    <h1>Frequently Asked Questions</h1>
-    <p>30+ real questions — the ones users actually ask. The answer is always in the first sentence. Can't find yours? Write to <a data-email href="#" style="color:var(--accent);">master@letterbot.ru</a>.</p>
-    <div class="faq-tools" style="margin-top:24px;">
-      <input class="search-input" id="faq-search" type="search" placeholder="Search: e.g. ChatGPT, old laptop, multiple accounts, privacy…" autocomplete="off" style="max-width:520px;margin-bottom:0;"/>
-      <a class="btn btn-primary" id="download-page" href="#">⬇ Download Letterbot</a>
-    </div>
-  </div>
-</section>
-
-<section class="section" style="padding-top:32px;">
-  <div class="wrap">
-
-    <!-- About the product -->
-    <div data-faq-section>
-    <div class="eyebrow" style="margin-bottom:14px;">About Letterbot</div>
-    <div class="faq-grid" style="margin-bottom:36px;">
-      <details class="faq-item" data-faq-item open>
-        <summary>What is Letterbot? <span class="faq-icon">−</span></summary>
-        <div class="faq-answer">Letterbot is a free, self-hosted AI email filter for Windows. It connects to your IMAP mailbox, analyzes incoming emails, determines priority and the suggested action, and sends concise notifications to Telegram. Your emails never leave your computer — there is no Letterbot cloud.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>Who is Letterbot for? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">Primarily for people whose inbox has become a task list: freelancers, sole traders, developers, and small businesses with active B2B correspondence. Especially useful for those who value privacy — data stays on your machine. Also a great use case for an old laptop or spare PC you want to put to work.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>How is Letterbot different from Gmail AI or email filters? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">Standard filters sort emails by rules. Letterbot translates an email into an action: "pay", "reply", "review contract", "snooze". It delivers that action to Telegram as a short message with priority buttons. The core difference: it is a decision system, not a storage system. And it runs locally — your data does not go to Google or any other cloud.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>How is Letterbot different from paid tools like Superhuman or SaneBox? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">Letterbot is self-hosted, free, and open source. Superhuman costs $30/month and is cloud-only. SaneBox costs $7–36/month and also runs in the cloud. Letterbot is the only free tool in the "local + Telegram + multi-inbox routing" intersection. For enterprise SLA guarantees, look at paid alternatives.</div>
-      </details>
-    </div>
-    </div>
-
-    <!-- Privacy & data -->
-    <div data-faq-section>
-    <div class="eyebrow" style="margin-bottom:14px;">Privacy &amp; data</div>
-    <div class="faq-grid" style="margin-bottom:36px;">
-      <details class="faq-item" data-faq-item>
-        <summary>Where does my email data go? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">Nowhere external. In the default mode, Letterbot processes everything locally. Email metadata (sender, subject, date, detected entities) is stored in a SQLite database on your machine. No Letterbot server exists to receive your data.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>Does Letterbot require ChatGPT or paid AI services? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">No. The default deterministic mode works without any external AI service. LLM providers — GigaChat (Sber), OpenAI, Cloudflare Workers AI — are optional enhancements. Without them, the system uses rule-based extraction with slightly lower accuracy on unusual texts, but fully operational.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>If I enable an LLM, what gets sent to it? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">Only the email's text body (minimal context for classification). Attachments are not sent. You control which LLM provider is used via the config file. The provider you choose handles that data under their own privacy policy.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>What is stored in the local SQLite database? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">Metadata: sender email, subject, date, detected email type, priority, priority source, extracted entities, snooze status, and processing analytics. Full email bodies and attachments are not stored in the database.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>How do I delete all Letterbot data? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">Delete the project folder, or just the <code>database.sqlite</code> file. There are no cloud backups, no remote storage, nothing to request deletion of — all data is on your machine.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>Does Letterbot have telemetry or analytics that phones home? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">No. Letterbot has zero telemetry. The only external connections it makes are: to your IMAP server, to the Telegram Bot API, and (if enabled) to your chosen LLM provider. The source code is open — you can verify this yourself on GitHub.</div>
-      </details>
-    </div>
-    </div>
-
-    <!-- Technical -->
-    <div data-faq-section>
-    <div class="eyebrow" style="margin-bottom:14px;">Technical questions</div>
-    <div class="faq-grid" style="margin-bottom:36px;">
-      <details class="faq-item" data-faq-item>
-        <summary>Can Letterbot run on an old or slow computer? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">Yes — this is one of the best Letterbot use cases. It is tested on an Intel Celeron N4020 (2 cores, 1.1 GHz) with 3 GB RAM. An old laptop or spare desktop PC makes an excellent dedicated local email assistant.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>Does Letterbot modify or delete my emails? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">No. Letterbot connects to your mailbox via IMAP in read-only mode. It does not delete, move, mark, or alter any emails. Your inbox remains exactly as it was.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>Which email providers are supported? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">Any mailbox with IMAP access: Yandex.Mail, Mail.ru, Gmail (with app password), corporate Exchange / Office 365, Outlook, ProtonMail Bridge, FastMail, and any IMAP-compatible server. If you have an IMAP host and password, it works.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>Can I connect multiple email accounts? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">Yes. Multi-Inbox Routing is one of Letterbot's key features. You can connect unlimited mailboxes. Each can be routed to a separate Telegram chat — work email to the work chat, personal to another, server alerts to a dedicated channel.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>What happens if the internet goes down? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">Letterbot cannot sync IMAP or deliver Telegram messages without internet. It does not crash — it retries automatically on the next cycle. All local data remains intact.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>Is there a local web interface? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">Yes. Letterbot includes a read-only local cockpit at <code>http://127.0.0.1:8787</code> with a dashboard, email archive, AI decision trace, system health, delivery SLA metrics, and sender relationship analytics. It does not connect to the internet.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>Can Letterbot read PDF and Excel attachments? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">Yes. Letterbot extracts text from PDF and Excel (.xlsx) files without requiring Microsoft Office. Attachment content is factored into the priority calculation — an invoice in a PDF attachment can trigger 🔴 Urgent priority.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>What is the weekly digest? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">A weekly summary sent every Monday containing: total emails processed, invoices detected, contracts for review, overdue obligations, silent-partner risks (contacts who stopped replying), and pending replies you haven't acted on yet.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>What if my LLM provider goes down? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">Letterbot automatically enters <code>DEGRADED_NO_LLM</code> mode and continues sending basic notifications using its deterministic extraction engine. You are notified of the degraded state via Telegram. When the LLM recovers, normal mode resumes automatically.</div>
-      </details>
-    </div>
-    </div>
-
-    <!-- Features -->
-    <div data-faq-section>
-    <div class="eyebrow" style="margin-bottom:14px;">Features &amp; behavior</div>
-    <div class="faq-grid" style="margin-bottom:36px;">
-      <details class="faq-item" data-faq-item>
-        <summary>How does priority work? How does Letterbot decide what's important? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">Letterbot analyzes sender history, email type (invoice, contract, alert), deadline keywords, attachment type, and frequency signals. The result: 🔴 Urgent (today) / 🟡 Important (next few days) / 🔵 Low. Every decision includes a reason code like PRIO_INVOICE or PRIO_DEADLINE_1D, so you can see why a priority was assigned.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>Does Letterbot learn from my corrections? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">Yes. When you override a priority in Telegram, the correction is recorded as a training signal. Over time, Letterbot's priority model adapts to your real behavior — which senders you treat as urgent, which you consistently ignore.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>How does snooze with memory work? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">Tap a snooze button in Telegram (2h, tomorrow, next week). At the scheduled time, Letterbot resurfaces the email with context — original sender, subject, what was detected, when it arrived. This is different from a simple reminder: it restores the full decision context.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>What email types does Letterbot recognize? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">INVOICE, CONTRACT, SECURITY_ALERT, PRICE_LIST, NEWSLETTER, NOTIFICATION, and several others. Classification is used to determine base priority and the suggested action.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>What is obligation tracking? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">Letterbot detects commitment phrases ("will send by Friday", "confirm by Monday", "I'll call you tomorrow") in email bodies. These are tracked and surfaced in the weekly digest so you can see who promised what — and whether you have outstanding commitments yourself.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>What does the Telegram notification look like exactly? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">One email = one message. Structure: priority emoji + email type · sender name · subject · 2–3 line summary · suggested action · attachment note (if any) · priority change buttons · snooze options. Tapping a priority button immediately updates the stored priority.</div>
-      </details>
-    </div>
-    </div>
-
-    <!-- Setup -->
-    <div data-faq-section>
-    <div class="eyebrow" style="margin-bottom:14px;">Installation &amp; setup</div>
-    <div class="faq-grid" style="margin-bottom:36px;">
-      <details class="faq-item" data-faq-item>
-        <summary>How do I install Letterbot? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">1) Download the ZIP from GitHub releases. 2) Unzip to a folder (e.g. <code>C:\letterbot</code>). 3) Fill in <code>accounts.yaml</code> with IMAP credentials and Telegram bot token. 4) Run <code>letterbot.bat</code>. Total setup time: ~10 minutes. Full instructions in the README inside the archive.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>Do I need to know Python? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">For the bundled Windows build, ideally no — the .bat script handles the environment. However, the project is in active development, so some setup steps may require a command line. This is suited for technically comfortable users.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>How do I create a Telegram bot? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">Open Telegram → search @BotFather → send <code>/newbot</code> → follow the prompts. You receive a bot token. Set it in Letterbot config. Takes about 2 minutes. No Telegram premium required.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>How do I run the health check? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">Run <code>python -m mailbot_v26 doctor</code> in the project folder. It shows the status of each component: IMAP connections, Telegram bot, LLM provider, database, and configuration. Color-coded results with specific error messages if something is wrong.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>Telegram messages aren't arriving. What do I check? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">First: check the bot token in config, verify the chat_id is correct (must be numeric), confirm internet access. Run <code>python -m mailbot_v26 doctor</code> — it shows Telegram status specifically. If still stuck, open an issue on GitHub or email master@letterbot.ru.</div>
-      </details>
-    </div>
-    </div>
-
-    <!-- Donate -->
-    <div data-faq-section>
-    <div class="eyebrow" style="margin-bottom:14px;">Pricing &amp; support</div>
-    <div class="faq-grid">
-      <details class="faq-item" data-faq-item>
-        <summary>Is Letterbot really free? Will it stay free? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">Yes, free forever. Letterbot is an independent open-source project, not a startup with investors. There is no freemium model, no "pro version", no locked features. Development is sustained by voluntary donations via Boosty and CloudTips.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>How can I support the project? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">Via <a id="boosty-link" href="#" target="_blank">Boosty</a> or <a id="cloudtips" href="#" target="_blank">CloudTips</a> — voluntary donation of any amount. Also: star the <a id="github-link-2" href="#" target="_blank">GitHub repository</a>, report bugs, share with your community, or join the <a id="telegram-link" href="#" target="_blank">Telegram channel</a>.</div>
-      </details>
-      <details class="faq-item" data-faq-item>
-        <summary>Will Letterbot ever become paid? <span class="faq-icon">+</span></summary>
-        <div class="faq-answer">No. The project's founding principle is free and open. Even if a managed hosting service is introduced in the future for non-technical users, the self-hosted version will always be free.</div>
-      </details>
-    </div>
-    </div>
-
-  </div>
-</section>
-
-<section class="section-sm">
-  <div class="wrap reveal">
-    <div class="donate-card">
-      <div class="donate-qr">
-        <img id="boosty-qr" src="/assets/boosty_qr.svg" alt="QR code — support Letterbot on Boosty"/>
-      </div>
-      <div class="donate-text">
-        <h3>Support Letterbot</h3>
-        <p>Free and open source. If Letterbot saves you time, consider a voluntary donation. No banners, no paywall, no subscription.</p>
-        <a class="btn btn-gold" id="boosty-link-3" href="#" target="_blank">Support on Boosty →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-</main>
-
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer-grid">
-      <div>
-        <a class="brand" href="/"><div class="brand-mark">✉</div><div>Letterbot <small>local AI email filter</small></div></a>
-        <p class="footer-desc">Free self-hosted AI email assistant for Windows. Your data stays on your machine.</p>
-      </div>
-      <nav class="footer-links">
-        <a href="/">Home</a><a href="/faq.html">FAQ</a><a href="/compare.html">Compare</a>
-        <a href="/privacy.html">Privacy</a><a href="/support.html">Support</a>
-        <a href="/download.html">Download</a><a id="github-link-3" href="#" target="_blank">GitHub</a>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="index.html" aria-label="LetterBot home">
+        <span class="brand-mark">L</span><span>LetterBot</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+        <a href="features.html">Features</a><a href="use-cases.html">Use cases</a><a href="how-it-works.html">How it works</a><a href="observability.html">Observability</a><a href="install.html">Install</a><a href="faq.html" aria-current="page">FAQ</a><a href="compare.html">Compare</a><a href="privacy.html">Privacy</a><a href="support.html">Support</a>
+        <a class="pill" href="https://github.com/SergioTheFirst/letterbot" rel="noopener noreferrer">GitHub</a>
       </nav>
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 Letterbot · AGPL-3.0 · <a href="/privacy.html">Privacy</a></span>
-      <span><a data-email href="#">master@letterbot.ru</a></span>
+  </header>
+  <main id="content"><section class="section"><div class="container"><h1>FAQ</h1><p class="page-meta">Last updated: March 2026</p><div class="answer"><strong>Direct answer:</strong> This page is intentionally written in explicit question-and-answer form because both people and answer engines respond better when a page answers the question before it markets.</div><div class="faq"><details><summary>What is LetterBot?</summary><p class="muted">LetterBot is a self-hosted email triage assistant that watches IMAP inboxes, prioritizes messages, and sends concise Telegram notifications for what needs attention.</p></details><details><summary>Does LetterBot replace my mailbox?</summary><p class="muted">No. Your mailbox stays the source system. LetterBot adds a decision layer on top.</p></details><details><summary>Who is LetterBot for?</summary><p class="muted">It is strongest for freelancers, operators, founders, privacy-conscious technical users, and small teams with overloaded inboxes.</p></details><details><summary>What makes it different from typical email AI?</summary><p class="muted">Explainable decision traces, user-correction learning, snooze with memory, multi-account routing, and a local observability dashboard.</p></details><details><summary>Can it work without external AI providers?</summary><p class="muted">Yes. It is designed to remain useful in degraded mode instead of collapsing into fake all-green behavior.</p></details><details><summary>Why Telegram?</summary><p class="muted">Because Telegram is a fast operational surface: triage, reprioritize, snooze, and keep moving.</p></details><details><summary>Can it monitor multiple inboxes?</summary><p class="muted">Yes. Multi-account routing is one of LetterBot’s strongest practical differentiators.</p></details><details><summary>Why is this FAQ important?</summary><p class="muted">Because answer-first pages and explicit Q&A are easier for search and recommendation systems to match to user intent.</p></details></div></div></section></main>
+  <footer class="footer">
+    <div class="container footer-row">
+      <p class="muted small">© <span id="year"></span> LetterBot • GitHub Pages edition • AGPL-3.0</p>
+      <p class="muted small"><a href="faq.html">FAQ</a> · <a href="privacy.html">Privacy</a> · <a href="support.html">Support</a></p>
     </div>
-  </div>
-</footer>
+  </footer>
+  <script src="assets/main.js" defer></script>
 </body>
 </html>

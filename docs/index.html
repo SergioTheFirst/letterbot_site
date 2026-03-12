@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>LetterBot — Self-hosted email triage to Telegram (explainable, memory, snooze)</title>
+  <meta name="description" content="LetterBot is an open-source, self-hosted email triage assistant that turns IMAP inboxes into actionable Telegram summaries. Explainable decisions (decision trace), persistent mail memory, snooze reminders, multi-account routing, golden tests, and an observability console." />
+
+  <link rel="canonical" href="https://sergiothefirst.github.io/letterbot/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="LetterBot — Self-hosted email triage to Telegram" />
+  <meta property="og:description" content="Answer: LetterBot watches IMAP inboxes and posts actionable Telegram summaries — with explainable decision traces, persistent mail memory, snooze reminders, multi-account routing, tests, and observability." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sergiothefirst.github.io/letterbot/" />
+  <meta property="og:image" content="https://sergiothefirst.github.io/letterbot/assets/img/og-letterbot.svg" />
+  <meta property="og:image:alt" content="LetterBot: self-hosted email triage to Telegram with explainable decision traces." />
+
+  <!-- Twitter / X Cards (SVG image may not render; export og-letterbot.svg to PNG for best results) -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LetterBot — Self-hosted email triage to Telegram" />
+  <meta name="twitter:description" content="Answer: Turn inbox chaos into Telegram actions — with explainable decision traces, memory, and snooze reminders." />
+  <meta name="twitter:image" content="https://sergiothefirst.github.io/letterbot/assets/img/og-letterbot.svg" />
+
+  <meta name="theme-color" content="#0b1220" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"Organization",
+        "name":"LetterBot",
+        "url":"https://sergiothefirst.github.io/letterbot/",
+        "logo":"https://sergiothefirst.github.io/letterbot/assets/img/logo.svg",
+        "sameAs":[
+          "https://github.com/SergioTheFirst/letterbot"
+        ]
+      },
+      {
+        "@type":"SoftwareApplication",
+        "name":"LetterBot",
+        "applicationCategory":"BusinessApplication",
+        "operatingSystem":"Windows, Linux",
+        "isAccessibleForFree":true,
+        "license":"https://www.gnu.org/licenses/agpl-3.0.en.html",
+        "url":"https://sergiothefirst.github.io/letterbot/",
+        "downloadUrl":"https://github.com/SergioTheFirst/letterbot",
+        "offers":{
+          "@type":"Offer",
+          "price":"0",
+          "priceCurrency":"USD"
+        },
+        "description":"Self-hosted email triage that posts actionable Telegram summaries, with explainable decision traces, persistent mail memory, snooze reminders, multi-account routing, golden corpus tests, and an observability console."
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="./" aria-label="LetterBot home">
+        <img src="assets/img/logo.svg" width="28" height="28" alt="LetterBot logo" />
+        <span>LetterBot</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        Menu
+      </button>
+
+      <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+        <a href="features.html">Features</a>
+        <a href="install.html">Install</a>
+        <a href="faq.html">FAQ</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="support.html" class="pill">Donate</a>
+        <a href="https://github.com/SergioTheFirst/letterbot" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="hero">
+      <div class="container grid2">
+        <div>
+          <p class="eyebrow">Open-source • Self-hosted • Explainable</p>
+          <h1>Turn inbox chaos into Telegram actions — with a decision trace you can audit</h1>
+
+          <p class="answer">
+            <strong>Answer:</strong> LetterBot watches one or more IMAP inboxes, classifies incoming mail,
+            posts concise Telegram summaries, and logs every decision (evidence + rationale) so you can verify behavior.
+          </p>
+
+          <div class="cta">
+            <a class="btn primary" href="install.html">Get started</a>
+            <a class="btn" href="features.html">See features</a>
+            <a class="btn ghost" href="support.html#donate">Donate</a>
+          </div>
+
+          <ul class="checklist">
+            <li><strong>Explainable decisions:</strong> per‑email decision trace for auditing</li>
+            <li><strong>Mail operating memory:</strong> persistent context across threads</li>
+            <li><strong>Snooze done right:</strong> postpone + reminders, not “leave it unread”</li>
+            <li><strong>Multi-account:</strong> monitor + route multiple inboxes</li>
+            <li><strong>Quality gates:</strong> golden corpus tests + regressions you can measure</li>
+            <li><strong>Observability:</strong> local console to inspect decisions & pipelines</li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <div class="mock">
+            <div class="mock-top">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="mock-title">Telegram briefing preview</span>
+            </div>
+
+            <div class="bubble">
+              <span class="prio high">HIGH</span>
+              Invoice due Wednesday — payment requested. Suggested action: “confirm payment date”.
+            </div>
+
+            <div class="bubble">
+              <span class="prio med">MED</span>
+              Meeting moved to 14:30. Suggested action: “accept and update calendar”.
+            </div>
+
+            <div class="bubble">
+              <span class="prio low">LOW</span>
+              Newsletter / promo. Suggested action: “archive”.
+            </div>
+
+            <p class="muted small">
+              Minimalist output by design: it reads “premium” and scales to busy teams.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section">
+      <h2>Why LetterBot is different</h2>
+      <p class="lede">
+        Most email “AI assistants” optimize for writing emails. LetterBot optimizes for <strong>operating the inbox</strong>:
+        triage, routing, reminders, and inspection of *why* something happened.
+      </p>
+
+      <div class="cards">
+        <article class="card">
+          <h3>Explainable AI, not magic</h3>
+          <p>Every decision is inspectable: signals, score, logic path, and what changed in storage.</p>
+        </article>
+
+        <article class="card">
+          <h3>Memory that matters</h3>
+          <p>A persistent “mail operating memory” enables stable behavior across repeated patterns and threads.</p>
+        </article>
+
+        <article class="card">
+          <h3>Snooze is a first-class behavior</h3>
+          <p>Postpone with intent: keep it out of the inbox, but never lose it.</p>
+        </article>
+
+        <article class="card">
+          <h3>Built for privacy-first setups</h3>
+          <p>Self-hosted by default. Your mailbox traffic stays under your control.</p>
+        </article>
+
+        <article class="card">
+          <h3>Golden corpus testing</h3>
+          <p>Evaluate changes against a fixed set of examples so improvements are measurable.</p>
+        </article>
+
+        <article class="card">
+          <h3>Observability console</h3>
+          <p>See what the system did, when, and why — without digging through random logs.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="container section">
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li><strong>Connect inboxes:</strong> configure IMAP + Telegram settings once.</li>
+        <li><strong>LetterBot listens:</strong> new mail triggers parsing + triage.</li>
+        <li><strong>Telegram output:</strong> minimal actions, priorities, and next steps.</li>
+        <li><strong>Audit anytime:</strong> open the local console and inspect decision traces.</li>
+      </ol>
+
+      <p class="callout">
+        Want recommendation engines to “get it”? This site starts with direct answers and Q&A blocks — a pattern LLM recommenders are known to prefer. [1]
+      </p>
+    </section>
+
+    <section class="container section" id="donate">
+      <h2>Support the project</h2>
+      <p class="lede">
+        If LetterBot saves you time, consider supporting development.
+      </p>
+
+      <div class="donate-box">
+        <div>
+          <a class="btn primary" href="https://boosty.to/personalbot/donate?qr=true" rel="noopener noreferrer">
+            Donate on Boosty
+          </a>
+          <p class="muted small">
+            QR not showing? Copy <code>mailbot_v26/boostydon.svg</code> to <code>docs/assets/img/boostydon.svg</code> (steps in deployment README).
+          </p>
+        </div>
+
+        <div class="qr">
+          <img src="assets/img/boostydon.svg" alt="Boosty donation QR code for LetterBot" loading="lazy" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <p class="muted">
+        © <span id="year"></span> LetterBot • Self-hosted email triage to Telegram • AGPL-3.0
+      </p>
+      <p class="muted">
+        <a href="privacy.html">Privacy</a> · <a href="support.html">Support</a> · <a href="sitemap.xml">Sitemap</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

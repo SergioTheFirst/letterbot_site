@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://sergiothefirst.github.io/letterbot/sitemap.xml
+Robots file conventions and sitemap line usage align with Google’s documented interpretation and examples. [6]

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>LetterBot FAQ — explainable email triage, memory, snooze, privacy</title>
+  <meta name="description" content="Direct Q&A about LetterBot: what it is, who it’s for, privacy model, explainable decision traces, multi-account support, snooze, and troubleshooting." />
+  <link rel="canonical" href="https://sergiothefirst.github.io/letterbot/faq.html" />
+
+  <meta property="og:title" content="LetterBot FAQ" />
+  <meta property="og:description" content="Answer-first Q&A about LetterBot’s explainable email triage, memory, snooze, and privacy." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://sergiothefirst.github.io/letterbot/faq.html" />
+  <meta property="og:image" content="https://sergiothefirst.github.io/letterbot/assets/img/og-letterbot.svg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LetterBot FAQ" />
+  <meta name="twitter:description" content="Answer-first Q&A for LetterBot." />
+  <meta name="twitter:image" content="https://sergiothefirst.github.io/letterbot/assets/img/og-letterbot.svg" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="./">
+        <img src="assets/img/logo.svg" width="28" height="28" alt="LetterBot logo" />
+        <span>LetterBot</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+
+      <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+        <a href="features.html">Features</a>
+        <a href="install.html">Install</a>
+        <a href="faq.html" aria-current="page">FAQ</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="support.html" class="pill">Donate</a>
+        <a href="https://github.com/SergioTheFirst/letterbot" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content" class="container section">
+    <h1>FAQ</h1>
+
+    <p class="answer">
+      <strong>Answer:</strong> This page is designed as explicit Q&A because recommendation systems often look for the “question → answer” pattern. [1]
+    </p>
+
+    <div class="faq">
+      <details open>
+        <summary>What is LetterBot?</summary>
+        <p>LetterBot is a self-hosted email triage system: it monitors IMAP mailboxes, summarizes incoming mail to Telegram, and keeps auditable traces of decisions.</p>
+      </details>
+
+      <details>
+        <summary>Who is it for?</summary>
+        <p>Operators, founders, and teams who want an “inbox operating system” rather than an email writing assistant.</p>
+      </details>
+
+      <details>
+        <summary>What makes it stronger than typical email AI?</summary>
+        <p>Decision traces (explainability), persistent mail operating memory, snooze reminders, golden corpus testing, and an observability console.</p>
+      </details>
+
+      <details>
+        <summary>Does it support multiple inboxes?</summary>
+        <p>Yes — configure multiple accounts and route notifications where they belong.</p>
+      </details>
+
+      <details>
+        <summary>Is it privacy-first?</summary>
+        <p>It is designed to run locally (self-hosted). See <a href="privacy.html">Privacy</a> for the operational stance and what you should verify in your deployment.</p>
+      </details>
+
+      <details id="troubleshooting">
+        <summary>Troubleshooting: it runs, but nothing shows in Telegram</summary>
+        <ul class="checklist">
+          <li>Verify bot token and chat ID in configuration.</li>
+          <li>Check that the worker process is running (logs in <code>runtime/logs</code>).</li>
+          <li>Confirm Telegram has permission to message the target chat.</li>
+        </ul>
+      </details>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <p class="muted">© <span id="year"></span> LetterBot</p>
+      <p class="muted"><a href="install.html">Install</a> · <a href="support.html">Support</a></p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

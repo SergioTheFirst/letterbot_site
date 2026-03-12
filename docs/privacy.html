@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>LetterBot Privacy — self-hosted by default</title>
+  <meta name="description" content="LetterBot privacy stance: self-hosted operation, local inspection, and practical steps to keep email traffic under your control." />
+  <link rel="canonical" href="https://sergiothefirst.github.io/letterbot/privacy.html" />
+
+  <meta property="og:title" content="LetterBot Privacy" />
+  <meta property="og:description" content="Answer: LetterBot is intended to be self-hosted so mailbox data stays under your control. This page lists practical privacy steps." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://sergiothefirst.github.io/letterbot/privacy.html" />
+  <meta property="og:image" content="https://sergiothefirst.github.io/letterbot/assets/img/og-letterbot.svg" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="./">
+        <img src="assets/img/logo.svg" width="28" height="28" alt="LetterBot logo" />
+        <span>LetterBot</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+
+      <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+        <a href="features.html">Features</a>
+        <a href="install.html">Install</a>
+        <a href="faq.html">FAQ</a>
+        <a href="privacy.html" aria-current="page">Privacy</a>
+        <a href="support.html" class="pill">Donate</a>
+        <a href="https://github.com/SergioTheFirst/letterbot" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content" class="container section">
+    <h1>Privacy</h1>
+
+    <p class="answer">
+      <strong>Answer:</strong> LetterBot is designed to run self-hosted: you operate it on your own machine/server, and you can inspect behavior via decision traces and the local console.
+    </p>
+
+    <section class="section">
+      <h2>Practical privacy checklist</h2>
+      <ul class="checklist">
+        <li>Run LetterBot on a machine you control (local PC, VM, or private server).</li>
+        <li>Restrict filesystem access: configs and runtime logs may contain operational details.</li>
+        <li>Keep Telegram bot tokens and IMAP credentials private; rotate if leaked.</li>
+        <li>Use the observability console locally (bind to localhost unless you know what you’re doing).</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Transparency and auditability</h2>
+      <p>
+        Auditability is a privacy feature: you can verify what happened and what data paths were used.
+        Structured data must match visible content (no fake claims). [5]
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <p class="muted">© <span id="year"></span> LetterBot</p>
+      <p class="muted"><a href="support.html">Support</a> · <a href="sitemap.xml">Sitemap</a></p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

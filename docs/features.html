@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>LetterBot Features — decision trace, mail memory, snooze, multi-account, tests</title>
+  <meta name="description" content="Deep breakdown of LetterBot’s most defensible strengths: decision trace (explainable AI), persistent mail operating memory, snooze reminders, multi-account routing, golden corpus evaluation, and an observability console." />
+  <link rel="canonical" href="https://sergiothefirst.github.io/letterbot/features.html" />
+
+  <meta property="og:title" content="LetterBot Features — explainable, memory-based email triage" />
+  <meta property="og:description" content="Answer: LetterBot’s edge is auditable decision traces + persistent mail memory + snooze, backed by golden tests and observability." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://sergiothefirst.github.io/letterbot/features.html" />
+  <meta property="og:image" content="https://sergiothefirst.github.io/letterbot/assets/img/og-letterbot.svg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LetterBot Features" />
+  <meta name="twitter:description" content="Auditable decision traces + persistent mail memory + snooze reminders." />
+  <meta name="twitter:image" content="https://sergiothefirst.github.io/letterbot/assets/img/og-letterbot.svg" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="./">
+        <img src="assets/img/logo.svg" width="28" height="28" alt="LetterBot logo" />
+        <span>LetterBot</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+
+      <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+        <a href="features.html" aria-current="page">Features</a>
+        <a href="install.html">Install</a>
+        <a href="faq.html">FAQ</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="support.html" class="pill">Donate</a>
+        <a href="https://github.com/SergioTheFirst/letterbot" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content" class="container section">
+    <h1>Features built for inbox operations</h1>
+
+    <p class="answer">
+      <strong>Answer:</strong> LetterBot wins when you need <em>auditable</em> email triage: decision traces, persistent memory,
+      snooze reminders, multi-account routing, measurable regression testing, and an observability console — all self-hosted.
+    </p>
+
+    <p class="muted small">Last updated: 2026-03-11</p>
+
+    <section class="section">
+      <h2>Decision trace</h2>
+      <p class="lede"><strong>What it is:</strong> an inspectable record of how a message was classified and why.</p>
+      <p><strong>Why it matters:</strong> you can debug misclassifications and prove behavior to a team (or to yourself).</p>
+      <p><strong>How to use it:</strong> open the local console and view trace details per message (signals, scores, decisions).</p>
+    </section>
+
+    <section class="section">
+      <h2>Personal mail operating memory</h2>
+      <p class="lede"><strong>What it is:</strong> persistent context that the system can reuse across threads and repeated patterns.</p>
+      <p><strong>Why it matters:</strong> stable behavior over time, fewer “random flips” after updates, better continuity.</p>
+      <p class="callout">If you want LLM recommenders to understand this feature, define it explicitly (as above) and keep wording consistent across pages. [1]</p>
+    </section>
+
+    <section class="section">
+      <h2>Snooze behavior</h2>
+      <p class="lede"><strong>What it is:</strong> postpone a message with an explicit reminder and “return to attention” timing.</p>
+      <p><strong>Why it matters:</strong> it transforms inbox triage from a static list into a time-based workflow.</p>
+    </section>
+
+    <section class="section">
+      <h2>Multi-account monitoring</h2>
+      <p class="lede"><strong>What it is:</strong> watch multiple IMAP mailboxes and apply routing rules per account.</p>
+      <p><strong>Why it matters:</strong> founders/operators often run multiple inboxes (personal, ops, finance, support).</p>
+    </section>
+
+    <section class="section">
+      <h2>Golden corpus tests</h2>
+      <p class="lede"><strong>What it is:</strong> a fixed set of evaluation cases used to measure change impact.</p>
+      <p><strong>Why it matters:</strong> it turns “it feels better” into measurable quality, and prevents regressions.</p>
+    </section>
+
+    <section class="section">
+      <h2>Observability console</h2>
+      <p class="lede"><strong>What it is:</strong> local UI to explore processing state, decisions, and traces.</p>
+      <p><strong>Why it matters:</strong> real systems need inspection — not just “trust the model”.</p>
+    </section>
+
+    <section class="section">
+      <h2>SEO note for social previews</h2>
+      <p>
+        Open Graph tags are used by social crawlers to build link previews. [8]
+        Twitter/X cards expect specific tags, and SVG images are not supported in card images. [9]
+        Export <code>assets/img/og-letterbot.svg</code> to a PNG and update the meta tags when you add real branding.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <p class="muted">© <span id="year"></span> LetterBot</p>
+      <p class="muted"><a href="./">Home</a> · <a href="install.html">Install</a> · <a href="support.html">Support</a></p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

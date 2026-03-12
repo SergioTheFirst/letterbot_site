@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Support LetterBot — donate & help improve the project</title>
+  <meta name="description" content="Support LetterBot development: donation link + QR (Boosty), plus contribution paths." />
+  <link rel="canonical" href="https://sergiothefirst.github.io/letterbot/support.html" />
+
+  <meta property="og:title" content="Support LetterBot" />
+  <meta property="og:description" content="Donate via Boosty and help improve a privacy-first, self-hosted email triage system." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://sergiothefirst.github.io/letterbot/support.html" />
+  <meta property="og:image" content="https://sergiothefirst.github.io/letterbot/assets/img/og-letterbot.svg" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="./">
+        <img src="assets/img/logo.svg" width="28" height="28" alt="LetterBot logo" />
+        <span>LetterBot</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+
+      <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+        <a href="features.html">Features</a>
+        <a href="install.html">Install</a>
+        <a href="faq.html">FAQ</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="support.html" class="pill" aria-current="page">Donate</a>
+        <a href="https://github.com/SergioTheFirst/letterbot" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content" class="container section">
+    <h1>Support the project</h1>
+
+    <p class="answer" id="donate">
+      <strong>Answer:</strong> Donate via Boosty (link + QR) to support development and maintain the self-hosted, explainable workflow.
+    </p>
+
+    <div class="donate-box">
+      <div>
+        <a class="btn primary" href="https://boosty.to/personalbot/donate?qr=true" rel="noopener noreferrer">
+          Donate on Boosty
+        </a>
+
+        <p class="muted small">
+          Required QR asset: copy <code>mailbot_v26/boostydon.svg</code> into <code>docs/assets/img/boostydon.svg</code>.
+        </p>
+
+        <h2>Other ways to help</h2>
+        <ul class="checklist">
+          <li>Open issues with reproducible steps and logs.</li>
+          <li>Contribute docs: install notes, configs, troubleshooting.</li>
+          <li>Share your use case (what you triage + what success looks like).</li>
+        </ul>
+      </div>
+
+      <div class="qr">
+        <img src="assets/img/boostydon.svg" alt="Boosty donation QR code" loading="lazy" />
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <p class="muted">© <span id="year"></span> LetterBot</p>
+      <p class="muted"><a href="./">Home</a> · <a href="sitemap.xml">Sitemap</a></p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

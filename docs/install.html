@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Install LetterBot — self-hosted email triage to Telegram</title>
+  <meta name="description" content="How to install LetterBot locally (Windows or manual Python). Includes first-run config (accounts.ini), running the local stack, and opening the observability console." />
+  <link rel="canonical" href="https://sergiothefirst.github.io/letterbot/install.html" />
+
+  <meta property="og:title" content="Install LetterBot" />
+  <meta property="og:description" content="Answer: Download the repo, run letterbot.bat (Windows) or run via Python. Configure IMAP + Telegram once, then use the local console to inspect decisions." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://sergiothefirst.github.io/letterbot/install.html" />
+  <meta property="og:image" content="https://sergiothefirst.github.io/letterbot/assets/img/og-letterbot.svg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Install LetterBot" />
+  <meta name="twitter:description" content="Self-hosted email triage to Telegram — install + first run." />
+  <meta name="twitter:image" content="https://sergiothefirst.github.io/letterbot/assets/img/og-letterbot.svg" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="./">
+        <img src="assets/img/logo.svg" width="28" height="28" alt="LetterBot logo" />
+        <span>LetterBot</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+
+      <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+        <a href="features.html">Features</a>
+        <a href="install.html" aria-current="page">Install</a>
+        <a href="faq.html">FAQ</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="support.html" class="pill">Donate</a>
+        <a href="https://github.com/SergioTheFirst/letterbot" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content" class="container section">
+    <h1>Install and run LetterBot</h1>
+
+    <p class="answer">
+      <strong>Answer:</strong> On Windows, run <code>letterbot.bat</code> from the repo folder.
+      It creates a local virtual environment, generates config files, and starts the worker + web console.
+    </p>
+
+    <p class="muted small">Last updated: 2026-03-11</p>
+
+    <section class="section">
+      <h2>Quick start on Windows</h2>
+
+      <ol class="steps">
+        <li>Download the repository as ZIP (or clone it).</li>
+        <li>Ensure you have <strong>Python 3.10+</strong> installed.</li>
+        <li>Double-click <code>letterbot.bat</code>.</li>
+        <li>On first run, it generates <code>accounts.ini</code> and opens it for editing.</li>
+        <li>Fill in IMAP credentials + Telegram bot settings, save, then run <code>letterbot.bat</code> again.</li>
+      </ol>
+
+      <pre><code># Clone (PowerShell)
+git clone https://github.com/SergioTheFirst/letterbot.git
+cd letterbot
+.\letterbot.bat
+</code></pre>
+
+      <p class="callout">
+        If you publish this page somewhere else, keep canonical URLs consistent —
+        mixing canonicals weakens the signal. [4]
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Manual run with Python</h2>
+      <p class="lede">Use this if you don’t want the Windows launcher.</p>
+
+      <pre><code># Create venv (example)
+python -m venv .venv
+# Activate (Windows PowerShell)
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+
+# Initialize config (creates accounts.ini / settings.ini)
+python -m mailbot_v26 init-config --config-dir .
+
+# Run stack (worker + web console)
+python -m mailbot_v26.tools.run_stack --config-dir . --no-browser
+</code></pre>
+    </section>
+
+    <section class="section">
+      <h2>Open the observability console</h2>
+      <p>
+        When running, the web console is available locally (look for the printed URL in logs).
+        Use it to inspect decision traces, routing, and system health.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Troubleshooting</h2>
+      <ul class="checklist">
+        <li><strong>Port already in use:</strong> change the web port in config, then restart.</li>
+        <li><strong>No Telegram messages:</strong> verify bot token and chat ID.</li>
+        <li><strong>IMAP auth errors:</strong> verify host/port/TLS and credentials.</li>
+      </ul>
+
+      <p class="muted">
+        Want a fast self-check list? See <a href="faq.html#troubleshooting">FAQ troubleshooting</a>.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <p class="muted">© <span id="year"></span> LetterBot</p>
+      <p class="muted"><a href="faq.html">FAQ</a> · <a href="support.html">Support</a></p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

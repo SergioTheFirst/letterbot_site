@@ -1,200 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Install Letterbot — Windows Setup in 10 Minutes</title>
-  <meta name="description" content="Step-by-step Letterbot installation guide for Windows 10 and 11. Download ZIP, configure IMAP and Telegram bot token, run letterbot.bat. Takes about 10 minutes."/>
-  <meta name="theme-color" content="#090e17"/>
-  <meta property="og:title" content="Install Letterbot — Windows Setup in 10 Minutes"/>
-  <meta property="og:description" content="Step-by-step Letterbot installation guide for Windows 10 and 11. Download ZIP, configure IMAP and Telegram bot token, run letterbot.bat. Takes about 10 minutes."/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://sergiothefirst.github.io/letterbot/install.html"/>
-  <meta property="og:image" content="https://sergiothefirst.github.io/letterbot/assets/og.png"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <link rel="canonical" href="https://sergiothefirst.github.io/letterbot/install.html"/>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
-  <link rel="stylesheet" href="assets/styles.css"/>
-  <script src="assets/config.js"></script>
-  <script defer src="assets/main.js"></script>
-  <script type="application/ld+json">{
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "name":"Letterbot",
-    "applicationCategory":"ProductivityApplication",
-    "operatingSystem":"Windows 10, Windows 11",
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
-    "description":"Free self-hosted AI email filter for Windows. Reads IMAP inbox, prioritizes with AI, sends only important emails to Telegram. Data stays local.",
-    "url":"https://sergiothefirst.github.io/letterbot/",
-    "downloadUrl":"https://github.com/SergioTheFirst/letterbot/releases/latest",
-    "softwareVersion":"28.0.0",
-    "dateModified":"2026-03-11"
-  }</script>
-  
-</head>
-<body>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Install Letterbot — Free Download for Windows (No Python Required)</title><meta name="description" content="Download Letterbot free. Extract ZIP, edit config, run. No Python needed. Windows 10/11, Celeron 3 GB RAM. Setup in 10 minutes."><link rel="canonical" href="https://sergiothefirst.github.io/letterbot_site/install.html"><meta property="og:title" content="Install Letterbot — Free Download for Windows (No Python Required)"><meta property="og:description" content="Download Letterbot free. Extract ZIP, edit config, run. No Python needed. Windows 10/11, Celeron 3 GB RAM. Setup in 10 minutes."><meta property="og:image" content="https://sergiothefirst.github.io/letterbot_site/assets/og.png"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap"><link rel="stylesheet" href="assets/styles.css"><script src="assets/config.js" defer></script><script src="assets/main.js" defer></script></head><body><nav class="nav"><div class="wrap nav-inner"><a href="index.html" class="brand"><span class="brand-icon">✉</span><span>Letterbot<small class="brand-sub">local AI email filter</small></span></a><div class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="features.html">Features</a><a href="how-it-works.html">How it works</a><a href="install.html">Install</a><a href="faq.html">FAQ</a><a href="compare.html">Compare</a><a href="privacy.html">Privacy</a><a href="support.html">Donate</a></div><div class="nav-actions"><a href="https://github.com/SergioTheFirst/letterbot" class="btn-ghost" target="_blank" rel="noopener">GitHub</a><a href="install.html" class="btn-primary btn-sm">Download</a></div><button class="burger" id="burger" aria-label="Menu">☰</button></div></nav><section class="page-hero"><div class="wrap"><h1>Install Letterbot</h1><p>Download → Extract → Configure → Run. Takes about 10 minutes.</p></div></section><section class="page-content"><div class="wrap"><h2>Step 1: Download</h2>
+<p>Download <a href="https://github.com/SergioTheFirst/letterbot/releases/latest">Letterbot.zip</a> from GitHub Releases and extract to any folder (e.g. <code>C:\letterbot</code>).</p>
+<h2>Step 2: Create a Telegram bot</h2>
+<ul>
+<li>Open Telegram → find <strong>@BotFather</strong> → send <code>/newbot</code></li>
+<li>Copy the <strong>bot token</strong> (looks like <code>1234567890:AAF-xxxx</code>)</li>
+<li>Send <code>/start</code> to your new bot</li>
+<li>Open <code>https://api.telegram.org/bot&lt;TOKEN&gt;/getUpdates</code> in browser</li>
+<li>Find the numeric <code>id</code> value — this is your <strong>chat_id</strong></li>
+</ul>
+<h2>Step 3: Configure</h2>
+<p>Open <code>accounts.ini</code> and fill in:</p>
+<pre><code>[my_inbox]
+login    = you@example.com
+password = YOUR_APP_PASSWORD
+host     = imap.gmail.com
+port     = 993
+use_ssl  = true
+telegram_chat_id = 123456789
 
-<nav class="nav" role="navigation">
-  <div class="wrap nav-inner">
-    <a class="brand" href="index.html">
-      <span class="brand-icon">✉</span>
-      <span>Letterbot<span class="brand-tag">local AI email filter</span></span>
-    </a>
-    <div class="nav-links"><a href="index.html">Home</a><a href="features.html">Features</a><a href="how-it-works.html">How it works</a><a href="install.html">Install</a><a href="faq.html">FAQ</a><a href="compare.html">Compare</a><a href="privacy.html">Privacy</a><a href="support.html">Donate</a></div>
-    <div class="nav-end">
-      <a class="btn btn-outline btn-sm" href="#" data-gh>GitHub</a>
-      <a class="btn btn-amber btn-sm" href="install.html">Download</a>
-    </div>
-    <button class="mob-btn" id="mob-toggle" aria-expanded="false" aria-label="Toggle menu">☰</button>
-  </div>
-  <div class="mob-nav" id="mob-nav"><a href="index.html">Home</a><a href="features.html">Features</a><a href="how-it-works.html">How it works</a><a href="install.html">Install</a><a href="faq.html">FAQ</a><a href="compare.html">Compare</a><a href="privacy.html">Privacy</a><a href="support.html">Donate</a>
-    <a class="btn btn-amber" href="install.html" style="margin-top:4px;">⬇ Download</a>
-  </div>
-</nav>
-<main id="content">
-<section class="page-hero">
-  <div class="wrap">
-    <p class="eyebrow">// Windows 10 · Windows 11 · ~10 minutes</p>
-    <h1>Install Letterbot</h1>
-    <p>Three steps: download, configure, run. No cloud account. No registration. No installer wizard. Just a ZIP file and a config.</p>
-  </div>
-</section>
-<section class="section" style="padding-top:24px">
-  <div class="wrap">
-
-    <div class="dl-hero rv" style="margin-bottom:44px">
-      <div class="dl-icon">⬇</div>
-      <div class="version-tag">Letterbot v<span data-ver></span> · Windows 10 / 11 · Free forever · AGPL-3.0</div>
-      <h2 style="margin-bottom:10px">Download Letterbot for Windows</h2>
-      <p class="muted" style="max-width:46ch;margin:0 auto 24px">Unzip anywhere. Configure in 10 minutes. Your emails stay on your machine.</p>
-      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:16px">
-        <a class="btn btn-amber btn-lg" href="#" data-releases>⬇ Download ZIP (GitHub Releases)</a>
-        <a class="btn btn-outline btn-lg" href="#" data-gh>View on GitHub →</a>
-      </div>
-      <p class="muted" style="font-size:12px">Last updated: <span data-updated></span></p>
-    </div>
-
-    <div class="sh rv"><h2>Step-by-step setup</h2></div>
-    <div class="g3 rv" style="margin-bottom:40px">
-      <div class="card card-amber">
-        <div style="font-family:var(--font-h);font-size:48px;font-weight:800;color:var(--amber);line-height:1;margin-bottom:14px">1</div>
-        <h3>Download &amp; unzip</h3>
-        <p>Download the ZIP from GitHub Releases. Unzip to any folder, for example <code>C:\letterbot</code>. No installer. No admin rights needed.</p>
-      </div>
-      <div class="card card-amber" style="transition-delay:.1s">
-        <div style="font-family:var(--font-h);font-size:48px;font-weight:800;color:var(--amber);line-height:1;margin-bottom:14px">2</div>
-        <h3>Configure</h3>
-        <p>Open <code>accounts.yaml</code> in any text editor. Add your IMAP credentials (host, user, app password) and your Telegram bot token. See the README for provider-specific setup.</p>
-      </div>
-      <div class="card card-amber" style="transition-delay:.2s">
-        <div style="font-family:var(--font-h);font-size:48px;font-weight:800;color:var(--amber);line-height:1;margin-bottom:14px">3</div>
-        <h3>Run</h3>
-        <p>Double-click <code>letterbot.bat</code>. Letterbot starts polling your inbox. Telegram notifications arrive on the first completed check cycle.</p>
-      </div>
-    </div>
-
-    <div class="qa-grid rv" style="margin-bottom:44px">
-      <div>
-        <div class="qa-q">How do I create a Telegram bot?</div>
-        <div class="qa-a">Open Telegram → search <code>@BotFather</code> → send <code>/newbot</code> → follow prompts. You receive a bot token. Paste it into <code>accounts.yaml</code>. Takes 2 minutes. Free, no Telegram Premium needed.</div>
-      </div>
-      <div>
-        <div class="qa-q">How do I find my chat_id for Telegram?</div>
-        <div class="qa-a">Send any message to your new bot, then open <code>https://api.telegram.org/bot&lt;TOKEN&gt;/getUpdates</code> in a browser. Your numeric chat_id appears in the <code>from.id</code> field. This is what goes in the config.</div>
-      </div>
-      <div>
-        <div class="qa-q">How do I get an app password for Gmail?</div>
-        <div class="qa-a">Go to Google Account → Security → 2-Step Verification → App passwords. Generate a password for "Mail" on "Windows Computer". Use this password (not your main password) in <code>accounts.yaml</code>.</div>
-      </div>
-      <div>
-        <div class="qa-q">How do I verify the installation worked?</div>
-        <div class="qa-a">Run <code>python -m mailbot_v26 doctor</code> in the project folder. It checks every component — IMAP connection, Telegram delivery, database, config — with color-coded results and specific error messages for anything that fails.</div>
-      </div>
-    </div>
-
-    <div class="g2 rv">
-      <div class="card">
-        <div class="ib ib-amber">💻</div>
-        <h3>System requirements</h3>
-        <ul class="tick-list" style="margin-top:10px">
-          <li>Windows 10 or 11 (64-bit)</li>
-          <li>IMAP access to your mailbox</li>
-          <li>Telegram bot token (from @BotFather)</li>
-          <li>~200 MB free disk space</li>
-          <li>~1 GB free RAM (tested: Celeron, 3 GB total)</li>
-          <li>Internet for IMAP sync and Telegram</li>
-        </ul>
-      </div>
-      <div class="card card-teal">
-        <div class="ib ib-teal">📦</div>
-        <h3>What is in the ZIP</h3>
-        <ul class="tick-list" style="margin-top:10px">
-          <li><code>letterbot.bat</code> — one-click launcher</li>
-          <li><code>accounts.yaml</code> — config template with comments</li>
-          <li><code>settings.ini</code> — advanced settings</li>
-          <li><code>doctor.bat</code> — health check tool</li>
-          <li>README with setup guide for all providers</li>
-          <li>Example configs for Yandex, Mail.ru, Gmail</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="callout callout-amber rv" style="margin-top:24px">
-      <strong>Need help?</strong> Check the <a href="faq.html">FAQ</a> first. Then <a href="#" data-issues>GitHub Issues</a>. For corporate Exchange setup or complex IMAP: <a href="#" data-email>master@letterbot.ru</a>.
-    </div>
-
-  </div>
-</section>
-</main>
-
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer-grid">
-      <div>
-        <a class="brand" href="index.html">
-          <span class="brand-icon">✉</span>
-          <span>Letterbot<span class="brand-tag">local AI email filter</span></span>
-        </a>
-        <p class="footer-desc">Free self-hosted AI email assistant. Your emails stay on your machine. Open source forever.</p>
-        <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
-          <a class="badge badge-amber" href="#" data-gh target="_blank">GitHub ↗</a>
-          <a class="badge badge-teal" href="#" data-tg target="_blank">Telegram ↗</a>
-          <a class="badge badge-green" href="#" data-boosty target="_blank">Boosty ↗</a>
-        </div>
-      </div>
-      <div class="footer-cols">
-        <div class="footer-col">
-          <h4>Product</h4>
-          <a href="features.html">Features</a>
-          <a href="how-it-works.html">How it works</a>
-          <a href="install.html">Install</a>
-          <a href="use-cases.html">Use cases</a>
-          <a href="observability.html">Observability</a>
-          <a href="changelog.html">Changelog</a>
-        </div>
-        <div class="footer-col">
-          <h4>Compare &amp; Learn</h4>
-          <a href="compare.html">Compare alternatives</a>
-          <a href="privacy.html">Privacy &amp; data</a>
-          <a href="faq.html">FAQ</a>
-          <a href="blog/why-letterbot-exists.html">Why Letterbot</a>
-          <a href="blog/email-ai-guide.html">Email AI guide</a>
-        </div>
-        <div class="footer-col">
-          <h4>Community</h4>
-          <a href="#" data-gh>GitHub</a>
-          <a href="#" data-issues>Issues &amp; feedback</a>
-          <a href="#" data-tg>Telegram channel</a>
-          <a href="support.html">Support the project</a>
-          <a href="#" data-email>master@letterbot.ru</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 Letterbot · AGPL-3.0 · <a href="privacy.html">Privacy</a></span>
-      <span>v<span data-ver></span> · updated <span data-updated></span> · <a data-email href="#" data-email-show></a></span>
-    </div>
-  </div>
-</footer>
-</body>
-</html>
+[telegram]
+bot_token = 1234567890:AAF-xxxx
+chat_id   = 123456789</code></pre>
+<h2>Step 4: Run</h2>
+<p>Double-click <code>run.bat</code>. Wait for <code>[OK] Ready to work</code>. Send yourself a test email — notification arrives in Telegram within 2 minutes.</p>
+<h2>Step 5: Web dashboard</h2>
+<p>Open <code>http://127.0.0.1:8787</code> in your browser for the local observability cockpit.</p>
+<h2>IMAP settings for common providers</h2>
+<table>
+<tr><th>Provider</th><th>Host</th><th>Port</th><th>Notes</th></tr>
+<tr><td>Gmail</td><td><code>imap.gmail.com</code></td><td>993</td><td>App password + 2FA required</td></tr>
+<tr><td>Yandex</td><td><code>imap.yandex.ru</code></td><td>993</td><td>App password in security settings</td></tr>
+<tr><td>Mail.ru</td><td><code>imap.mail.ru</code></td><td>993</td><td>Works for @bk.ru, @list.ru</td></tr>
+<tr><td>Outlook</td><td><code>outlook.office365.com</code></td><td>993</td><td>App password if 2FA enabled</td></tr>
+</table>
+<h2>SmartScreen warning</h2>
+<p>Windows may show a SmartScreen warning for unsigned executables. Click "More info" → "Run anyway". The source code is fully public and auditable.</p>
+</div></section><footer class="footer"><div class="wrap footer-inner"><div class="footer-brand"><a href="index.html" class="brand"><span class="brand-icon">✉</span> Letterbot</a><p>Free self-hosted AI email assistant. Open source forever.</p><div class="footer-social"><a href="https://github.com/SergioTheFirst/letterbot" target="_blank" rel="noopener">GitHub ↗</a><a href="https://t.me/+1xHH6NwJONVlZTA6" target="_blank" rel="noopener">Telegram ↗</a><a href="https://boosty.to/personalbot/donate?qr=true" target="_blank" rel="noopener">Boosty ↗</a></div></div><div class="footer-col"><h4>Product</h4><a href="features.html">Features</a><a href="how-it-works.html">How it works</a><a href="install.html">Install</a><a href="use-cases.html">Use cases</a><a href="observability.html">Observability</a></div><div class="footer-col"><h4>Learn</h4><a href="compare.html">Compare</a><a href="privacy.html">Privacy</a><a href="faq.html">FAQ</a><a href="blog/why-letterbot-exists.html">Why Letterbot</a></div><div class="footer-col"><h4>Community</h4><a href="https://github.com/SergioTheFirst/letterbot" target="_blank">GitHub</a><a href="https://github.com/SergioTheFirst/letterbot/issues" target="_blank">Issues</a><a href="https://t.me/+1xHH6NwJONVlZTA6" target="_blank">Telegram</a><a href="support.html">Support</a><a href="mailto:master@letterbot.ru">master@letterbot.ru</a></div></div><div class="wrap footer-bottom"><p>© 2026 Letterbot · AGPL-3.0 · <a href="privacy.html">Privacy</a></p><p class="footer-meta">v28.0.0 · updated March 2026</p></div></footer></body></html>

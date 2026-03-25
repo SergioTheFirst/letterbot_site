@@ -1,41 +1,51 @@
-# Letterbot GitHub Pages Site
+# Letterbot Site — Deployment
 
-Premium AEO/SEO-optimized English site for Letterbot.
+## GitHub Pages (default)
 
-## Pages (14)
-- `index.html` — Hero + Q&A-first overview, FAQ preview, donate CTA
-- `features.html` — Every feature as Q&A
-- `how-it-works.html` — 6-stage pipeline explained
-- `install.html` — 3-step setup guide, download
-- `faq.html` — 30+ questions with full FAQPage Schema.org
-- `compare.html` — Honest comparison table + 5-year cost data
-- `privacy.html` — Technical data flow breakdown
-- `use-cases.html` — 3 user profiles + "old laptop" scenario
-- `observability.html` — Local web cockpit documentation
-- `support.html` — Donation page with psychology
-- `changelog.html` — Version history v26–v28
-- `blog/why-letterbot-exists.html` — Author opinion piece (AEO entity signal)
-- `blog/email-ai-guide.html` — Original technical content (citable by AI)
-- `404.html` — Branded error page
+1. Push this folder to `main` branch of `letterbot_site` repo
+2. GitHub Pages serves from root automatically (`.nojekyll` present)
+3. Custom domain: add CNAME file with `letterbot.ru` if needed
 
-## AEO principles applied (from vc.ru/ai/2758129)
-1. Q&A-first: every section title is a question, answer in first sentence
-2. Original data AI can't generate: 5-year cost table, data flow table, SLA metrics
-3. FAQPage JSON-LD: 30 questions on faq.html, 4 on index.html
-4. SoftwareApplication JSON-LD: on every page
-5. Comparison page: calm table, includes "when NOT to use Letterbot"
-6. Blog as entity signal: two original articles with author voice
-7. Positive framing only: no negative posturing, just direct answers
-8. Donation psychology: explain why it matters, no pressure
+## Structure
 
-## Deploy to GitHub Pages
-1. Push all files (keeping directory structure) to your repository root
-2. Settings → Pages → Source: Deploy from branch → branch: main, folder: / (root)
-3. Update `assets/config.js` with your final repo URL if different
-4. Update `assets/config.js` `releases` URL when you publish a release tag
+```
+index.html          — homepage (hero + features + FAQ preview + donate)
+features.html       — full feature list
+how-it-works.html   — architecture + pipeline
+install.html        — download + setup guide
+faq.html            — 25 Q&A pairs with Schema.org FAQPage
+compare.html        — vs Superhuman/SaneBox/Zapier
+privacy.html        — data handling explanation
+support.html        — Boosty + CloudTips donate page
+use-cases.html      — 5 real-world scenarios
+observability.html  — web cockpit description
+changelog.html      — version history
+blog/               — 2 evergreen articles
+assets/             — CSS, JS, config, QR, OG image
+```
 
-## Update links
-Edit `assets/config.js` only — all links are wired from there via JavaScript.
+## SEO / GEO Optimization
 
-## Contact
-master@letterbot.ru
+- Every page has unique `<title>`, `<meta description>`, `<link rel="canonical">`
+- Schema.org: SoftwareApplication + FAQPage on index
+- FAQ answers start with the direct answer in the first sentence
+- Compare page honestly shows when competitors are better
+- sitemap.xml with priority weights
+- robots.txt allows all crawlers
+- All pages have `og:image` meta tags
+- Answer-first content structure for AI citation
+
+## Updating
+
+- Edit `assets/config.js` to update version/links
+- Add date stamps to page content quarterly
+- Keep FAQ page at 25+ questions
+- Refresh compare table when competitor pricing changes
+
+## Donate Integration
+
+- Boosty QR: `assets/boosty_qr.svg`
+- Boosty URL: `https://boosty.to/personalbot/donate?qr=true`  
+- CloudTips: `https://pay.cloudtips.ru/p/00d77c6a`
+- Donate strip appears on index.html bottom
+- Full donate page at support.html

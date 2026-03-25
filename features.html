@@ -1,146 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Letterbot Features — Every Capability Explained with Direct Answers</title>
-  <meta name="description" content="Complete feature list for Letterbot: AI prioritization, multi-inbox routing, Telegram notifications, PDF reading, snooze, weekly digest, observability, adaptive learning. Q&A format."/>
-  <meta name="theme-color" content="#090e17"/>
-  <meta property="og:title" content="Letterbot Features — Every Capability Explained with Direct Answers"/>
-  <meta property="og:description" content="Complete feature list for Letterbot: AI prioritization, multi-inbox routing, Telegram notifications, PDF reading, snooze, weekly digest, observability, adaptive learning. Q&A format."/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://sergiothefirst.github.io/letterbot/features.html"/>
-  <meta property="og:image" content="https://sergiothefirst.github.io/letterbot/assets/og.png"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <link rel="canonical" href="https://sergiothefirst.github.io/letterbot/features.html"/>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
-  <link rel="stylesheet" href="assets/styles.css"/>
-  <script src="assets/config.js"></script>
-  <script defer src="assets/main.js"></script>
-  <script type="application/ld+json">{
-    "@context":"https://schema.org",
-    "@type":"SoftwareApplication",
-    "name":"Letterbot",
-    "applicationCategory":"ProductivityApplication",
-    "operatingSystem":"Windows 10, Windows 11",
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
-    "description":"Free self-hosted AI email filter for Windows. Reads IMAP inbox, prioritizes with AI, sends only important emails to Telegram. Data stays local.",
-    "url":"https://sergiothefirst.github.io/letterbot/",
-    "downloadUrl":"https://github.com/SergioTheFirst/letterbot/releases/latest",
-    "softwareVersion":"28.0.0",
-    "dateModified":"2026-03-11"
-  }</script>
-  
-</head>
-<body>
-
-<nav class="nav" role="navigation">
-  <div class="wrap nav-inner">
-    <a class="brand" href="index.html">
-      <span class="brand-icon">✉</span>
-      <span>Letterbot<span class="brand-tag">local AI email filter</span></span>
-    </a>
-    <div class="nav-links"><a href="index.html">Home</a><a href="features.html">Features</a><a href="how-it-works.html">How it works</a><a href="install.html">Install</a><a href="faq.html">FAQ</a><a href="compare.html">Compare</a><a href="privacy.html">Privacy</a><a href="support.html">Donate</a></div>
-    <div class="nav-end">
-      <a class="btn btn-outline btn-sm" href="#" data-gh>GitHub</a>
-      <a class="btn btn-amber btn-sm" href="install.html">Download</a>
-    </div>
-    <button class="mob-btn" id="mob-toggle" aria-expanded="false" aria-label="Toggle menu">☰</button>
-  </div>
-  <div class="mob-nav" id="mob-nav"><a href="index.html">Home</a><a href="features.html">Features</a><a href="how-it-works.html">How it works</a><a href="install.html">Install</a><a href="faq.html">FAQ</a><a href="compare.html">Compare</a><a href="privacy.html">Privacy</a><a href="support.html">Donate</a>
-    <a class="btn btn-amber" href="install.html" style="margin-top:4px;">⬇ Download</a>
-  </div>
-</nav>
-<main id="content">
-<section class="page-hero">
-  <div class="wrap">
-    <p class="eyebrow">// every feature · direct answers · no fluff</p>
-    <h1>What does Letterbot do?</h1>
-    <p>Each feature is described as a direct answer to "what does it do" — not as a marketing claim. If a feature doesn't exist, it's not listed.</p>
-  </div>
-</section>
-<section class="section" style="padding-top:0">
-  <div class="wrap">
-
-    <div class="qa-grid rv" style="margin-bottom:56px">
-      <div><div class="qa-q">How does Letterbot prioritize emails?</div><div class="qa-a">Letterbot analyzes sender history, email type, deadline keywords in subject and body, attachment type, and frequency signals from the same sender. Result: 🔴 Urgent (action today) / 🟡 Important (next few days) / 🔵 Low. Every decision includes a reason code — <code>PRIO_INVOICE</code>, <code>PRIO_DEADLINE_1D</code>, <code>PRIO_FREQ_SPIKE_3X</code> — so you can see exactly why a priority was assigned. Not a black box.</div></div>
-      <div><div class="qa-q">How does Multi-Inbox Routing work?</div><div class="qa-a">You define multiple IMAP accounts in <code>accounts.yaml</code>, each with a target Telegram chat_id. Letterbot routes each account's notifications to its designated chat. Work emails go to the work group chat, personal emails to your private chat, server alerts to a dedicated channel. No limit on the number of accounts.</div></div>
-      <div><div class="qa-q">How does snooze with memory work?</div><div class="qa-a">Tap a snooze button in Telegram — 2 hours, tomorrow, next week. Letterbot persists the snooze in the local database with a wakeup timestamp. At the scheduled time, it resurfaces the email with full context: sender, subject, detected type, suggested action, and when it originally arrived. The decision context is fully restored, not just a bare reminder.</div></div>
-      <div><div class="qa-q">Does Letterbot learn from corrections?</div><div class="qa-a">Yes. When you tap a priority button in Telegram to override the system's decision, the correction is recorded as a training signal associated with that sender and email type. Over time, the priority model adapts to your real behavior — which senders you consistently treat as urgent, which you consistently downgrade.</div></div>
-      <div><div class="qa-q">What does the weekly digest contain?</div><div class="qa-a">Sent every Monday: total emails processed in the past week, invoices detected with amounts, contracts that arrived for review, overdue obligations (commitments that passed their stated deadline), silent-partner risks (contacts you haven't heard from in longer than normal), and pending replies you haven't acted on.</div></div>
-      <div><div class="qa-q">How does Letterbot read PDF and Excel attachments?</div><div class="qa-a">Letterbot uses open-source text extraction libraries to read PDF and .xlsx files without requiring Microsoft Office. The extracted text is used during priority calculation — an invoice amount in a PDF can trigger the PRIO_INVOICE reason code, an Excel spreadsheet containing contract terms can increase priority to 🟡 Important.</div></div>
-      <div><div class="qa-q">What does the local web cockpit show?</div><div class="qa-a">Available at <code>http://127.0.0.1:8787</code>. The cockpit includes: a system dashboard with current health status, IMAP connection state per account, Telegram delivery metrics (p90 latency, delivery rate, error rate, salvage rate), processed email archive with full decision trace and reason codes, sender relationship analytics, and a system health page with per-component status. Read-only. Does not connect to the internet.</div></div>
-      <div><div class="qa-q">What is obligation tracking?</div><div class="qa-a">Letterbot scans email bodies for commitment phrases: "will send by Friday", "confirm by Monday", "I'll call you tomorrow", "payment due April 15". Detected commitments are stored with their deadline date. Both incoming obligations (what others promised you) and outgoing ones (what you promised) are tracked and surfaced in the weekly digest.</div></div>
-    </div>
-
-    <div class="sh rv"><div class="eyebrow">// reliability features</div><h2>How does Letterbot handle failures?</h2></div>
-    <div class="g3 rv">
-      <div class="card card-teal"><div class="ib ib-teal">⚡</div><h3>Degraded mode (DEGRADED_NO_LLM)</h3><p>When an LLM provider is unavailable, Letterbot automatically switches to deterministic mode. Basic notifications using rule-based extraction continue. You receive a Telegram notification about the degraded state. Normal mode resumes automatically when the LLM recovers.</p></div>
-      <div class="card"><div class="ib">🔁</div><h3>Telegram retry with backoff</h3><p>If a Telegram API call fails, Letterbot retries with exponential backoff. Emails processed during an outage are queued locally and delivered when connectivity is restored — no silent message loss.</p></div>
-      <div class="card card-amber"><div class="ib ib-amber">🛡</div><h3>UIDVALIDITY / IMAP resync</h3><p>Letterbot tracks IMAP UIDVALIDITY per account. When the IMAP server signals a UID reset (e.g. after mailbox migration), Letterbot automatically resyncs state to prevent duplicate deliveries or missed messages.</p></div>
-    </div>
-
-    <div class="card rv" style="margin-top:32px;text-align:center;padding:40px">
-      <h2 style="margin-bottom:10px">See all features in action</h2>
-      <p class="muted" style="max-width:44ch;margin:0 auto 24px">Download Letterbot and try it on your own inbox. Free, 10-minute setup, no cloud required.</p>
-      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <a class="btn btn-amber btn-lg" href="install.html">⬇ Download</a>
-        <a class="btn btn-outline" href="observability.html">See the observability cockpit →</a>
-      </div>
-    </div>
-
-  </div>
-</section>
-</main>
-
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer-grid">
-      <div>
-        <a class="brand" href="index.html">
-          <span class="brand-icon">✉</span>
-          <span>Letterbot<span class="brand-tag">local AI email filter</span></span>
-        </a>
-        <p class="footer-desc">Free self-hosted AI email assistant. Your emails stay on your machine. Open source forever.</p>
-        <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
-          <a class="badge badge-amber" href="#" data-gh target="_blank">GitHub ↗</a>
-          <a class="badge badge-teal" href="#" data-tg target="_blank">Telegram ↗</a>
-          <a class="badge badge-green" href="#" data-boosty target="_blank">Boosty ↗</a>
-        </div>
-      </div>
-      <div class="footer-cols">
-        <div class="footer-col">
-          <h4>Product</h4>
-          <a href="features.html">Features</a>
-          <a href="how-it-works.html">How it works</a>
-          <a href="install.html">Install</a>
-          <a href="use-cases.html">Use cases</a>
-          <a href="observability.html">Observability</a>
-          <a href="changelog.html">Changelog</a>
-        </div>
-        <div class="footer-col">
-          <h4>Compare &amp; Learn</h4>
-          <a href="compare.html">Compare alternatives</a>
-          <a href="privacy.html">Privacy &amp; data</a>
-          <a href="faq.html">FAQ</a>
-          <a href="blog/why-letterbot-exists.html">Why Letterbot</a>
-          <a href="blog/email-ai-guide.html">Email AI guide</a>
-        </div>
-        <div class="footer-col">
-          <h4>Community</h4>
-          <a href="#" data-gh>GitHub</a>
-          <a href="#" data-issues>Issues &amp; feedback</a>
-          <a href="#" data-tg>Telegram channel</a>
-          <a href="support.html">Support the project</a>
-          <a href="#" data-email>master@letterbot.ru</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 Letterbot · AGPL-3.0 · <a href="privacy.html">Privacy</a></span>
-      <span>v<span data-ver></span> · updated <span data-updated></span> · <a data-email href="#" data-email-show></a></span>
-    </div>
-  </div>
-</footer>
-</body>
-</html>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Letterbot Features — Complete List of AI Email Filter Capabilities</title><meta name="description" content="Complete Letterbot feature list: priority classification, PDF/Excel reading, digest, snooze, adaptive learning, trust scores, obligation tracking, web cockpit."><link rel="canonical" href="https://sergiothefirst.github.io/letterbot_site/features.html"><meta property="og:title" content="Letterbot Features — Complete List of AI Email Filter Capabilities"><meta property="og:description" content="Complete Letterbot feature list: priority classification, PDF/Excel reading, digest, snooze, adaptive learning, trust scores, obligation tracking, web cockpit."><meta property="og:image" content="https://sergiothefirst.github.io/letterbot_site/assets/og.png"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap"><link rel="stylesheet" href="assets/styles.css"><script src="assets/config.js" defer></script><script src="assets/main.js" defer></script></head><body><nav class="nav"><div class="wrap nav-inner"><a href="index.html" class="brand"><span class="brand-icon">✉</span><span>Letterbot<small class="brand-sub">local AI email filter</small></span></a><div class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="features.html">Features</a><a href="how-it-works.html">How it works</a><a href="install.html">Install</a><a href="faq.html">FAQ</a><a href="compare.html">Compare</a><a href="privacy.html">Privacy</a><a href="support.html">Donate</a></div><div class="nav-actions"><a href="https://github.com/SergioTheFirst/letterbot" class="btn-ghost" target="_blank" rel="noopener">GitHub</a><a href="install.html" class="btn-primary btn-sm">Download</a></div><button class="burger" id="burger" aria-label="Menu">☰</button></div></nav><section class="page-hero"><div class="wrap"><h1>Features</h1><p>Every capability listed. No marketing fluff.</p></div></section><section class="page-content"><div class="wrap"><h2>Core email processing</h2>
+<ul>
+<li><strong>IMAP connection</strong> — read-only access to any IMAP-compatible mail server</li>
+<li><strong>Unlimited email accounts</strong> — no cap on the number of mailboxes you can connect</li>
+<li><strong>Multi-inbox routing</strong> — route each account to a different Telegram chat</li>
+<li><strong>Attachment reading</strong> — PDF (pypdf), Excel (openpyxl/xlrd), Word (python-docx), without Office installed</li>
+<li><strong>Body segmentation</strong> — separates main text from forwards, signatures, disclaimers</li>
+<li><strong>20+ mail type classification</strong> — INVOICE, CONTRACT, SECURITY_ALERT, DEADLINE, and more</li>
+</ul>
+<h2>Priority and decision engine</h2>
+<ul>
+<li><strong>Deterministic priority</strong> — rules-based scoring that works without any AI</li>
+<li><strong>Fact extraction</strong> — amounts, dates, document numbers, currencies from body and attachments</li>
+<li><strong>Evidence windows</strong> — each fact is anchored to ±3 lines of surrounding context</li>
+<li><strong>Consistency checks</strong> — cross-validates amounts, dates, currencies for accuracy</li>
+<li><strong>Explainable reason codes</strong> — PRIO_INVOICE, PRIO_DEADLINE_1D, PRIO_SILENCE_14D</li>
+<li><strong>Confidence scoring</strong> — 0.0–1.0 confidence per decision, affects action suggestions</li>
+<li><strong>Optional LLM enhancement</strong> — GigaChat (Sber) or Cloudflare Workers AI for complex emails</li>
+</ul>
+<h2>Telegram interface</h2>
+<ul>
+<li><strong>One-message rule</strong> — one email = one Telegram message, always</li>
+<li><strong>Priority buttons</strong> — 🔴 Urgent / 🟡 Important / 🔵 Low, tap to correct</li>
+<li><strong>Snooze</strong> — 2h, 6h, or tomorrow, with context restoration on return</li>
+<li><strong>Edit-in-place</strong> — priority changes update the original message, no spam</li>
+<li><strong>Daily and weekly digest</strong> — scheduled summaries with invoices, contracts, obligations</li>
+<li><strong>Bot commands</strong> — /help, /status, /doctor, /stats, /week, /lang en|ru</li>
+<li><strong>EN/RU bilingual</strong> — full interface localization, switchable at runtime</li>
+</ul>
+<h2>Learning and intelligence</h2>
+<ul>
+<li><strong>Adaptive priority learning</strong> — learns from corrections per sender+account pair</li>
+<li><strong>Quality gates</strong> — minimum 3 corrections, ≥80% accuracy before auto-applying</li>
+<li><strong>Sender trust scores</strong> — reliability profile per contact with temporal decay</li>
+<li><strong>Obligation tracking</strong> — detects "will send by Friday" and surfaces missed deadlines</li>
+<li><strong>Silence detection</strong> — alerts when regular contacts go quiet</li>
+<li><strong>Stalled thread detection</strong> — notices unanswered email chains</li>
+</ul>
+<h2>Reliability and observability</h2>
+<ul>
+<li><strong>Graceful degradation</strong> — FULL → DEGRADED_NO_LLM → continues working</li>
+<li><strong>Delivery SLA metrics</strong> — latency, error rate, salvage rate</li>
+<li><strong>Web cockpit</strong> — localhost:8787, read-only, health/archive/events/AI traces</li>
+<li><strong>1,541 tests</strong> — pytest on GitHub Actions CI, including 138 golden corpus cases</li>
+<li><strong>Self-checks on startup</strong> — schema validation, config preflight, health snapshot</li>
+<li><strong>Doctor diagnostics</strong> — built-in system check command</li>
+</ul>
+</div></section><footer class="footer"><div class="wrap footer-inner"><div class="footer-brand"><a href="index.html" class="brand"><span class="brand-icon">✉</span> Letterbot</a><p>Free self-hosted AI email assistant. Open source forever.</p><div class="footer-social"><a href="https://github.com/SergioTheFirst/letterbot" target="_blank" rel="noopener">GitHub ↗</a><a href="https://t.me/+1xHH6NwJONVlZTA6" target="_blank" rel="noopener">Telegram ↗</a><a href="https://boosty.to/personalbot/donate?qr=true" target="_blank" rel="noopener">Boosty ↗</a></div></div><div class="footer-col"><h4>Product</h4><a href="features.html">Features</a><a href="how-it-works.html">How it works</a><a href="install.html">Install</a><a href="use-cases.html">Use cases</a><a href="observability.html">Observability</a></div><div class="footer-col"><h4>Learn</h4><a href="compare.html">Compare</a><a href="privacy.html">Privacy</a><a href="faq.html">FAQ</a><a href="blog/why-letterbot-exists.html">Why Letterbot</a></div><div class="footer-col"><h4>Community</h4><a href="https://github.com/SergioTheFirst/letterbot" target="_blank">GitHub</a><a href="https://github.com/SergioTheFirst/letterbot/issues" target="_blank">Issues</a><a href="https://t.me/+1xHH6NwJONVlZTA6" target="_blank">Telegram</a><a href="support.html">Support</a><a href="mailto:master@letterbot.ru">master@letterbot.ru</a></div></div><div class="wrap footer-bottom"><p>© 2026 Letterbot · AGPL-3.0 · <a href="privacy.html">Privacy</a></p><p class="footer-meta">v28.0.0 · updated March 2026</p></div></footer></body></html>

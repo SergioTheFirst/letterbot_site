@@ -1,14 +1,147 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Letterbot Observability — Local Web Dashboard for Email Processing</title><meta name="description" content="Read-only web cockpit at localhost:8787. System health, email archive, AI decision traces, delivery SLA metrics. No internet exposure, no data collection."><link rel="canonical" href="https://sergiothefirst.github.io/letterbot_site/observability.html"><meta property="og:title" content="Letterbot Observability — Local Web Dashboard for Email Processing"><meta property="og:description" content="Read-only web cockpit at localhost:8787. System health, email archive, AI decision traces, delivery SLA metrics. No internet exposure, no data collection."><meta property="og:image" content="https://sergiothefirst.github.io/letterbot_site/assets/og.png"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap"><link rel="stylesheet" href="assets/styles.css"><script src="assets/config.js" defer></script><script src="assets/main.js" defer></script></head><body><nav class="nav"><div class="wrap nav-inner"><a href="index.html" class="brand"><span class="brand-icon">✉</span><span>Letterbot<small class="brand-sub">local AI email filter</small></span></a><div class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="features.html">Features</a><a href="how-it-works.html">How it works</a><a href="install.html">Install</a><a href="faq.html">FAQ</a><a href="compare.html">Compare</a><a href="privacy.html">Privacy</a><a href="support.html">Donate</a></div><div class="nav-actions"><a href="https://github.com/SergioTheFirst/letterbot" class="btn-ghost" target="_blank" rel="noopener">GitHub</a><a href="install.html" class="btn-primary btn-sm">Download</a></div><button class="burger" id="burger" aria-label="Menu">☰</button></div></nav><section class="page-hero"><div class="wrap"><h1>Observability</h1><p>Every decision is traceable. Every metric is visible.</p></div></section><section class="page-content"><div class="wrap"><h2>What is the web cockpit?</h2>
-<p>A local, read-only web dashboard running at <code>http://127.0.0.1:8787</code>. It shows system health, processed emails, AI decision traces, and delivery metrics. It never connects to the internet and never exposes data externally.</p>
-<h2>Cockpit sections</h2>
-<ul>
-<li><strong>Dashboard</strong> — live overview: emails processed, LLM usage, priority distribution, recent events</li>
-<li><strong>Archive</strong> — searchable history with filters by document type, priority, sender, confidence</li>
-<li><strong>Health</strong> — IMAP connection status, LLM provider health, database state, component matrix</li>
-<li><strong>Events timeline</strong> — every system decision in chronological order, fully auditable</li>
-</ul>
-<h2>SLA metrics</h2>
-<p>Letterbot tracks delivery performance: <code>delivery_rate</code>, <code>error_rate</code>, <code>p90_latency</code>, <code>salvage_rate</code>. These are real production metrics typically found in SaaS platforms, not hobby projects.</p>
-<h2>Decision traces</h2>
-<p>Every priority decision has auditable reason codes. You can see exactly why an email was classified as 🔴 Urgent: which facts were extracted, what weights were applied, what signals triggered.</p>
-</div></section><footer class="footer"><div class="wrap footer-inner"><div class="footer-brand"><a href="index.html" class="brand"><span class="brand-icon">✉</span> Letterbot</a><p>Free self-hosted AI email assistant. Open source forever.</p><div class="footer-social"><a href="https://github.com/SergioTheFirst/letterbot" target="_blank" rel="noopener">GitHub ↗</a><a href="https://t.me/+1xHH6NwJONVlZTA6" target="_blank" rel="noopener">Telegram ↗</a><a href="https://boosty.to/personalbot/donate?qr=true" target="_blank" rel="noopener">Boosty ↗</a></div></div><div class="footer-col"><h4>Product</h4><a href="features.html">Features</a><a href="how-it-works.html">How it works</a><a href="install.html">Install</a><a href="use-cases.html">Use cases</a><a href="observability.html">Observability</a></div><div class="footer-col"><h4>Learn</h4><a href="compare.html">Compare</a><a href="privacy.html">Privacy</a><a href="faq.html">FAQ</a><a href="blog/why-letterbot-exists.html">Why Letterbot</a></div><div class="footer-col"><h4>Community</h4><a href="https://github.com/SergioTheFirst/letterbot" target="_blank">GitHub</a><a href="https://github.com/SergioTheFirst/letterbot/issues" target="_blank">Issues</a><a href="https://t.me/+1xHH6NwJONVlZTA6" target="_blank">Telegram</a><a href="support.html">Support</a><a href="mailto:master@letterbot.ru">master@letterbot.ru</a></div></div><div class="wrap footer-bottom"><p>© 2026 Letterbot · AGPL-3.0 · <a href="privacy.html">Privacy</a></p><p class="footer-meta">v28.0.0 · updated March 2026</p></div></footer></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Letterbot observability cockpit — local dashboard for health, events and decision traces</title>
+<meta name="description" content="Letterbot exposes a read-only cockpit on localhost:8787 with health views, incidents, events, archive filters and decision visibility.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="Letterbot">
+<meta name="theme-color" content="#0b1830">
+<link rel="canonical" href="https://sergiothefirst.github.io/letterbot_site/observability.html">
+<meta property="og:title" content="Letterbot observability cockpit — local dashboard for health, events and decision traces">
+<meta property="og:description" content="Letterbot exposes a read-only cockpit on localhost:8787 with health views, incidents, events, archive filters and decision visibility.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sergiothefirst.github.io/letterbot_site/observability.html">
+<meta property="og:image" content="https://sergiothefirst.github.io/letterbot_site/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Letterbot observability cockpit — local dashboard for health, events and decision traces">
+<meta name="twitter:description" content="Letterbot exposes a read-only cockpit on localhost:8787 with health views, incidents, events, archive filters and decision visibility.">
+<meta name="twitter:image" content="https://sergiothefirst.github.io/letterbot_site/assets/og.png">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/config.js" defer></script>
+<script src="assets/main.js" defer></script>
+</head>
+<body>
+<nav class="nav" role="navigation" aria-label="Main navigation">
+<div class="wrap nav-inner">
+  <a href="index.html" class="brand" aria-label="Letterbot home">
+    <span class="brand-icon">✉</span>
+    <span>Letterbot<small class="brand-sub">self-hosted email assistant</small></span>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="features.html">Features</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="install.html">Install</a>
+    <a href="faq.html">FAQ</a>
+    <a href="compare.html">Compare</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="observability.html">Cockpit</a>
+    <a href="support.html">Donate</a>
+  </div>
+  <div class="nav-actions">
+    <a href="https://github.com/SergioTheFirst/letterbot" class="btn-ghost" target="_blank" rel="noopener">GitHub</a>
+    <a href="install.html" class="btn-primary btn-sm">Download</a>
+  </div>
+  <button class="burger" id="burger" aria-label="Menu">☰</button>
+</div>
+</nav>
+<section class="page-hero">
+  <div class="wrap">
+    <h1>Observability cockpit</h1>
+    <p>Local, read-only and built for operators who want to verify the system before they trust it.</p>
+  </div>
+</section>
+
+<section class="page-content">
+  <div class="wrap">
+    <p>The cockpit runs on <code>http://127.0.0.1:8787</code>. It is not a hosted dashboard and it is not meant to replace your inbox. Its job is narrower: prove that intake, routing, fallbacks and operator feedback are behaving as expected.</p>
+
+    <div class="note-box">The screenshots on this page are taken from a running local instance. They are included because product claims convert better when a buyer can see the operator surface instead of reading a feature list.</div>
+
+    <div class="page-gallery">
+      <figure>
+        <img src="assets/cockpit-home.jpg" alt="Letterbot cockpit dashboard home view">
+        <figcaption><strong>Home view.</strong> A summary screen for runtime state, event freshness, high-priority flow, latency coverage and partial degradation.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/cockpit-health.jpg" alt="Letterbot cockpit health view">
+        <figcaption><strong>Health view.</strong> Component status, golden signals and operator-friendly incident context for IMAP, Telegram, DB and optional AI.</figcaption>
+      </figure>
+    </div>
+
+    <h2>What the cockpit is for</h2>
+    <ul>
+      <li>Confirm that IMAP polling and Telegram delivery are alive</li>
+      <li>See whether optional AI is unavailable and whether deterministic fallback is active</li>
+      <li>Inspect component health without exposing anything to the internet</li>
+      <li>Audit what the system did before changing config or opening an issue</li>
+    </ul>
+
+    <h2>Why this matters</h2>
+    <p>A self-hosted workflow is only trustworthy if the operator can verify its behavior. The cockpit is the missing layer between “it should work” and “I have evidence that it worked”. It turns a background agent into an inspectable system.</p>
+
+    <div class="kpi-row">
+      <div class="kpi"><b>localhost</b><span>No external dashboard dependency</span></div>
+      <div class="kpi"><b>read-only</b><span>Operator visibility without mailbox mutation</span></div>
+      <div class="kpi"><b>health</b><span>Component matrix and incident context</span></div>
+      <div class="kpi"><b>events</b><span>Decision traces and timeline visibility</span></div>
+    </div>
+
+    <h2>Best next step</h2>
+    <p>If the cockpit is the part that makes the product credible for you, install the release and inspect the local screens first. That will tell you more in three minutes than a long marketing page can.</p>
+    <p><a href="install.html" class="btn-primary">Open install guide</a></p>
+  </div>
+</section>
+<footer class="footer">
+<div class="wrap footer-inner">
+  <div class="footer-brand">
+    <a href="index.html" class="brand"><span class="brand-icon">✉</span> Letterbot</a>
+    <p>Self-hosted email triage for Windows. Telegram notifications, local cockpit, no vendor cloud.</p>
+    <div class="footer-social">
+      <a href="https://github.com/SergioTheFirst/letterbot" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="https://t.me/+1xHH6NwJONVlZTA6" target="_blank" rel="noopener">Telegram ↗</a>
+      <a href="https://boosty.to/personalbot/donate?qr=true" target="_blank" rel="noopener">Boosty ↗</a>
+    </div>
+  </div>
+  <div class="footer-col">
+    <h4>Product</h4>
+    <a href="features.html">Features</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="install.html">Install</a>
+    <a href="use-cases.html">Use cases</a>
+    <a href="observability.html">Observability</a>
+  </div>
+  <div class="footer-col">
+    <h4>Learn</h4>
+    <a href="compare.html">Compare</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="faq.html">FAQ</a>
+    <a href="blog/why-letterbot-exists.html">Why Letterbot</a>
+    <a href="blog/email-ai-guide.html">Email guide</a>
+  </div>
+  <div class="footer-col">
+    <h4>Community</h4>
+    <a href="https://github.com/SergioTheFirst/letterbot" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://github.com/SergioTheFirst/letterbot/issues" target="_blank" rel="noopener">Issues & feedback</a>
+    <a href="https://t.me/+1xHH6NwJONVlZTA6" target="_blank" rel="noopener">Telegram channel</a>
+    <a href="support.html">Support the project</a>
+    <a href="mailto:master@letterbot.ru">master@letterbot.ru</a>
+  </div>
+</div>
+<div class="wrap footer-bottom">
+  <p>© 2026 Letterbot · AGPL-3.0 · <a href="privacy.html">Privacy</a></p>
+  <p class="footer-meta">v28.0.0 · updated March 2026</p>
+</div>
+</footer>
+</body>
+</html>

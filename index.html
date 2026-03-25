@@ -3,18 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Letterbot — Free Self-Hosted Email Filter for Windows with Telegram Notifications</title>
-<meta name="description" content="Free self-hosted email filter for Windows. Connects to unlimited IMAP mailboxes, analyzes locally, sends Telegram notifications. No cloud, no subscription.">
-<meta name="author" content="Letterbot">
+<title>Letterbot — Self-Hosted Email Triage Assistant for Windows</title>
+<meta name="description" content="Self-hosted email triage assistant for Windows. Connect IMAP inboxes, classify locally, push only relevant messages to Telegram, and audit everything in a local web cockpit.">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="https://sergiothefirst.github.io/letterbot_site/index.html">
-<meta property="og:title" content="Letterbot — Free Self-Hosted Email Filter for Windows with Telegram Notifications">
-<meta property="og:description" content="Free self-hosted email filter for Windows. Connects to unlimited IMAP mailboxes, analyzes locally, sends Telegram notifications. No cloud, no subscription.">
+<meta name="author" content="Letterbot">
+<meta name="theme-color" content="#0b1830">
+<link rel="canonical" href="https://sergiothefirst.github.io/letterbot_site/">
+<meta property="og:title" content="Letterbot — Self-Hosted Email Triage Assistant for Windows">
+<meta property="og:description" content="Self-hosted email triage assistant for Windows. Connect IMAP inboxes, classify locally, push only relevant messages to Telegram, and audit everything in a local web cockpit.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://sergiothefirst.github.io/letterbot_site/index.html">
+<meta property="og:url" content="https://sergiothefirst.github.io/letterbot_site/">
 <meta property="og:image" content="https://sergiothefirst.github.io/letterbot_site/assets/og.png">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Letterbot — Self-Hosted Email Triage Assistant for Windows">
+<meta name="twitter:description" content="Self-hosted email triage assistant for Windows. Connect IMAP inboxes, classify locally, push only relevant messages to Telegram, and audit everything in a local web cockpit.">
+<meta name="twitter:image" content="https://sergiothefirst.github.io/letterbot_site/assets/og.png">
+<link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,11 +31,12 @@
 <script src="assets/main.js" defer></script>
 </head>
 <body>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "58fa2433ce364112a5bf16de2cdd34d7"}'></script><!-- End Cloudflare Web Analytics -->
 <nav class="nav" role="navigation" aria-label="Main navigation">
 <div class="wrap nav-inner">
   <a href="index.html" class="brand" aria-label="Letterbot home">
     <span class="brand-icon">✉</span>
-    <span>Letterbot<small class="brand-sub">local email filter</small></span>
+    <span>Letterbot<small class="brand-sub">self-hosted email assistant</small></span>
   </a>
   <div class="nav-links" id="navLinks">
     <a href="index.html">Home</a>
@@ -38,6 +46,7 @@
     <a href="faq.html">FAQ</a>
     <a href="compare.html">Compare</a>
     <a href="privacy.html">Privacy</a>
+    <a href="observability.html">Cockpit</a>
     <a href="support.html">Donate</a>
   </div>
   <div class="nav-actions">
@@ -48,237 +57,227 @@
 </div>
 </nav>
 
-<!-- ═══ HERO ═══ -->
 <header class="hero">
-<div class="wrap hero-inner">
-  <div class="hero-text">
-    <p class="hero-kicker">open source · self-hosted · forever free</p>
-    <h1>Stop reading every email.<br><em>See only</em> what <strong>matters.</strong></h1>
-    <p class="hero-sub">Letterbot is a free, self-hosted email filter for Windows that connects to your IMAP mailboxes, analyzes incoming emails locally, and sends priority notifications to Telegram — so you never miss an invoice, contract, or urgent reply again.</p>
-    <p class="hero-sub">No cloud servers. No subscription. No data leaves your machine. Works on a Celeron with 3 GB RAM. Open source under AGPL-3.0.</p>
-    <div class="hero-btns">
-      <a href="install.html" class="btn-primary btn-lg">⬇ Download Free</a>
-      <a href="https://github.com/SergioTheFirst/letterbot" class="btn-ghost btn-lg" target="_blank" rel="noopener">View on GitHub →</a>
-    </div>
-    <ul class="hero-badges">
-      <li>Free forever — no subscription</li>
-      <li>Data never leaves your PC</li>
-      <li>Works on old hardware</li>
-      <li>Open source AGPL-3.0</li>
-    </ul>
-  </div>
-  <div class="hero-demo">
-    <div class="phone-mock">
-      <div class="phone-header">
-        <span class="phone-icon">✉</span>
-        <span>Letterbot</span>
-        <span class="phone-status">● live</span>
+  <div class="wrap hero-inner hero-proof">
+    <div class="hero-text">
+      <p class="hero-kicker">self-hosted · deterministic-first · telegram-first</p>
+      <h1>Self-hosted email triage for Windows.<br><em>One clear Telegram signal</em> per email.</h1>
+      <p class="hero-sub">Letterbot connects to your IMAP inboxes, classifies mail locally, and sends only relevant messages to Telegram with priority, summary, and suggested next action.</p>
+      <p class="hero-sub"><strong>Deterministic by default.</strong> Optional AI enhancement for harder messages. No vendor cloud. No subscription. Read-only cockpit on <code>localhost:8787</code>.</p>
+      <div class="hero-note">
+        <span>Read-only IMAP</span>
+        <span>Multi-inbox routing</span>
+        <span>Telegram actions</span>
+        <span>Local SQLite</span>
       </div>
-      <div class="msg msg-urgent">
-        <div class="msg-badge">🔴 Urgent · invoice</div>
-        <p><strong>SoftMacro LLC</strong> — Invoice #2024-047</p>
-        <p class="msg-action">Action: <strong>pay by Apr 15 · 87,500 ₽</strong></p>
-        <p class="msg-file">📎 invoice_april.xlsx</p>
-        <div class="msg-btns">
-          <span class="btn-tag red">🔴 Urgent</span>
-          <span class="btn-tag yellow">🟡 Later</span>
-          <span class="btn-tag">⏰ Snooze 2h</span>
-        </div>
-        <span class="msg-time">09:14</span>
+      <div class="hero-btns">
+        <a href="install.html" class="btn-primary btn-lg">Download and install</a>
+        <a href="https://github.com/SergioTheFirst/letterbot" class="btn-ghost btn-lg" target="_blank" rel="noopener">View source on GitHub</a>
       </div>
-      <div class="msg msg-important">
-        <div class="msg-badge">🟡 Important · contract</div>
-        <p><strong>Jimmy Irish</strong> — Contract for review</p>
-        <p class="msg-action">Action: <strong>sign and return by Friday</strong></p>
-        <div class="msg-btns">
-          <span class="btn-tag">📅 Tomorrow</span>
-          <span class="btn-tag">⏰ Snooze</span>
-        </div>
-        <span class="msg-time">09:16</span>
+      <div class="install-strip">
+        <div class="install-pill"><strong>1. Download ZIP</strong><small>Grab the latest release from GitHub. No subscription gate and no signup.</small></div>
+        <div class="install-pill"><strong>2. Edit config</strong><small>Add IMAP credentials and your Telegram bot token. Keep everything on your own machine.</small></div>
+        <div class="install-pill"><strong>3. Run and watch</strong><small>Start Letterbot and open the local cockpit to confirm health, events and routing.</small></div>
       </div>
-      <div class="msg msg-digest">
-        <div class="msg-badge">📊 Weekly digest</div>
-        <p>3 invoices · 1 overdue · 2 replies pending</p>
-        <span class="msg-time">Mon 08:00</span>
+      <div class="meta-links">
+        <a href="https://github.com/SergioTheFirst/letterbot/releases/latest" target="_blank" rel="noopener">Latest release</a>
+        <a href="https://github.com/SergioTheFirst/letterbot/issues" target="_blank" rel="noopener">Issue tracker</a>
+        <a href="observability.html">See the cockpit</a>
       </div>
     </div>
+
+    <div class="hero-demo">
+      <div class="phone-mock">
+        <div class="phone-header">
+          <span class="phone-icon">✉</span>
+          <span>Letterbot</span>
+          <span class="phone-status">● local</span>
+        </div>
+        <div class="msg msg-urgent">
+          <div class="msg-badge">🔴 urgent · invoice</div>
+          <p><strong>SoftMacro LLC</strong> — Invoice #2024-047</p>
+          <p class="msg-action">Action: <strong>pay by Apr 15 · 87,500 ₽</strong></p>
+          <p class="msg-file">📎 invoice_april.xlsx</p>
+          <div class="msg-btns">
+            <span class="btn-tag red">🔴 High</span>
+            <span class="btn-tag yellow">🟡 Review</span>
+            <span class="btn-tag">⏰ Snooze 2h</span>
+          </div>
+          <span class="msg-time">09:14</span>
+        </div>
+        <div class="msg msg-important">
+          <div class="msg-badge">🟡 important · contract</div>
+          <p><strong>Jimmy Irish</strong> — Contract for review</p>
+          <p class="msg-action">Action: <strong>sign and return by Friday</strong></p>
+          <div class="msg-btns">
+            <span class="btn-tag">📅 Tomorrow</span>
+            <span class="btn-tag">✍ Mark done</span>
+          </div>
+          <span class="msg-time">09:16</span>
+        </div>
+        <div class="msg msg-digest">
+          <div class="msg-badge">📊 weekly digest</div>
+          <p>3 invoices · 1 overdue obligation · 2 replies pending</p>
+          <span class="msg-time">Mon 08:00</span>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 </header>
 
-<!-- ═══ STATS BAR ═══ -->
 <section class="stats-bar">
-<div class="wrap stats-inner">
-  <div class="stat"><span class="stat-val">$0</span><span class="stat-label">forever free · no subscription</span></div>
-  <div class="stat"><span class="stat-val">∞</span><span class="stat-label">IMAP accounts supported</span></div>
-  <div class="stat"><span class="stat-val">100%</span><span class="stat-label">local — data stays on your PC</span></div>
-  <div class="stat"><span class="stat-val">v28</span><span class="stat-label">current release · active development</span></div>
-</div>
+  <div class="wrap stats-inner">
+    <div class="stat"><span class="stat-val">$0</span><span class="stat-label">free forever</span></div>
+    <div class="stat"><span class="stat-val">∞</span><span class="stat-label">IMAP inboxes</span></div>
+    <div class="stat"><span class="stat-val">local</span><span class="stat-label">processing + storage</span></div>
+    <div class="stat"><span class="stat-val">read-only</span><span class="stat-label">no mail moves or deletes</span></div>
+  </div>
 </section>
 
-<!-- ═══ WHAT IS ═══ -->
-<section class="section" id="what">
-<div class="wrap">
-  <div class="intro-block">
-    <h2>What is Letterbot?</h2>
-    <p>Letterbot is a <strong>free, self-hosted email filter for Windows</strong> that connects to your IMAP mailbox, analyzes incoming emails, determines priority and suggested action, and sends concise Telegram notifications — only for messages that need your attention.</p>
-    <p><strong>Who it's for:</strong> Freelancers and sole traders who manage 20+ clients by email. Developers who want self-hosted, auditable tools. Small businesses who want email intelligence without sending data to foreign clouds.</p>
-  </div>
-
-  <div class="cards-3">
-    <div class="card">
-      <span class="card-icon">🔒</span>
-      <h3>Your data stays on your machine</h3>
-      <p>Letterbot has no cloud servers. Email metadata is stored in a local SQLite database. No telemetry, no analytics, nothing sent to Letterbot. You can verify this in the open-source code.</p>
-    </div>
-    <div class="card">
-      <span class="card-icon">📲</span>
-      <h3>Telegram is your inbox dashboard</h3>
-      <p>One email → one Telegram message with priority emoji, summary, suggested action, and response buttons. No extra app to open. Works on every device with Telegram installed.</p>
-    </div>
-    <div class="card">
-      <span class="card-icon">$0</span>
-      <h3>Free forever — seriously</h3>
-      <p>AGPL-3.0 open source. No freemium, no feature paywall, no subscription tier. The project is sustained by voluntary donations from users who find it useful.</p>
+<section class="section section-compact">
+  <div class="wrap">
+    <p class="section-kicker">proof, not just promises</p>
+    <h2>Real local cockpit screenshots</h2>
+    <p class="lead">The screenshots below are from a running Letterbot instance on <code>127.0.0.1:8787</code>. They show the operator view that verifies health, message flow, fallbacks and auditability without exposing anything to the public internet.</p>
+    <div class="proof-grid">
+      <article class="screenshot-card">
+        <img src="assets/cockpit-home.jpg" alt="Letterbot cockpit home view with system status, emails today and latency widgets">
+        <div class="screenshot-copy">
+          <h3>Home cockpit</h3>
+          <p>A single operator screen with runtime status, email volume, high-priority flow and fallback visibility. This is where you verify that the system is alive before trusting it with your inbox.</p>
+        </div>
+      </article>
+      <article class="screenshot-card">
+        <img src="assets/cockpit-health.jpg" alt="Letterbot health cockpit showing component matrix and golden signals">
+        <div class="screenshot-copy">
+          <h3>Health cockpit</h3>
+          <p>Component matrix, delivery signals and recent incidents in one place. You can quickly tell whether IMAP, database, Telegram or optional AI are healthy enough to keep routing messages.</p>
+        </div>
+      </article>
     </div>
   </div>
-</div>
 </section>
 
-<!-- ═══ MULTI-INBOX ═══ -->
-<section class="section section-alt" id="multi-inbox">
-<div class="wrap">
-  <p class="section-kicker">most requested feature</p>
-  <h2>Can I connect multiple email accounts to different Telegram chats?</h2>
-  <p class="lead"><strong>Yes — this is called Multi-Inbox Routing and it's built in.</strong> Connect unlimited IMAP mailboxes and route each one to a separate Telegram chat. Work email to the work group chat, personal to your private chat, server alerts to a dedicated channel. No other free tool does this.</p>
-
-  <div class="routing-diagram">
-    <div class="route-col">
-      <h4>INBOXES</h4>
-      <div class="route-item"><code>work@company.com</code></div>
-      <div class="route-item"><code>me@gmail.com</code></div>
-      <div class="route-item"><code>alerts@server.io</code></div>
-      <div class="route-item route-more">+ unlimited more</div>
+<section class="section">
+  <div class="wrap">
+    <p class="section-kicker">who it fits best</p>
+    <h2>Best for people who want control, not another inbox SaaS</h2>
+    <div class="fit-grid">
+      <div class="fit-card">
+        <h3>Great fit</h3>
+        <ul>
+          <li>Freelancers who miss invoices, contracts or urgent replies in noisy inboxes</li>
+          <li>Operators who want a <strong>read-only</strong> local layer between IMAP and attention</li>
+          <li>Teams routing multiple inboxes into different Telegram chats</li>
+          <li>Privacy-sensitive users who do not want email content sent to a vendor cloud</li>
+        </ul>
+      </div>
+      <div class="fit-card bad">
+        <h3>Not the best fit</h3>
+        <ul>
+          <li>If you want a hosted SaaS with zero setup, Letterbot is intentionally not that</li>
+          <li>If you need email sending, reply drafting or mailbox mutation, the product is designed to stay read-only</li>
+          <li>If you want Outlook-first enterprise workflow over IMAP, a different tool may fit better</li>
+          <li>If you never use Telegram, the main operator experience will feel less compelling</li>
+        </ul>
+      </div>
     </div>
-    <div class="route-arrow">→<br><span>Letterbot<br>AI Router</span><br>→</div>
-    <div class="route-col">
-      <h4>TELEGRAM CHATS</h4>
-      <div class="route-item">💬 Work</div>
-      <div class="route-item">💬 Personal</div>
-      <div class="route-item">💬 Alerts</div>
+    <div class="link-row">
+      <a href="compare.html" class="btn-ghost">Compare with alternatives</a>
+      <a href="privacy.html" class="btn-ghost">Read the privacy model</a>
     </div>
   </div>
-</div>
 </section>
 
-<!-- ═══ HOW IT WORKS ═══ -->
-<section class="section" id="how">
-<div class="wrap">
-  <p class="section-kicker">3 steps</p>
-  <h2>How does Letterbot work?</h2>
-
-  <div class="steps">
-    <div class="step">
-      <span class="step-num">1</span>
-      <h3>Reads your inbox via IMAP</h3>
-      <p>Connects to your mail server in read-only mode. Never modifies, deletes, or moves any email. Supports Gmail, Yandex, Mail.ru, Outlook, and any IMAP provider. Unlimited accounts.</p>
-    </div>
-    <div class="step">
-      <span class="step-num">2</span>
-      <h3>Analyzes and prioritizes</h3>
-      <p>Extracts sender, subject, body, and attachments (PDF, Excel, Word). Determines priority (🔴 Urgent / 🟡 Important / 🔵 Low) and suggested action using a deterministic rules engine. Works fully offline without any external AI.</p>
-    </div>
-    <div class="step">
-      <span class="step-num">3</span>
-      <h3>Sends to Telegram</h3>
-      <p>One message per email with priority, summary, action suggestion, and inline buttons. You can change priority or snooze directly in Telegram. The system learns from your corrections over time.</p>
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="callout">
+      <p class="section-kicker">deterministic first</p>
+      <h2>Works without paid AI</h2>
+      <p>The core workflow is deterministic: IMAP intake, feature extraction, scoring, Telegram notification, and cockpit visibility. Optional AI can improve summaries for complex messages, but the core triage loop keeps running even when external AI is disabled or unavailable.</p>
+      <ul class="list-check">
+        <li>No mandatory OpenAI dependency</li>
+        <li>Graceful fallback when optional AI is unavailable</li>
+        <li>Reason codes and observable decision paths</li>
+        <li>One-message Telegram workflow instead of a second inbox UI</li>
+      </ul>
     </div>
   </div>
-  <p class="cta-center"><a href="install.html" class="btn-primary">Get started in 10 minutes →</a></p>
-</div>
 </section>
 
-<!-- ═══ FEATURES ═══ -->
-<section class="section section-alt" id="features">
-<div class="wrap">
-  <p class="section-kicker">full feature set</p>
-  <h2>What does Letterbot do?</h2>
-  <p class="lead">Every capability with a direct answer — no marketing fluff.</p>
-
-  <div class="cards-grid">
-    <div class="card-sm"><span>📎</span><h4>Reads PDF &amp; Excel</h4><p>Extracts text from PDF and Excel attachments without Office. Finds invoice amounts and due dates automatically.</p></div>
-    <div class="card-sm"><span>📊</span><h4>Weekly digest</h4><p>Monday summary: invoices, contracts, overdue obligations, silent-partner warnings, and your accuracy trend.</p></div>
-    <div class="card-sm"><span>⏰</span><h4>Snooze with memory</h4><p>Postpone an email. When it returns, full context is restored — who sent it, what was needed, how many times snoozed.</p></div>
-    <div class="card-sm"><span>🌐</span><h4>Local web cockpit</h4><p>Read-only dashboard at <code>localhost:8787</code>. Health metrics, decision trace, processed email archive.</p></div>
-    <div class="card-sm"><span>🔁</span><h4>Adaptive learning</h4><p>Override a priority → system records it. Over time, Letterbot adapts priorities per sender+account pair. Bounded ±12 bias, 45-day window, quality-gated.</p></div>
-    <div class="card-sm"><span>⚡</span><h4>Degraded mode</h4><p>LLM unavailable? Letterbot switches to deterministic mode. Basic notifications keep flowing. You are told exactly why.</p></div>
-    <div class="card-sm"><span>🔗</span><h4>Obligation tracking</h4><p>Detects "will send by Friday" — surfaces commitments in the weekly digest when the deadline passes.</p></div>
-    <div class="card-sm"><span>🔍</span><h4>Explainable decisions</h4><p>Every priority has a reason code: PRIO_INVOICE, PRIO_DEADLINE_1D, PRIO_SILENCE_14D. Auditable in logs and web cockpit.</p></div>
-    <div class="card-sm"><span>🤝</span><h4>Sender trust scores</h4><p>Builds reliability profile per contact. Tracks if they meet deadlines, respond on time. Trust decays and recovers — no permanent penalties.</p></div>
-    <div class="card-sm"><span>🌍</span><h4>EN/RU bilingual</h4><p>Full English and Russian interface. Switch with <code>/lang en</code> or <code>/lang ru</code> in Telegram. Digests, notifications, commands — all localized.</p></div>
-    <div class="card-sm"><span>🛡️</span><h4>1,541 tests</h4><p>Full test suite on GitHub Actions CI. 138 golden corpus cases + 120 bilingual quality cases. Regressions caught before release.</p></div>
-    <div class="card-sm"><span>💻</span><h4>Windows one-click</h4><p>Download ZIP, edit config, double-click <code>run.bat</code>. No Python install required. Runs on Celeron N4020 with 3 GB RAM.</p></div>
+<section class="section">
+  <div class="wrap">
+    <p class="section-kicker">what you actually get</p>
+    <h2>Core capabilities</h2>
+    <div class="cards-grid">
+      <div class="card-sm"><span>📨</span><h4>IMAP intake</h4><p>Connect multiple inboxes, keep access read-only, and route each account into the right Telegram destination.</p></div>
+      <div class="card-sm"><span>📎</span><h4>Attachment extraction</h4><p>Read PDFs, spreadsheets and documents locally to surface amounts, dates and obligations with better context.</p></div>
+      <div class="card-sm"><span>📲</span><h4>Telegram actions</h4><p>One email becomes one action-oriented message with priority controls, snooze and context restoration.</p></div>
+      <div class="card-sm"><span>🧭</span><h4>Decision trace</h4><p>Audit why something became urgent, important or low instead of trusting a black box.</p></div>
+      <div class="card-sm"><span>🩺</span><h4>Local observability</h4><p>Use the cockpit to inspect health, incidents, latency and event history on your own machine.</p></div>
+      <div class="card-sm"><span>🌍</span><h4>EN/RU workflow</h4><p>English and Russian support across notifications, digests and operator flows.</p></div>
+    </div>
+    <p class="cta-center"><a href="features.html" class="btn-primary">See the full feature list</a></p>
   </div>
-  <p class="cta-center"><a href="features.html" class="btn-ghost">See all features in detail →</a></p>
-</div>
 </section>
 
-<!-- ═══ FAQ PREVIEW ═══ -->
-<section class="section" id="faq-preview">
-<div class="wrap">
-  <p class="section-kicker">quick answers</p>
-  <h2>Common questions</h2>
-  <p class="lead">Full answer in the first sentence — always. <a href="faq.html">30+ questions →</a></p>
-
-  <div class="faq-list">
-    <details class="faq-item" open>
-      <summary>Does Letterbot require ChatGPT or any paid AI?</summary>
-      <p>No. Letterbot runs in deterministic mode without any external by default. GigaChat (free, by Sber) and Cloudflare Workers (free tier) are optional — you activate one explicitly in the config file if you want higher accuracy on complex texts. OpenAI is not required.</p>
-    </details>
-    <details class="faq-item">
-      <summary>Where do my emails go?</summary>
-      <p>Nowhere external. Letterbot reads email via IMAP directly from your mail server. Processing happens locally on your machine. The SQLite database is stored next to the executable. There are no Letterbot servers — they don't exist.</p>
-    </details>
-    <details class="faq-item">
-      <summary>Is it really free forever?</summary>
-      <p>Yes. Letterbot is free and open source under AGPL-3.0. There is no freemium model, no "Pro" tier, no subscription. The project runs on voluntary donations via Boosty from users who find it useful. All features are available to everyone.</p>
-    </details>
-    <details class="faq-item">
-      <summary>Does it work on an old or slow computer?</summary>
-      <p>Yes — tested and verified on an Intel Celeron N4020 (2 cores, 1.1 GHz) with 3 GB RAM running Windows 10. Uses 40–120 MB RAM in operation. Giving an old laptop a second life as a local email assistant is one of the best Letterbot use cases.</p>
-    </details>
-    <details class="faq-item">
-      <summary>How many email accounts can I connect?</summary>
-      <p>Unlimited. Add as many IMAP accounts as you need — each can be routed to a different Telegram chat. There is no account limit in Letterbot. Work, personal, client accounts — all in one bot, each going to the right chat.</p>
-    </details>
+<section class="section">
+  <div class="wrap">
+    <p class="section-kicker">open source proof points</p>
+    <h2>Verify the project before you trust it</h2>
+    <div class="proof-links">
+      <a class="proof-link" href="https://github.com/SergioTheFirst/letterbot" target="_blank" rel="noopener">
+        <strong>Repository</strong>
+        <span>Inspect the code, licenses, docs and release history before you install anything.</span>
+      </a>
+      <a class="proof-link" href="https://github.com/SergioTheFirst/letterbot/releases/latest" target="_blank" rel="noopener">
+        <strong>Releases</strong>
+        <span>Download the latest build and review packaging changes or version notes.</span>
+      </a>
+      <a class="proof-link" href="https://github.com/SergioTheFirst/letterbot/issues" target="_blank" rel="noopener">
+        <strong>Issues</strong>
+        <span>See what users report, what is being fixed and how the maintainer responds.</span>
+      </a>
+    </div>
   </div>
-  <p class="cta-center"><a href="faq.html" class="btn-ghost">See all 30+ questions →</a></p>
-</div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap">
+    <p class="section-kicker">quick answers</p>
+    <h2>Questions that decide the purchase</h2>
+    <div class="faq-list">
+      <details class="faq-item"><summary>Does Letterbot require ChatGPT or a paid AI service?</summary><p>No. The deterministic pipeline works without paid AI. Optional AI can be enabled for harder summaries, but the core triage loop stays local and useful on its own.</p></details>
+      <details class="faq-item"><summary>Where do my emails go?</summary><p>They stay between your mail server and your own machine. Letterbot reads through IMAP, stores local metadata for the workflow, and exposes a cockpit on localhost.</p></details>
+      <details class="faq-item"><summary>Can I route multiple inboxes to different Telegram chats?</summary><p>Yes. Multi-inbox routing is one of the core reasons to use Letterbot: one instance can separate work, personal and alert traffic into different Telegram destinations.</p></details>
+      <details class="faq-item"><summary>Is it read-only?</summary><p>Yes. The product is designed to classify and notify, not to move, delete or send email. That constraint is part of the trust model.</p></details>
+    </div>
+    <p class="cta-center"><a href="faq.html" class="btn-ghost">Open the full FAQ</a></p>
+  </div>
 </section>
 
 <section class="section donate-strip">
-<div class="wrap donate-inner">
-  <div class="donate-text">
-    <p class="donate-lead">This project has no investors, no ads, no corporate backing.</p>
-    <h2>Support Letterbot</h2>
-    <p>Letterbot is free and stays free. If it saves you time, a voluntary donation keeps development moving — new features, better docs, longer project life.</p>
-    <div class="donate-btns">
-      <a href="https://boosty.to/personalbot/donate?qr=true" class="btn-primary" target="_blank" rel="noopener">Donate on Boosty →</a>
-      <a href="https://pay.cloudtips.ru/p/00d77c6a" class="btn-ghost" target="_blank" rel="noopener">CloudTips</a>
-      <a href="support.html" class="btn-ghost">Why it matters</a>
+  <div class="wrap donate-inner">
+    <div class="donate-text">
+      <p class="donate-lead">No investors. No ads. No forced cloud.</p>
+      <h2>Use it first. Donate later if it saves you time.</h2>
+      <p>Letterbot stays free. If it becomes part of your workflow, a donation helps fund documentation, packaging, fixes and the boring maintenance that keeps a self-hosted project alive.</p>
+      <div class="donate-btns">
+        <a href="https://boosty.to/personalbot/donate?qr=true" class="btn-primary" target="_blank" rel="noopener">Donate on Boosty</a>
+        <a href="https://pay.cloudtips.ru/p/00d77c6a" class="btn-ghost" target="_blank" rel="noopener">CloudTips</a>
+      </div>
+    </div>
+    <div class="donate-qr">
+      <img src="assets/boosty_qr.svg" alt="Boosty QR code for supporting Letterbot" width="180" height="180">
     </div>
   </div>
-  <div class="donate-qr">
-    <img src="assets/boosty_qr.svg" alt="Boosty QR — support Letterbot" width="180" height="180" loading="lazy">
-  </div>
-</div>
 </section>
 
 <footer class="footer">
 <div class="wrap footer-inner">
   <div class="footer-brand">
     <a href="index.html" class="brand"><span class="brand-icon">✉</span> Letterbot</a>
-    <p>Free self-hosted email assistant. Your emails stay on your machine. Open source forever.</p>
+    <p>Self-hosted email triage for Windows. Telegram notifications, local cockpit, no vendor cloud.</p>
     <div class="footer-social">
       <a href="https://github.com/SergioTheFirst/letterbot" target="_blank" rel="noopener">GitHub ↗</a>
       <a href="https://t.me/+1xHH6NwJONVlZTA6" target="_blank" rel="noopener">Telegram ↗</a>
@@ -292,12 +291,11 @@
     <a href="install.html">Install</a>
     <a href="use-cases.html">Use cases</a>
     <a href="observability.html">Observability</a>
-    <a href="changelog.html">Changelog</a>
   </div>
   <div class="footer-col">
-    <h4>Compare &amp; Learn</h4>
-    <a href="compare.html">Compare alternatives</a>
-    <a href="privacy.html">Privacy &amp; data</a>
+    <h4>Learn</h4>
+    <a href="compare.html">Compare</a>
+    <a href="privacy.html">Privacy</a>
     <a href="faq.html">FAQ</a>
     <a href="blog/why-letterbot-exists.html">Why Letterbot</a>
     <a href="blog/email-ai-guide.html">Email guide</a>
@@ -305,7 +303,7 @@
   <div class="footer-col">
     <h4>Community</h4>
     <a href="https://github.com/SergioTheFirst/letterbot" target="_blank" rel="noopener">GitHub</a>
-    <a href="https://github.com/SergioTheFirst/letterbot/issues" target="_blank" rel="noopener">Issues &amp; feedback</a>
+    <a href="https://github.com/SergioTheFirst/letterbot/issues" target="_blank" rel="noopener">Issues & feedback</a>
     <a href="https://t.me/+1xHH6NwJONVlZTA6" target="_blank" rel="noopener">Telegram channel</a>
     <a href="support.html">Support the project</a>
     <a href="mailto:master@letterbot.ru">master@letterbot.ru</a>
@@ -317,89 +315,6 @@
 </div>
 </footer>
 
-<!-- Schema.org: SoftwareApplication -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Letterbot",
-  "alternateName": "LetterBot",
-  "applicationCategory": "UtilitiesApplication",
-  "operatingSystem": "Windows 10, Windows 11",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "description": "Free, self-hosted email filter for Windows that connects to unlimited IMAP mailboxes, analyzes incoming emails locally using deterministic rules and optional AI, and sends priority notifications to Telegram. No cloud, no subscription. 74,000 lines of Python, 1,541 tests, AGPL-3.0.",
-  "url": "https://sergiothefirst.github.io/letterbot_site/",
-  "downloadUrl": "https://github.com/SergioTheFirst/letterbot/releases/latest",
-  "softwareVersion": "28.0.0",
-  "datePublished": "2026-03-21",
-  "dateModified": "2026-03-25",
-  "license": "https://www.gnu.org/licenses/agpl-3.0.html",
-  "author": {
-    "@type": "Organization",
-    "name": "Letterbot",
-    "url": "https://sergiothefirst.github.io/letterbot_site/",
-    "email": "master@letterbot.ru"
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "ratingCount": "47",
-    "bestRating": "5"
-  }
-}
-</script>
-<!-- Schema.org: FAQPage -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Does Letterbot require ChatGPT or any paid AI?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. Letterbot runs in deterministic mode without any external by default. GigaChat (free, by Sber) and Cloudflare Workers (free tier) are optional — you activate one explicitly in the config file if you want higher accuracy on complex texts."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Where do my emails go when using Letterbot?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Nowhere external. Letterbot reads email via IMAP directly from your mail server. Processing happens locally on your machine. The SQLite database is stored next to the executable. There are no Letterbot servers."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is Letterbot really free forever?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Letterbot is free and open source under AGPL-3.0. There is no freemium model, no Pro tier, no subscription. The project runs on voluntary donations via Boosty."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How many email accounts can I connect to Letterbot?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Unlimited. Add as many IMAP accounts as you need — each can be routed to a different Telegram chat. There is no account limit in Letterbot."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does Letterbot work on old or slow computers?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes — tested on an Intel Celeron N4020 with 3 GB RAM running Windows 10. Uses 40-120 MB RAM. Giving an old laptop a second life as a local email assistant is one of the best use cases."
-      }
-    }
-  ]
-}
-</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Letterbot", "applicationCategory": "BusinessApplication", "operatingSystem": "Windows 10, Windows 11", "url": "https://sergiothefirst.github.io/letterbot_site/", "downloadUrl": "https://github.com/SergioTheFirst/letterbot/releases/latest", "softwareVersion": "28.0.0", "license": "https://www.gnu.org/licenses/agpl-3.0.html", "description": "Self-hosted email triage assistant for Windows that connects to IMAP inboxes, classifies messages locally, sends priority Telegram notifications, and exposes a read-only cockpit on localhost.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@type": "Organization", "name": "Letterbot"}}</script>
 </body>
 </html>

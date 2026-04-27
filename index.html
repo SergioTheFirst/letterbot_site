@@ -3,21 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Letterbot — Self-Hosted Email Triage Assistant for Windows</title>
-<meta name="description" content="Self-hosted email triage assistant for Windows. Connect IMAP inboxes, classify locally, push only relevant messages to Telegram, and audit everything in a local web cockpit.">
+<title>Letterbot — Free Self-Hosted Email Triage for Windows. Telegram Notifications, No Cloud.</title>
+<meta name="description" content="Letterbot is a free, open-source, self-hosted email triage tool for Windows. 74,000 lines of Python, 1,541 automated tests. Classifies IMAP mail locally, sends one Telegram notification per email, stores data in local SQLite. No vendor cloud, no subscription, no paid AI required.">
 <meta name="robots" content="index,follow">
-<meta name="author" content="Letterbot">
+<meta name="author" content="Letterbot project — master@letterbot.ru">
+<meta name="last-modified" content="2026-04-27">
 <meta name="theme-color" content="#0b1830">
 <link rel="canonical" href="https://sergiothefirst.github.io/letterbot_site/">
-<meta property="og:title" content="Letterbot — Self-Hosted Email Triage Assistant for Windows">
-<meta property="og:description" content="Self-hosted email triage assistant for Windows. Connect IMAP inboxes, classify locally, push only relevant messages to Telegram, and audit everything in a local web cockpit.">
+<meta property="og:title" content="Letterbot — Free Self-Hosted Email Triage for Windows">
+<meta property="og:description" content="Free open-source email triage for Windows. 74K lines of Python, 1,541 tests, no cloud, no subscription. Classifies IMAP mail locally and sends one Telegram notification per email.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sergiothefirst.github.io/letterbot_site/">
 <meta property="og:image" content="https://sergiothefirst.github.io/letterbot_site/assets/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Letterbot — Self-Hosted Email Triage Assistant for Windows">
-<meta name="twitter:description" content="Self-hosted email triage assistant for Windows. Connect IMAP inboxes, classify locally, push only relevant messages to Telegram, and audit everything in a local web cockpit.">
+<meta name="twitter:title" content="Letterbot — Free Self-Hosted Email Triage for Windows">
+<meta name="twitter:description" content="Free open-source email triage for Windows. 74K lines of Python, 1,541 tests, no cloud, no subscription. Classifies IMAP mail locally and sends one Telegram notification per email.">
 <meta name="twitter:image" content="https://sergiothefirst.github.io/letterbot_site/assets/og.png">
+<link rel="alternate" hreflang="en" href="https://sergiothefirst.github.io/letterbot_site/">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.png" type="image/png">
@@ -140,10 +142,38 @@
 
 <section class="stats-bar">
   <div class="wrap stats-inner">
-    <div class="stat"><span class="stat-val">$0</span><span class="stat-label">free forever</span></div>
+    <div class="stat"><span class="stat-val">$0</span><span class="stat-label">free forever · AGPL-3.0</span></div>
     <div class="stat"><span class="stat-val">∞</span><span class="stat-label">IMAP inboxes</span></div>
-    <div class="stat"><span class="stat-val">local</span><span class="stat-label">processing + storage</span></div>
+    <div class="stat"><span class="stat-val">1,541</span><span class="stat-label">automated tests</span></div>
+    <div class="stat"><span class="stat-val">74K</span><span class="stat-label">lines of Python</span></div>
+    <div class="stat"><span class="stat-val">40–120 MB</span><span class="stat-label">RAM on Windows</span></div>
     <div class="stat"><span class="stat-val">read-only</span><span class="stat-label">no mail moves or deletes</span></div>
+  </div>
+</section>
+
+<section class="section section-definition" id="what-is-letterbot">
+  <div class="wrap">
+    <p class="section-kicker">definition</p>
+    <h2>What is Letterbot?</h2>
+    <p class="definition-lead"><dfn>Letterbot</dfn> is a free, open-source, self-hosted email triage assistant for Windows. It connects to IMAP mailboxes in read-only mode, classifies each incoming email using a deterministic rules engine, and delivers one priority-tagged Telegram notification per email with a suggested action. All processing runs on the user's own hardware; data is stored in a local SQLite database with no vendor cloud involved.</p>
+    <div class="definition-facts">
+      <div class="fact-item">
+        <strong>What problem does it solve?</strong>
+        <p>The average knowledge worker spends 28–40 minutes per day reading email — not replying, just reading. Letterbot reduces that to a single Telegram tap per important message.</p>
+      </div>
+      <div class="fact-item">
+        <strong>How does classification work?</strong>
+        <p>A five-stage deterministic pipeline extracts facts (amounts, dates, document numbers), scores priority across 20+ email types (INVOICE, CONTRACT, SECURITY_ALERT, DEADLINE…), and attaches explainable reason codes (e.g. <code>PRIO_INVOICE</code>, <code>PRIO_DEADLINE_1D</code>) to every decision.</p>
+      </div>
+      <div class="fact-item">
+        <strong>Is AI required?</strong>
+        <p>No. The core triage loop is fully deterministic and works offline. Optional GigaChat (Sber) or Cloudflare Workers AI can improve summaries for ambiguous messages, but Letterbot falls back to deterministic mode automatically when AI is unavailable.</p>
+      </div>
+      <div class="fact-item">
+        <strong>Who maintains it?</strong>
+        <p>Letterbot is an independent open-source project maintained by a solo developer. The full source (74,000 lines of Python, 1,541 tests) is public at <a href="https://github.com/SergioTheFirst/letterbot" target="_blank" rel="noopener">github.com/SergioTheFirst/letterbot</a> under AGPL-3.0.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -258,14 +288,18 @@
 <section class="section section-alt">
   <div class="wrap">
     <p class="section-kicker">quick answers</p>
-    <h2>Questions that decide the purchase</h2>
+    <h2>Frequently asked questions about Letterbot</h2>
     <div class="faq-list">
-      <details class="faq-item"><summary>Does Letterbot require ChatGPT or a paid AI service?</summary><p>No. The deterministic pipeline works without paid AI. Optional AI can be enabled for harder summaries, but the core triage loop stays local and useful on its own.</p></details>
-      <details class="faq-item"><summary>Where do my emails go?</summary><p>They stay between your mail server and your own machine. Letterbot reads through IMAP, stores local metadata for the workflow, and exposes a cockpit on localhost.</p></details>
-      <details class="faq-item"><summary>Can I route multiple inboxes to different Telegram chats?</summary><p>Yes. Multi-inbox routing is one of the core reasons to use Letterbot: one instance can separate work, personal and alert traffic into different Telegram destinations.</p></details>
-      <details class="faq-item"><summary>Is it read-only?</summary><p>Yes. The product is designed to classify and notify, not to move, delete or send email. That constraint is part of the trust model.</p></details>
+      <details class="faq-item"><summary>Does Letterbot require ChatGPT or a paid AI service?</summary><p>No — Letterbot works fully without paid AI. The deterministic pipeline classifies email, extracts facts, and notifies via Telegram without any external model. GigaChat (free, by Sber) and Cloudflare Workers AI (free tier) are optional enhancements that can be enabled explicitly; they are never required.</p></details>
+      <details class="faq-item"><summary>Where do my emails go — does Letterbot send them to a cloud?</summary><p>Nowhere external. Letterbot reads email via IMAP directly from your mail server, processes everything on your local machine, and stores only metadata (sender, subject, date, priority score) in a local SQLite file. There are no Letterbot servers. Email text and attachments are never stored or transmitted.</p></details>
+      <details class="faq-item"><summary>Can I route multiple inboxes to different Telegram chats?</summary><p>Yes. One Letterbot instance supports an unlimited number of IMAP accounts, each routed to a different Telegram chat or group. This is the primary use case for teams and freelancers who manage separate work, personal, and alert inboxes.</p></details>
+      <details class="faq-item"><summary>Is Letterbot read-only — can it delete or send email?</summary><p>Yes, strictly read-only. Letterbot is designed to classify and notify, not to move, delete, or send email. This constraint is intentional: notification and inbox mutation are separate concerns with very different trust requirements.</p></details>
+      <details class="faq-item"><summary>Is Letterbot really free forever?</summary><p>Yes. Letterbot is licensed under AGPL-3.0 — free to use, inspect, and modify with no freemium tier, no Pro plan, and no subscription. Development is sustained by voluntary donations via Boosty and CloudTips.</p></details>
+      <details class="faq-item"><summary>What hardware does Letterbot require?</summary><p>Very little. Letterbot runs on Windows 10/11 and uses 40–120 MB of RAM. It has been tested on an Intel Celeron N4020 with 3 GB RAM — an old budget laptop is enough to run it as a dedicated email assistant.</p></details>
+      <details class="faq-item"><summary>What email providers does Letterbot support?</summary><p>Any provider with IMAP access: Gmail, Yandex Mail, Mail.ru, Outlook/Microsoft 365, and any custom or self-hosted mail server. All connections use SSL/TLS on port 993.</p></details>
+      <details class="faq-item"><summary>How does Letterbot classify emails?</summary><p>A five-stage deterministic pipeline processes each email: body segmentation, fact extraction (amounts, dates, document numbers), validation, priority scoring across 20+ mail types, and a consistency check. Each decision gets an auditable reason code (e.g. <code>PRIO_INVOICE</code>, <code>PRIO_DEADLINE_1D</code>) and a confidence score between 0.0 and 1.0.</p></details>
     </div>
-    <p class="cta-center"><a href="faq.html" class="btn-ghost">Open the full FAQ</a></p>
+    <p class="cta-center"><a href="faq.html" class="btn-ghost">Open the full FAQ (25 questions)</a></p>
   </div>
 </section>
 
@@ -311,7 +345,8 @@
     <a href="privacy.html">Privacy</a>
     <a href="faq.html">FAQ</a>
     <a href="blog/why-letterbot-exists.html">Why Letterbot</a>
-    <a href="blog/email-ai-guide.html">Email guide</a>
+    <a href="blog/email-ai-guide.html">Email AI guide</a>
+    <a href="blog/self-hosted-email-triage.html">Email triage guide</a>
   </div>
   <div class="footer-col">
     <h4>Community</h4>
@@ -324,10 +359,152 @@
 </div>
 <div class="wrap footer-bottom">
   <p>© 2026 Letterbot · AGPL-3.0 · <a href="privacy.html">Privacy</a></p>
-  <p class="footer-meta">v28.0.0 · updated March 2026</p>
+  <p class="footer-meta">v28.0.0 · updated April 27, 2026</p>
 </div>
 </footer>
 
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Letterbot", "applicationCategory": "BusinessApplication", "operatingSystem": "Windows 10, Windows 11", "url": "https://sergiothefirst.github.io/letterbot_site/", "downloadUrl": "https://github.com/SergioTheFirst/letterbot/releases/latest", "softwareVersion": "28.0.0", "license": "https://www.gnu.org/licenses/agpl-3.0.html", "description": "Self-hosted email triage assistant for Windows that connects to IMAP inboxes, classifies messages locally, sends priority Telegram notifications, and exposes a read-only cockpit on localhost.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@type": "Organization", "name": "Letterbot"}}</script>
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Letterbot",
+    "applicationCategory": "BusinessApplication",
+    "applicationSubCategory": "Email Management",
+    "operatingSystem": "Windows 10, Windows 11",
+    "url": "https://sergiothefirst.github.io/letterbot_site/",
+    "downloadUrl": "https://github.com/SergioTheFirst/letterbot/releases/latest",
+    "softwareVersion": "28.0.0",
+    "dateModified": "2026-04-27",
+    "license": "https://www.gnu.org/licenses/agpl-3.0.html",
+    "description": "Letterbot is a free, open-source, self-hosted email triage assistant for Windows. It connects to IMAP mailboxes in read-only mode, classifies each incoming email using a deterministic rules engine (20+ mail types, 0.0–1.0 confidence scoring), and sends one priority-tagged Telegram notification per email. All processing is local; data is stored in SQLite. No vendor cloud, no subscription, no mandatory AI. 74,000 lines of Python, 1,541 automated tests.",
+    "featureList": [
+      "Read-only IMAP connection (SSL/TLS port 993)",
+      "Unlimited IMAP accounts with per-account Telegram routing",
+      "Deterministic priority engine with 20+ email type classifications",
+      "Fact extraction: amounts, dates, document numbers from body and attachments",
+      "PDF, Excel and Word attachment reading without Office installed",
+      "Explainable reason codes for every priority decision",
+      "Confidence scoring 0.0–1.0 per decision",
+      "Adaptive learning from Telegram priority corrections",
+      "Local web cockpit at localhost:8787",
+      "Daily and weekly Telegram digest",
+      "English and Russian interface",
+      "Optional AI enhancement via GigaChat or Cloudflare Workers AI",
+      "Runs on 40–120 MB RAM, tested on Intel Celeron N4020 with 3 GB RAM"
+    ],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Letterbot",
+      "url": "https://sergiothefirst.github.io/letterbot_site/",
+      "email": "master@letterbot.ru",
+      "sameAs": [
+        "https://github.com/SergioTheFirst/letterbot",
+        "https://t.me/+1xHH6NwJONVlZTA6"
+      ]
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Letterbot — Free Self-Hosted Email Triage for Windows",
+    "description": "Free open-source email triage for Windows. 74K lines of Python, 1,541 tests, no cloud, no subscription.",
+    "url": "https://sergiothefirst.github.io/letterbot_site/",
+    "dateModified": "2026-04-27",
+    "inLanguage": "en",
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": [
+        ".definition-lead",
+        ".hero-sub",
+        ".faq-item summary",
+        ".faq-item p",
+        ".fact-item p"
+      ]
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Letterbot", "item": "https://sergiothefirst.github.io/letterbot_site/"}
+      ]
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does Letterbot require ChatGPT or a paid AI service?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No — Letterbot works fully without paid AI. The deterministic pipeline classifies email, extracts facts, and notifies via Telegram without any external model. GigaChat (free, by Sber) and Cloudflare Workers AI (free tier) are optional enhancements; they are never required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where do my emails go — does Letterbot send them to a cloud?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nowhere external. Letterbot reads email via IMAP directly from your mail server, processes everything on your local machine, and stores only metadata in a local SQLite file. There are no Letterbot servers. Email text and attachments are never stored or transmitted."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I route multiple inboxes to different Telegram chats?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. One Letterbot instance supports an unlimited number of IMAP accounts, each routed to a different Telegram chat or group."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Letterbot read-only?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, strictly read-only. Letterbot is designed to classify and notify, not to move, delete, or send email. This constraint is intentional."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Letterbot really free forever?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Letterbot is licensed under AGPL-3.0 — free to use, inspect, and modify with no freemium tier, no Pro plan, and no subscription. Development is sustained by voluntary donations."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What hardware does Letterbot require?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Very little. Letterbot runs on Windows 10/11 and uses 40–120 MB of RAM. It has been tested on an Intel Celeron N4020 with 3 GB RAM."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What email providers does Letterbot support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Any provider with IMAP access: Gmail, Yandex Mail, Mail.ru, Outlook/Microsoft 365, and any custom or self-hosted mail server. All connections use SSL/TLS on port 993."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Letterbot classify emails?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A five-stage deterministic pipeline processes each email: body segmentation, fact extraction (amounts, dates, document numbers), validation, priority scoring across 20+ mail types, and a consistency check. Each decision gets an auditable reason code and a confidence score between 0.0 and 1.0."
+        }
+      }
+    ]
+  }
+]
+</script>
 </body>
 </html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Self-Hosted Email Triage: What It Is, How It Works, and When You Need It</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="../assets/styles.css" rel="stylesheet"/>
+<script defer src="../assets/config.js"></script>
+<script defer src="../assets/main.js"></script>
+<link href="https://sergiothefirst.github.io/letterbot_site/blog/self-hosted-email-triage.html" rel="canonical"/>
+<meta content="Self-hosted email triage explained: definition, how it works, key metrics, comparison with cloud tools, and a concrete open-source example (Letterbot, 74K lines, 1,541 tests, free forever). Updated April 27, 2026." name="description"/>
+<meta content="Letterbot project — master@letterbot.ru" name="author"/>
+<meta content="index,follow" name="robots"/>
+<meta name="last-modified" content="2026-04-27"/>
+<meta content="#0b1830" name="theme-color"/>
+<meta content="Self-Hosted Email Triage: What It Is, How It Works, and When You Need It" property="og:title"/>
+<meta content="Self-hosted email triage explained: definition, how it works, key metrics, comparison with cloud tools. Open-source example: Letterbot." property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://sergiothefirst.github.io/letterbot_site/blog/self-hosted-email-triage.html" property="og:url"/>
+<meta content="https://sergiothefirst.github.io/letterbot_site/assets/og.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Self-Hosted Email Triage: What It Is, How It Works, and When You Need It" name="twitter:title"/>
+<meta content="Self-hosted email triage explained: definition, how it works, key metrics, comparison with cloud tools." name="twitter:description"/>
+<meta content="https://sergiothefirst.github.io/letterbot_site/assets/og.png" name="twitter:image"/>
+<link href="../favicon.ico" rel="icon" sizes="any"/>
+<link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="../favicon.png" rel="icon" type="image/png"/>
+<link href="../apple-touch-icon.png" rel="apple-touch-icon"/>
+<link href="../site.webmanifest" rel="manifest"/>
+</head><body>
+<nav class="nav"><div class="wrap nav-inner"><a class="brand" href="../index.html"><span class="brand-icon">✉</span><span>Letterbot<small class="brand-sub">self-hosted email assistant</small></span></a><div class="nav-links" id="navLinks"><a href="../index.html">Home</a><a href="../features.html">Features</a><a href="../how-it-works.html">How it works</a><a href="../install.html">Install</a><a href="../faq.html">FAQ</a><a href="../compare.html">Compare</a><a href="../privacy.html">Privacy</a><a href="../support.html">Donate</a></div><div class="nav-actions"><a class="btn-ghost" href="https://github.com/SergioTheFirst/letterbot" rel="noopener" target="_blank">GitHub</a><a class="btn-primary btn-sm" href="../install.html">Download</a></div><button aria-label="Menu" class="burger" id="burger">☰</button></div></nav>
+
+<section class="page-hero"><div class="wrap">
+  <h1>Self-Hosted Email Triage: What It Is, How It Works, and When You Need It</h1>
+  <p>A complete guide. Last updated: <time datetime="2026-04-27">April 27, 2026</time>.</p>
+</div></section>
+
+<section class="page-content"><div class="wrap">
+
+<h2>What is email triage?</h2>
+<p><dfn>Email triage</dfn> is the process of automatically sorting incoming email by priority and urgency before the recipient reads it. The term comes from medical triage — the practice of assigning urgency to patients so limited attention goes to the highest-need cases first.</p>
+<p>In a business context, email triage answers one question per message: <em>does this require immediate action, deferred attention, or can it be ignored?</em> The answer is delivered as a signal — a notification, a label, a priority score — rather than requiring the recipient to manually read and categorize every message.</p>
+
+<h2>What does "self-hosted" mean for email triage?</h2>
+<p><dfn>Self-hosted email triage</dfn> means the classification logic, data storage, and notification delivery all run on hardware controlled by the user — not on a third-party cloud server. The triage tool connects to the email provider via IMAP, processes messages locally, and stores only metadata locally.</p>
+<p>The key difference from cloud-hosted triage tools: no email content leaves the user's machine. The full text of emails, attachment contents, and sender details are never transmitted to a vendor's server.</p>
+
+<h2>How does self-hosted email triage work? The core pipeline</h2>
+<p>A typical self-hosted triage pipeline has five stages:</p>
+<ol>
+  <li><strong>IMAP polling</strong> — The tool connects to the mail server using IMAP with SSL/TLS (port 993) in read-only mode. It polls at a fixed interval (typically every 2 minutes) and tracks which messages have been processed using UID-based state.</li>
+  <li><strong>Content extraction</strong> — The message body is segmented to separate the main text from forwarded chains, signatures, and disclaimers. Attachments (PDF, Excel, Word) are parsed locally to extract facts such as invoice amounts, due dates, and document numbers.</li>
+  <li><strong>Priority scoring</strong> — A rules engine assigns a priority (urgent, important, low) based on mail type, extracted facts, sender history, and deadline proximity. Each scoring decision is attached to auditable reason codes.</li>
+  <li><strong>Notification delivery</strong> — One notification per email is delivered to a messaging channel (e.g. Telegram) with a priority label, a summary, and a suggested action. Inline buttons allow the user to correct the priority or snooze the message.</li>
+  <li><strong>Event storage and learning</strong> — Every decision is written to a local event store. Priority corrections from the user feed back into adaptive learning, which adjusts future scoring for known senders.</li>
+</ol>
+
+<h2>What problems does self-hosted email triage solve?</h2>
+<p>The average knowledge worker spends 28–40 minutes per day reading email — not replying, just reading. Multiplied across a 250-day working year, that is 117–167 hours per year spent scanning for the handful of messages that actually require a response.</p>
+<p>Self-hosted email triage solves three specific failure modes:</p>
+<ul>
+  <li><strong>Missed deadlines.</strong> Invoice due dates, contract signature deadlines, and renewal notices buried in newsletters are extracted and flagged at arrival time, not when the deadline is imminent.</li>
+  <li><strong>Attention fragmentation.</strong> Checking email at intervals to avoid missing something creates a background anxiety that reduces focus. A triage layer with a clear Telegram signal replaces open-inbox monitoring.</li>
+  <li><strong>Noisy notification overload.</strong> Push notifications from cloud email clients treat every message equally. A priority-scoring triage layer sends one signal per genuinely important message and suppresses the rest.</li>
+</ul>
+
+<h2>Self-hosted vs cloud-hosted email triage: key differences</h2>
+<table>
+  <tr><th>Dimension</th><th>Self-hosted</th><th>Cloud-hosted</th></tr>
+  <tr><td>Email data location</td><td>Your machine only</td><td>Vendor's servers (typically US)</td></tr>
+  <tr><td>Privacy risk</td><td>Zero vendor exposure</td><td>Vendor processes email content</td></tr>
+  <tr><td>Price</td><td>Free (open-source options exist)</td><td>$7–$30/month typical</td></tr>
+  <tr><td>Setup complexity</td><td>10–30 minutes (config file)</td><td>1–5 minutes (OAuth)</td></tr>
+  <tr><td>Hardware requirement</td><td>Any Windows PC, even Celeron + 3 GB RAM</td><td>Any browser</td></tr>
+  <tr><td>Works without internet</td><td>Deterministic core can run offline</td><td>No</td></tr>
+  <tr><td>Auditable decisions</td><td>Yes — reason codes per email</td><td>Rarely; usually a black box</td></tr>
+  <tr><td>Vendor lock-in</td><td>None — local data, open formats</td><td>Data on vendor platform</td></tr>
+</table>
+
+<h2>What is deterministic email triage?</h2>
+<p><dfn>Deterministic email triage</dfn> uses rules-based logic — pattern matching, keyword scoring, fact extraction, date arithmetic — rather than a language model to classify email priority. Given the same input, a deterministic system always produces the same output. Its decisions can be traced and explained.</p>
+<p>The practical advantage: deterministic triage works reliably on low-power hardware, requires no API calls, and never depends on the availability of an external AI service. For business email where the facts are structured (invoice amounts, dates, sender names), deterministic logic captures 80–90% of priority signals correctly without a single LLM call.</p>
+
+<h2>When should you add AI to email triage?</h2>
+<p>AI (large language models) adds value to email triage in specific scenarios: ambiguous email body language, complex multi-issue messages, emails where tone and context matter, and edge cases outside the rules engine's coverage.</p>
+<p>AI is not necessary for: standard invoice emails, contract notifications, calendar invites, security alerts, deadline reminders, or any email where the priority signal is explicit in the subject or structured content of the body.</p>
+<p>The practical recommendation: start with deterministic triage. Add optional AI enhancement only for messages the deterministic engine marks as low-confidence (below 0.6 on a 0.0–1.0 scale). This hybrid approach uses AI for the 10–20% of edge cases where it adds real value, without incurring API cost or latency for the other 80–90%.</p>
+
+<h2>Letterbot: a concrete open-source example</h2>
+<p><a href="../index.html">Letterbot</a> is a free, open-source, self-hosted email triage tool for Windows that implements the pipeline described in this article.</p>
+<p>Technical specifications (v28.0.0, April 2026):</p>
+<ul>
+  <li>74,000 lines of Python</li>
+  <li>1,541 automated tests, including 138 golden corpus cases and a 120-case bilingual test suite</li>
+  <li>Five-stage deterministic extraction pipeline with ±3-line evidence windows</li>
+  <li>20+ mail type classifications (INVOICE, CONTRACT, SECURITY_ALERT, DEADLINE, and more)</li>
+  <li>Confidence scoring from 0.0 to 1.0 per decision with auditable reason codes</li>
+  <li>Adaptive learning: activates after 3+ corrections at ≥80% accuracy, bounded ±12 bias over a 45-day window</li>
+  <li>Attachment reading: PDF via pypdf, Excel via openpyxl/xlrd, Word via python-docx — no Office required</li>
+  <li>RAM usage: 40–120 MB on Windows; tested on Intel Celeron N4020 with 3 GB RAM</li>
+  <li>Polling interval: every 2 minutes by default</li>
+  <li>License: AGPL-3.0, no subscription, free forever</li>
+  <li>Notification channel: Telegram (one message per email, priority buttons, snooze, edit-in-place)</li>
+  <li>Local observability: read-only web cockpit at localhost:8787</li>
+  <li>Graceful degradation: switches to DEGRADED_NO_LLM mode automatically if optional AI is unavailable</li>
+</ul>
+
+<h2>Frequently asked questions about self-hosted email triage</h2>
+
+<details class="faq-item"><summary>Is self-hosted email triage safe for business email?</summary>
+<p>Yes — self-hosted triage is more private than cloud alternatives because email content never leaves the user's machine. The IMAP connection uses SSL/TLS encryption. The local database stores only metadata (sender, subject, priority score), not full email text.</p></details>
+
+<details class="faq-item"><summary>Can self-hosted email triage read attachments?</summary>
+<p>Yes, when the tool supports it. Letterbot, for example, reads PDF, Excel, and Word attachments locally using pypdf, openpyxl/xlrd, and python-docx. Invoice amounts and due dates are extracted directly from attachment content.</p></details>
+
+<details class="faq-item"><summary>Does self-hosted email triage require AI?</summary>
+<p>No. A deterministic rules engine handles 80–90% of business email priority correctly without any AI. AI can be added as an optional enhancement for ambiguous edge cases. The deterministic core runs offline with no external dependencies.</p></details>
+
+<details class="faq-item"><summary>What hardware is needed for self-hosted email triage?</summary>
+<p>Very modest hardware. Letterbot runs on 40–120 MB of RAM and has been verified on an Intel Celeron N4020 with 3 GB RAM running Windows 10. Any modern or budget Windows laptop is sufficient.</p></details>
+
+<details class="faq-item"><summary>How long does it take to set up self-hosted email triage?</summary>
+<p>About 10 minutes for basic operation: download the ZIP, create a Telegram bot via @BotFather, fill in IMAP credentials in a config file, and run the executable. The first Telegram notification arrives within 2 minutes of the first incoming email.</p></details>
+
+<div class="link-row">
+  <a href="../install.html" class="btn-primary">Install Letterbot now</a>
+  <a href="../faq.html" class="btn-ghost">Full FAQ (25 questions)</a>
+  <a href="../compare.html" class="btn-ghost">Compare with alternatives</a>
+</div>
+
+</div></section>
+
+<footer class="footer"><div class="wrap footer-inner"><div class="footer-brand"><a class="brand" href="../index.html"><span class="brand-icon">✉</span> Letterbot</a><p>Free self-hosted email triage for Windows. Open source forever.</p><div class="footer-social"><a href="https://github.com/SergioTheFirst/letterbot" rel="noopener" target="_blank">GitHub ↗</a><a href="https://t.me/+1xHH6NwJONVlZTA6" rel="noopener" target="_blank">Telegram ↗</a><a href="https://boosty.to/personalbot/donate?qr=true" rel="noopener" target="_blank">Boosty ↗</a></div></div><div class="footer-col"><h4>Product</h4><a href="../features.html">Features</a><a href="../how-it-works.html">How it works</a><a href="../install.html">Install</a><a href="../use-cases.html">Use cases</a><a href="../observability.html">Observability</a></div><div class="footer-col"><h4>Learn</h4><a href="../compare.html">Compare</a><a href="../privacy.html">Privacy</a><a href="../faq.html">FAQ</a><a href="why-letterbot-exists.html">Why Letterbot</a><a href="email-ai-guide.html">Email AI guide</a></div><div class="footer-col"><h4>Community</h4><a href="https://github.com/SergioTheFirst/letterbot" target="_blank">GitHub</a><a href="https://github.com/SergioTheFirst/letterbot/issues" target="_blank">Issues</a><a href="https://t.me/+1xHH6NwJONVlZTA6" target="_blank">Telegram</a><a href="../support.html">Support</a><a href="mailto:master@letterbot.ru">master@letterbot.ru</a></div></div><div class="wrap footer-bottom"><p>© 2026 Letterbot · AGPL-3.0 · <a href="../privacy.html">Privacy</a></p><p class="footer-meta">v28.0.0 · updated April 27, 2026</p></div></footer>
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Self-Hosted Email Triage: What It Is, How It Works, and When You Need It",
+    "description": "Complete guide to self-hosted email triage: definition, 5-stage pipeline, deterministic vs AI classification, comparison table, concrete open-source example (Letterbot v28).",
+    "author": {"@type": "Organization", "name": "Letterbot", "url": "https://sergiothefirst.github.io/letterbot_site/", "email": "master@letterbot.ru"},
+    "publisher": {"@type": "Organization", "name": "Letterbot", "url": "https://sergiothefirst.github.io/letterbot_site/"},
+    "mainEntityOfPage": "https://sergiothefirst.github.io/letterbot_site/blog/self-hosted-email-triage.html",
+    "image": "https://sergiothefirst.github.io/letterbot_site/assets/og.png",
+    "datePublished": "2026-04-27",
+    "dateModified": "2026-04-27",
+    "inLanguage": "en",
+    "about": [
+      {"@type": "Thing", "name": "Email triage"},
+      {"@type": "Thing", "name": "Self-hosted software"},
+      {"@type": "SoftwareApplication", "name": "Letterbot", "url": "https://sergiothefirst.github.io/letterbot_site/"}
+    ],
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": ["h2", ".page-content p", ".faq-item summary", ".faq-item p", "li"]
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Letterbot","item":"https://sergiothefirst.github.io/letterbot_site/"},
+        {"@type":"ListItem","position":2,"name":"Blog","item":"https://sergiothefirst.github.io/letterbot_site/blog/"},
+        {"@type":"ListItem","position":3,"name":"Self-Hosted Email Triage Guide","item":"https://sergiothefirst.github.io/letterbot_site/blog/self-hosted-email-triage.html"}
+      ]
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"Is self-hosted email triage safe for business email?","acceptedAnswer":{"@type":"Answer","text":"Yes — self-hosted triage is more private than cloud alternatives because email content never leaves the user's machine. IMAP uses SSL/TLS encryption. The local database stores only metadata, not full email text."}},
+      {"@type":"Question","name":"Can self-hosted email triage read attachments?","acceptedAnswer":{"@type":"Answer","text":"Yes, when the tool supports it. Letterbot reads PDF, Excel, and Word attachments locally using pypdf, openpyxl/xlrd, and python-docx. Invoice amounts and due dates are extracted directly from attachment content."}},
+      {"@type":"Question","name":"Does self-hosted email triage require AI?","acceptedAnswer":{"@type":"Answer","text":"No. A deterministic rules engine handles 80–90% of business email priority correctly without AI. AI can be added as an optional enhancement for ambiguous edge cases."}},
+      {"@type":"Question","name":"What hardware is needed for self-hosted email triage?","acceptedAnswer":{"@type":"Answer","text":"Very modest hardware. Letterbot runs on 40–120 MB of RAM and works on an Intel Celeron N4020 with 3 GB RAM on Windows 10."}},
+      {"@type":"Question","name":"How long does it take to set up self-hosted email triage?","acceptedAnswer":{"@type":"Answer","text":"About 10 minutes for basic operation: download the ZIP, create a Telegram bot, fill in IMAP credentials in a config file, run the executable. First notification arrives within 2 minutes."}}
+    ]
+  }
+]
+</script>
+</body></html>

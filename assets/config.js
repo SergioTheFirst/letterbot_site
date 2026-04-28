@@ -1,7 +1,7 @@
 /* Letterbot – Site Config — single source of truth for all links/version */
 window.LB = {
   version:     '28.0.0',
-  updated:     'March 2026',
+  updated:     'April 27, 2026',
   github:      'https://github.com/SergioTheFirst/letterbot',
   releases:    'https://github.com/SergioTheFirst/letterbot/releases/latest',
   issues:      'https://github.com/SergioTheFirst/letterbot/issues',
@@ -11,4 +11,5 @@ window.LB = {
   telegram:    'https://t.me/+1xHH6NwJONVlZTA6',
   email:       'master@letterbot.ru',
   site:        'https://sergiothefirst.github.io/letterbot_site/',
+  cloudflareToken: '58fa2433ce364112a5bf16de2cdd34d7',
 };

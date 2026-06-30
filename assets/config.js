@@ -1,7 +1,7 @@
 /* Letterbot – Site Config — single source of truth for all links/version */
 window.LB = {
-  version:     '28.0.0',
-  updated:     'April 27, 2026',
+  version:     '28.1.0',
+  updated:     'June 30, 2026',
   github:      'https://github.com/SergioTheFirst/letterbot',
   releases:    'https://github.com/SergioTheFirst/letterbot/releases/latest',
   issues:      'https://github.com/SergioTheFirst/letterbot/issues',
